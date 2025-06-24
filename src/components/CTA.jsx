@@ -113,15 +113,17 @@ const CTA = () => {
                         </select>
                       </div>
 
-                      <motion.button
-                        type="submit"
+                      <motion.a
+                        href="https://app.resolvemeq.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary-600 font-medium rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
                       >
                         <span>Request Demo</span>
                         <FiArrowRight className="w-5 h-5" />
-                      </motion.button>
+                      </motion.a>
                     </motion.form>
                   ) : (
                     <motion.div

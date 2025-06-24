@@ -133,7 +133,9 @@ const Header = () => {
             </motion.button>
 
             <motion.a
-              href="#login"
+              href="https://app.resolvemeq.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
@@ -143,7 +145,9 @@ const Header = () => {
             </motion.a>
 
             <motion.a
-              href="#signup"
+              href="https://app.resolvemeq.com/signup"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="btn-primary bg-primary-600 hover:bg-primary-700 text-white dark:bg-primary-500 dark:hover:bg-primary-600"

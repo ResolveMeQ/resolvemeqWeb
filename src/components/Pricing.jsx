@@ -199,7 +199,10 @@ const Pricing = () => {
                   )}
                 </div>
 
-                <motion.button
+                <motion.a
+                  href="https://app.resolvemeq.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className={`w-full py-3 px-6 rounded-lg font-medium mb-8 ${
@@ -209,7 +212,7 @@ const Pricing = () => {
                   } transition-colors`}
                 >
                   {plan.cta}
-                </motion.button>
+                </motion.a>
 
                 <ul className="space-y-4">
                   {plan.features.map((feature, index) => (
@@ -260,14 +263,17 @@ const Pricing = () => {
                 Our enterprise plan offers custom AI models, dedicated support, and advanced security features.
                 Contact our sales team to discuss your specific requirements.
               </p>
-              <motion.button
+              <motion.a
+                href="https://app.resolvemeq.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
               >
                 Contact Sales
                 <FiArrowRight className="w-5 h-5" />
-              </motion.button>
+              </motion.a>
             </div>
           </div>
         </FadeInDiv>
@@ -276,4 +282,4 @@ const Pricing = () => {
   );
 };
 
-export default Pricing; 
+export default Pricing;

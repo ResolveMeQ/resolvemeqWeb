@@ -216,7 +216,10 @@ const Hero = () => {
 
           <FadeInDiv delay={0.4}>
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
-              <motion.button
+              <motion.a
+                href="https://app.resolvemeq.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
                 whileTap={{ scale: 0.95 }}
                 className="btn-primary group"
@@ -226,7 +229,7 @@ const Hero = () => {
                   Get Started
                   <FiArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
                 </span>
-              </motion.button>
+              </motion.a>
               
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
