@@ -51,19 +51,18 @@ const TestimonialCard = ({ testimonial, isActive }) => {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
+      exit={{ opacity: 0, scale: 0.98 }}
       transition={{ duration: 0.3 }}
-      className={`relative h-full flex flex-col p-6 sm:p-8 rounded-xl transition-all duration-300 ${
+      className={`relative h-full flex flex-col p-6 sm:p-8 rounded-2xl transition-all duration-300 ${
         isActive 
-          ? "bg-white dark:bg-gray-800 shadow-xl ring-2 ring-primary-500/50" 
-          : "bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 hover:shadow-lg"
+          ? "bg-white dark:bg-slate-800 shadow-xl dark:shadow-2xl dark:shadow-black/20 ring-2 ring-indigo-500/30 dark:ring-indigo-400/40 scale-[1.02]" 
+          : "bg-white/90 dark:bg-slate-800/70 backdrop-blur-sm border border-gray-200 dark:border-slate-700/80 hover:shadow-lg dark:hover:border-slate-600"
       }`}
     >
-      {/* Quote Icon */}
-      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 text-primary-500/20 dark:text-primary-400/20">
-        <FiMessageSquare className="w-6 h-6 sm:w-8 sm:h-8" />
+      <div className="absolute top-5 right-5 sm:top-6 sm:right-6 text-indigo-400/20 dark:text-indigo-400/15">
+        <FiMessageSquare className="w-7 h-7 sm:w-8 sm:h-8" />
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">
@@ -72,17 +71,15 @@ const TestimonialCard = ({ testimonial, isActive }) => {
             <img
               src={testimonial.avatar}
               alt={testimonial.name}
-              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover ring-2 ring-primary-500/20 dark:ring-primary-400/20"
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover ring-2 ring-white dark:ring-slate-700 shadow-md"
             />
             {isActive && (
-              <div className="absolute -bottom-1 -right-1 bg-primary-500 dark:bg-primary-400 rounded-full p-1">
-                <FiStar className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
+              <div className="absolute -bottom-0.5 -right-0.5 bg-indigo-500 dark:bg-indigo-400 rounded-full p-1.5 shadow-lg">
+                <FiStar className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white fill-white" />
               </div>
             )}
           </div>
-          
-          {/* Mobile-only rating */}
-          <div className="flex items-center gap-1 text-yellow-400 sm:hidden">
+          <div className="flex items-center gap-0.5 text-amber-400 sm:hidden">
             {[...Array(testimonial.rating)].map((_, i) => (
               <FiStar key={i} className="w-4 h-4 fill-current" />
             ))}
@@ -90,14 +87,13 @@ const TestimonialCard = ({ testimonial, isActive }) => {
         </div>
         
         <div className="flex-1 min-w-0">
-          {/* Desktop-only rating */}
-          <div className="hidden sm:flex items-center gap-1 text-yellow-400 mb-3">
+          <div className="hidden sm:flex items-center gap-0.5 text-amber-400 mb-3">
             {[...Array(testimonial.rating)].map((_, i) => (
               <FiStar key={i} className="w-4 h-4 fill-current" />
             ))}
           </div>
           
-          <blockquote className="text-gray-700 dark:text-gray-200 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
+          <blockquote className="text-slate-700 dark:text-slate-200 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
             "{testimonial.content}"
           </blockquote>
           
@@ -105,18 +101,18 @@ const TestimonialCard = ({ testimonial, isActive }) => {
             <h4 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white">
               {testimonial.name}
             </h4>
-            <p className="text-sm text-primary-600 dark:text-primary-400 font-medium">
+            <p className="text-sm text-indigo-600 dark:text-indigo-400 font-medium">
               {testimonial.role} at {testimonial.company}
             </p>
           </div>
           
-          <div className="mt-auto grid grid-cols-3 gap-3 sm:gap-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+          <div className="mt-auto grid grid-cols-3 gap-2 sm:gap-3 pt-4 border-t border-gray-100 dark:border-slate-700">
             {Object.entries(testimonial.metrics).map(([key, value]) => (
-              <div key={key} className="text-center">
-                <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <div key={key} className="text-center py-2 px-2 rounded-xl bg-gray-50 dark:bg-slate-700/50 border border-gray-100 dark:border-slate-600/50">
+                <p className="text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                   {key.replace(/([A-Z])/g, " $1").trim()}
                 </p>
-                <p className="text-sm sm:text-base font-bold text-primary-600 dark:text-primary-400 mt-1">
+                <p className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-300 mt-0.5">
                   {value}
                 </p>
               </div>
@@ -153,18 +149,23 @@ const Testimonials = () => {
   };
 
   return (
-    <section id="testimonials" className="py-16 sm:py-20 bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="testimonials" className="py-16 sm:py-24 relative overflow-hidden bg-gray-50 dark:bg-gray-950">
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:via-gray-900 dark:to-gray-950" />
+      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '40px 40px' }} aria-hidden="true" />
+      <div className="container mx-auto px-4 sm:px-6 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-500/10 dark:bg-indigo-400/10 text-indigo-600 dark:text-indigo-300 text-sm font-medium mb-4 border border-indigo-500/20 dark:border-indigo-400/20">
+            Testimonials
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 tracking-tight">
             Trusted by IT Leaders
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Join hundreds of companies that have transformed their IT support with ResolveMeQ
           </p>
         </motion.div>
@@ -173,13 +174,13 @@ const Testimonials = () => {
           <div className="relative">
             <button
               onClick={prevTestimonial}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-2 sm:-translate-x-4 md:-translate-x-8 p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors z-10"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 md:-translate-x-8 p-3 rounded-full bg-white dark:bg-slate-800 shadow-lg dark:shadow-xl border border-gray-200 dark:border-slate-600/80 text-gray-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-500 transition-all z-10 hover:scale-105"
               aria-label="Previous testimonial"
             >
               <FiChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
               {testimonials.map((testimonial, index) => (
                 <TestimonialCard
                   key={testimonial.id}
@@ -191,14 +192,14 @@ const Testimonials = () => {
 
             <button
               onClick={nextTestimonial}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-2 sm:translate-x-4 md:translate-x-8 p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors z-10"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 md:translate-x-8 p-3 rounded-full bg-white dark:bg-slate-800 shadow-lg dark:shadow-xl border border-gray-200 dark:border-slate-600/80 text-gray-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-500 transition-all z-10 hover:scale-105"
               aria-label="Next testimonial"
             >
               <FiChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </div>
 
-          <div className="flex justify-center mt-6 sm:mt-8 space-x-2">
+          <div className="flex justify-center mt-8 sm:mt-10 gap-2">
             {testimonials.map((_, index) => (
               <button
                 key={index}
@@ -206,10 +207,10 @@ const Testimonials = () => {
                   setIsAutoPlaying(false);
                   setCurrent(index);
                 }}
-                className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
+                className={`rounded-full transition-all duration-300 ${
                   index === current 
-                    ? "bg-primary-600 dark:bg-primary-400 w-6 sm:w-8" 
-                    : "bg-gray-200 dark:bg-gray-700 w-1.5 sm:w-2 hover:bg-gray-300 dark:hover:bg-gray-600"
+                    ? "bg-indigo-500 dark:bg-indigo-400 w-8 sm:w-10 h-2 sm:h-2.5 shadow-sm" 
+                    : "bg-gray-300 dark:bg-slate-600 w-2 h-2 sm:w-2.5 sm:h-2.5 hover:bg-gray-400 dark:hover:bg-slate-500"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
@@ -224,24 +225,24 @@ const Testimonials = () => {
           transition={{ delay: 0.2 }}
           className="mt-12 sm:mt-16 text-center"
         >
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-8 p-4 sm:p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 p-6 sm:p-8 bg-white dark:bg-slate-800/80 rounded-2xl shadow-lg dark:shadow-xl border border-gray-200 dark:border-slate-700/80 backdrop-blur-sm">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary-50 dark:bg-primary-900/30">
-                <FiUsers className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+              <div className="p-3 rounded-xl bg-indigo-500/10 dark:bg-indigo-400/10 border border-indigo-500/20 dark:border-indigo-400/20">
+                <FiUsers className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               </div>
-              <span className="text-sm sm:text-base text-gray-700 dark:text-gray-200 font-medium">500+ Companies</span>
+              <span className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium">500+ Companies</span>
             </div>
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary-50 dark:bg-primary-900/30">
-                <FiTrendingUp className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+              <div className="p-3 rounded-xl bg-indigo-500/10 dark:bg-indigo-400/10 border border-indigo-500/20 dark:border-indigo-400/20">
+                <FiTrendingUp className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               </div>
-              <span className="text-sm sm:text-base text-gray-700 dark:text-gray-200 font-medium">45% Avg. Ticket Reduction</span>
+              <span className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium">45% Avg. Ticket Reduction</span>
             </div>
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary-50 dark:bg-primary-900/30">
-                <FiStar className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+              <div className="p-3 rounded-xl bg-indigo-500/10 dark:bg-indigo-400/10 border border-indigo-500/20 dark:border-indigo-400/20">
+                <FiStar className="w-5 h-5 text-amber-400 dark:text-amber-400 fill-amber-400" />
               </div>
-              <span className="text-sm sm:text-base text-gray-700 dark:text-gray-200 font-medium">4.9/5 Customer Rating</span>
+              <span className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium">4.9/5 Customer Rating</span>
             </div>
           </div>
         </motion.div>

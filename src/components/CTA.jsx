@@ -5,13 +5,23 @@ import { FiMail, FiPhone, FiCalendar, FiCheck, FiArrowRight } from "react-icons/
 
 const CTA = () => {
   const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [companySize, setCompanySize] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const formAction = process.env.REACT_APP_FORMSPREE_ID
+    ? `https://formspree.io/f/${process.env.REACT_APP_FORMSPREE_ID}`
+    : "#";
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you would typically handle the form submission
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 3000);
+    if (!process.env.REACT_APP_FORMSPREE_ID) {
+      e.preventDefault();
+      setIsSubmitted(true);
+      setTimeout(() => {
+        window.location.href = "https://app.resolvemeq.net";
+      }, 2000);
+      return;
+    }
+    // Form submits to Formspree; redirect is via hidden _next input
   };
 
   return (
@@ -25,7 +35,7 @@ const CTA = () => {
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-6 relative">
+      <div className="container mx-auto px-4 sm:px-6 relative min-w-0">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <FadeInDiv delay={0.2}>
@@ -69,15 +79,23 @@ const CTA = () => {
             <FadeInDiv delay={0.8}>
               <div className="glass-card p-8 rounded-xl backdrop-blur-sm bg-white/10 border border-white/20">
                 <AnimatePresence mode="wait">
-                  {!isLoading ? (
+                  {!isSubmitted ? (
                     <motion.form
                       key="form"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       onSubmit={handleSubmit}
+                      action={formAction}
+                      method="POST"
                       className="space-y-6"
                     >
+                      <input
+                        type="hidden"
+                        name="_next"
+                        value="https://app.resolvemeq.net"
+                      />
+                      <input type="hidden" name="_subject" value="ResolveMeQ demo request" />
                       <div>
                         <label htmlFor="email" className="block text-white text-sm font-medium mb-2">
                           Work Email
@@ -86,6 +104,7 @@ const CTA = () => {
                           <FiMail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/60" />
                           <input
                             id="email"
+                            name="email"
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -102,7 +121,10 @@ const CTA = () => {
                         </label>
                         <select
                           id="company"
+                          name="company_size"
                           required
+                          value={companySize}
+                          onChange={(e) => setCompanySize(e.target.value)}
                           className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
                         >
                           <option value="" className="bg-gray-800">Select company size</option>
@@ -113,17 +135,15 @@ const CTA = () => {
                         </select>
                       </div>
 
-                      <motion.a
-                        href="https://app.resolvemeq.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <motion.button
+                        type="submit"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary-600 font-medium rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
+                        className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-primary-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors shadow-lg border border-gray-200/50"
                       >
                         <span>Request Demo</span>
                         <FiArrowRight className="w-5 h-5" />
-                      </motion.a>
+                      </motion.button>
                     </motion.form>
                   ) : (
                     <motion.div
@@ -138,7 +158,7 @@ const CTA = () => {
                       </div>
                       <h3 className="text-xl font-bold text-white mb-2">Thank You!</h3>
                       <p className="text-white/80">
-                        We'll be in touch shortly to schedule your demo.
+                        We'll be in touch shortly to schedule your demo. Redirecting you to the app…
                       </p>
                     </motion.div>
                   )}
@@ -199,10 +219,10 @@ const CTA = () => {
               <p className="text-white/80">
                 Need more information? Contact our sales team at{" "}
                 <a
-                  href="mailto:sales@resolvemeq.com"
+                  href="mailto:sales@resolvemeq.net"
                   className="text-white font-medium hover:underline"
                 >
-                  sales@resolvemeq.com
+                  sales@resolvemeq.net
                 </a>
               </p>
             </div>

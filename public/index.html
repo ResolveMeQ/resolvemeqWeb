@@ -7,6 +7,7 @@
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#4F46E5" />
+  <link rel="canonical" href="https://resolvemeq.net/" />
   
   <!-- Primary Meta Tags -->
   <title>ResolveMeQ - AI-Powered IT Support Automation</title>
@@ -15,17 +16,19 @@
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://resolvemeq.com/">
+  <meta property="og:url" content="https://resolvemeq.net/">
   <meta property="og:title" content="ResolveMeQ - AI-Powered IT Support Automation">
   <meta property="og:description" content="Transform your IT support with ResolveMeQ's AI-powered automation. Reduce ticket resolution time by 40%, improve team efficiency, and enhance user satisfaction.">
-  <meta property="og:image" content="%PUBLIC_URL%/assets/logo.png">
+  <meta property="og:image" content="https://resolvemeq.net/assets/logo.png">
+  <meta property="og:image:alt" content="ResolveMeQ - AI-Powered IT Support">
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://resolvemeq.com/">
+  <meta property="twitter:url" content="https://resolvemeq.net/">
   <meta property="twitter:title" content="ResolveMeQ - AI-Powered IT Support Automation">
   <meta property="twitter:description" content="Transform your IT support with ResolveMeQ's AI-powered automation. Reduce ticket resolution time by 40%, improve team efficiency, and enhance user satisfaction.">
-  <meta property="twitter:image" content="%PUBLIC_URL%/assets/logo.png">
+  <meta property="twitter:image" content="https://resolvemeq.net/assets/logo.png">
+  <meta property="twitter:image:alt" content="ResolveMeQ - AI-Powered IT Support">
   
   <!-- Additional Meta Tags -->
   <meta name="keywords" content="IT support, AI automation, help desk, ticket management, IT service desk, AI support, IT automation, customer support, technical support">
@@ -49,11 +52,11 @@
       "name": "ResolveMeQ",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web-based",
-      "offers": {
-        "@type": "Offer",
-        "price": "Contact for pricing",
-        "priceCurrency": "USD"
-      },
+      "offers": [
+        { "@type": "Offer", "name": "Starter", "price": "19", "priceCurrency": "USD", "priceSpecification": { "@type": "UnitPriceSpecification", "billingIncrement": "P1M" } },
+        { "@type": "Offer", "name": "Pro", "price": "49", "priceCurrency": "USD", "priceSpecification": { "@type": "UnitPriceSpecification", "billingIncrement": "P1M" } },
+        { "@type": "Offer", "name": "Enterprise", "price": "99", "priceCurrency": "USD", "priceSpecification": { "@type": "UnitPriceSpecification", "billingIncrement": "P1M" } }
+      ],
       "description": "AI-powered IT support automation platform that reduces ticket resolution time by 40% and improves team efficiency.",
       "aggregateRating": {
         "@type": "AggregateRating",

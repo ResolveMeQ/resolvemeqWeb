@@ -7,7 +7,7 @@ import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { useInView } from "react-intersection-observer";
-import { FiPlay, FiArrowRight, FiChevronDown } from "react-icons/fi";
+import { FiPlay, FiArrowRight, FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const AnimatedSphere = () => {
   const { theme } = useTheme();
@@ -44,13 +44,13 @@ const SocialProof = () => (
           key={i}
           src={`https://i.pravatar.cc/150?img=${i + 10}`}
           alt={`User ${i}`}
-          className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800"
+          className="w-8 h-8 rounded-full border-2 border-gray-100 bg-white dark:border-gray-800 dark:bg-gray-800 shadow-sm"
           whileHover={{ scale: 1.2, zIndex: 1 }}
         />
       ))}
     </div>
-    <div className="text-sm text-gray-600 dark:text-gray-400">
-      <span className="font-semibold text-primary-600 dark:text-primary-400">500+</span> companies trust us
+    <div className="text-sm text-slate-800 dark:text-gray-400">
+      <span className="font-semibold text-indigo-600 dark:text-primary-400">500+</span> companies trust us
     </div>
   </motion.div>
 );
@@ -59,11 +59,11 @@ const FloatingActionButton = () => (
   <motion.button
     whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.9 }}
-    className="fixed bottom-8 right-8 bg-primary-600 text-white p-4 rounded-full shadow-lg z-50"
+    className="fixed bottom-8 right-8 bg-primary-600 text-white p-4 rounded-full shadow-lg border border-primary-700/30 dark:border-primary-400/20 z-50 hover:shadow-xl"
     onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
     aria-label="Scroll to top"
   >
-    <FiArrowRight className="w-6 h-6" />
+    <FiChevronUp className="w-6 h-6" />
   </motion.button>
 );
 
@@ -103,15 +103,15 @@ const Hero = () => {
 
   const particlesOptions = {
     particles: {
-      number: { value: 50, density: { enable: true, value_area: 800 } },
-      color: { value: theme === 'dark' ? "#6366F1" : "#4F46E5" },
-      opacity: { value: 0.5 },
-      size: { value: 3 },
+      number: { value: theme === 'dark' ? 50 : 35, density: { enable: true, value_area: 800 } },
+      color: { value: theme === 'dark' ? "#6366F1" : "#6366F1" },
+      opacity: { value: theme === 'dark' ? 0.5 : 0.22 },
+      size: { value: theme === 'dark' ? 3 : 2.5 },
       line_linked: {
         enable: true,
         distance: 150,
-        color: theme === 'dark' ? "#6366F1" : "#4F46E5",
-        opacity: 0.2,
+        color: theme === 'dark' ? "#6366F1" : "#818cf8",
+        opacity: theme === 'dark' ? 0.2 : 0.12,
         width: 1,
       },
       move: {
@@ -132,7 +132,7 @@ const Hero = () => {
         resize: true,
       },
       modes: {
-        grab: { distance: 140, line_linked: { opacity: 0.5 } },
+        grab: { distance: 140, line_linked: { opacity: theme === 'dark' ? 0.5 : 0.25 } },
         push: { particles_nb: 4 },
       },
     },
@@ -143,13 +143,35 @@ const Hero = () => {
     <section
       ref={containerRef}
       id="home"
-      className="min-h-screen flex items-center pt-20 md:pt-0 relative overflow-hidden bg-gray-50 dark:bg-gray-900"
+      data-theme={theme}
+      className="min-h-screen flex items-center pt-20 md:pt-0 relative overflow-hidden bg-[#f8fafc] dark:bg-gray-900"
       style={{
-        background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
-          ${theme === 'dark' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(79, 70, 229, 0.15)'}, 
-          transparent 50%)`,
+        background: theme === 'dark'
+          ? undefined
+          : `linear-gradient(180deg, #fafbfd 0%, #f1f5f9 50%, #eef2ff 100%)`,
       }}
     >
+      {/* Subtle radial glow in light mode */}
+      {theme === 'light' && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
+              rgba(99, 102, 241, 0.08), 
+              transparent 45%)`,
+          }}
+        />
+      )}
+      {theme === 'dark' && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
+              rgba(99, 102, 241, 0.15), 
+              transparent 50%)`,
+          }}
+        />
+      )}
       <div className="absolute inset-0">
         <Particles
           id="tsparticles"
@@ -161,9 +183,9 @@ const Hero = () => {
       <motion.div
         ref={ref}
         style={{ y, opacity }}
-        className="container mx-auto px-6 py-12 md:py-24 flex flex-col md:flex-row items-center gap-12 relative z-10"
+        className="container mx-auto px-4 sm:px-6 py-12 md:py-24 flex flex-col md:flex-row items-center gap-12 relative z-10 min-w-0 w-full"
       >
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 min-w-0 w-full">
           <FadeInDiv delay={0.2}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -174,22 +196,22 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="inline-block px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-sm font-medium mb-6"
+                className="inline-block px-4 py-2 rounded-full bg-indigo-200 dark:bg-primary-900/30 text-indigo-900 dark:text-primary-400 text-sm font-medium mb-6 border border-indigo-300 dark:border-transparent shadow-sm"
               >
                 🚀 The Future of IT Support
               </motion.div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 dark:text-white mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-slate-900 dark:text-white mb-6 break-words">
                 Transform Your IT Support with{" "}
                 <motion.span
-                  className="text-primary-600 dark:text-primary-400 relative inline-block"
+                  className="text-indigo-600 dark:text-primary-400 relative inline-block"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
                   AI
                   <motion.span
-                    className="absolute -bottom-2 left-0 w-full h-1 bg-primary-600 dark:bg-primary-400"
+                    className="absolute -bottom-2 left-0 w-full h-1 bg-indigo-600 dark:bg-primary-400 rounded-full"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.8, delay: 0.7 }}
@@ -201,10 +223,10 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-10"
+                className="text-xl md:text-2xl text-slate-800 dark:text-gray-300 mb-10"
               >
                 Resolve Me Quick automates{" "}
-                <span className="font-semibold text-primary-600 dark:text-primary-400">
+                <span className="font-semibold text-indigo-600 dark:text-primary-400">
                   40%+
                 </span>{" "}
                 of repetitive IT tickets, freeing your team to focus on what matters
@@ -217,12 +239,12 @@ const Hero = () => {
           <FadeInDiv delay={0.4}>
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <motion.a
-                href="https://app.resolvemeq.com"
+                href="https://app.resolvemeq.net"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-primary group"
+                whileHover={{ scale: 1.03, boxShadow: "0 10px 25px rgba(79, 70, 229, 0.35)" }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-primary group inline-flex items-center justify-center gap-2 px-7 py-3.5"
                 aria-label="Get Started"
               >
                 <span className="relative z-10 flex items-center gap-2">
@@ -232,22 +254,24 @@ const Hero = () => {
               </motion.a>
               
               <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setShowVideo(true)}
-                className="px-8 py-4 bg-gray-100 dark:bg-gray-800 text-primary-600 dark:text-primary-400 font-medium rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all shadow relative overflow-hidden group"
+                className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 font-medium rounded-xl transition-all duration-300 ${
+                  theme === 'light'
+                    ? "bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 shadow-md hover:shadow-lg"
+                    : "btn-secondary text-primary-600 dark:text-primary-400"
+                }`}
                 aria-label="Watch Demo"
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  <FiPlay className="w-5 h-5" />
-                  Watch Demo
-                </span>
+                <FiPlay className="w-5 h-5" />
+                Watch Demo
               </motion.button>
             </div>
           </FadeInDiv>
         </div>
 
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 min-w-0 w-full">
           <AnimatedSphere />
         </div>
       </motion.div>
@@ -294,7 +318,7 @@ const Hero = () => {
       >
         <button
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-          className="text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+          className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-primary-400 transition-colors p-2 rounded-full hover:bg-white/80 dark:hover:bg-gray-800/80"
           aria-label="Scroll down"
         >
           <FiChevronDown className="w-8 h-8" />

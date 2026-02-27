@@ -4,7 +4,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://resolvemeq.com/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 10
+Sitemap: https://resolvemeq.net/sitemap.xml

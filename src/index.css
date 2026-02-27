@@ -10,33 +10,49 @@
     --primary-dark: 67 56 202;
     --secondary: 236 72 153; /* Pink */
     --accent: 16 185 129;    /* Emerald */
-    --background: 249 250 251;
-    --foreground: 17 24 39;
+    /* Light mode: warm off-white background, strong text */
+    --background: 250 250 252;
+    --foreground: 30 41 59;
+    --surface: 255 255 255;
+    --surface-elevated: 248 250 252;
+    --border-light: 226 232 240;
+    --text-muted: 71 85 105;
     
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%);
     --gradient-dark: linear-gradient(135deg, rgb(17, 24, 39) 0%, rgb(88, 28, 135) 100%);
     
-    /* Shadows */
+    /* Shadows - light mode friendly */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
     
     /* Glassmorphism */
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(226, 232, 240, 0.8);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
   }
 
   .dark {
     --background: 17 24 39;
     --foreground: 249 250 251;
-    --glass-bg: rgba(17, 24, 39, 0.7);
+    --surface: 31 41 55;
+    --surface-elevated: 55 65 81;
+    --border-light: 55 65 81;
+    --text-muted: 156 163 175;
+    --glass-bg: rgba(17, 24, 39, 0.8);
+    --glass-border: rgba(55, 65, 81, 0.8);
   }
 
   body {
     @apply bg-[rgb(var(--background))] text-[rgb(var(--foreground))] antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 }
 
@@ -54,11 +70,40 @@
   }
 
   .btn-primary {
-    @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 
-           bg-gradient-to-r from-indigo-600 to-pink-500 
-           hover:from-indigo-700 hover:to-pink-600 
+    @apply px-6 py-3.5 rounded-xl font-medium text-base transition-all duration-300 
+           bg-gradient-to-r from-indigo-600 to-indigo-500 
+           hover:from-indigo-700 hover:to-indigo-600 
            text-white shadow-lg hover:shadow-xl 
-           transform hover:-translate-y-0.5;
+           transform hover:-translate-y-0.5
+           border border-indigo-700/30;
+  }
+
+  /* Light mode: stronger contrast and shadow so buttons stand out */
+  .btn-primary {
+    @apply dark:border-indigo-400/20;
+  }
+  :root:not(.dark) .btn-primary {
+    box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.35);
+  }
+  :root:not(.dark) .btn-primary:hover {
+    box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.45);
+  }
+
+  .btn-secondary {
+    @apply px-5 py-3 rounded-xl font-medium text-base transition-all duration-300
+           bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200
+           border-2 border-gray-200 dark:border-gray-600
+           hover:border-primary-500 hover:bg-gray-50 dark:hover:bg-gray-700
+           shadow-sm hover:shadow-md;
+  }
+
+  /* Light mode: ensure secondary button has clear border and shadow */
+  :root:not(.dark) .btn-secondary {
+    border-color: rgb(var(--border-light));
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06);
+  }
+  :root:not(.dark) .btn-secondary:hover {
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.08);
   }
 
   .section-padding {
@@ -123,4 +168,80 @@ html {
 /* Optional custom styles */
 html {
   scroll-behavior: smooth;
+}
+
+/* Header light mode: dark text when NOT scrolled (over hero), white text when scrolled */
+.light header:not([data-scrolled="true"]) .text-xl:not(.logo-text),
+.light header:not([data-scrolled="true"]) .text-2xl:not(.logo-text),
+.light header:not([data-scrolled="true"]) nav a,
+.light header:not([data-scrolled="true"]) nav button,
+header[data-theme="light"]:not([data-scrolled="true"]) .text-xl:not(.logo-text),
+header[data-theme="light"]:not([data-scrolled="true"]) .text-2xl:not(.logo-text),
+header[data-theme="light"]:not([data-scrolled="true"]) nav a,
+header[data-theme="light"]:not([data-scrolled="true"]) nav button {
+  color: #0f172a !important;
+}
+/* Log in is always white text in light mode (dark button) - handled in component */
+.light header .btn-primary,
+.light header a.btn-primary,
+header[data-theme="light"] .btn-primary,
+header[data-theme="light"] a.btn-primary {
+  color: #fff !important;
+}
+/* When scrolled, light header has dark bg so all text white */
+.light header[data-scrolled="true"],
+header[data-theme="light"][data-scrolled="true"] {
+  --header-text: #fff;
+}
+.light header[data-scrolled="true"] .text-xl:not(.logo-text),
+.light header[data-scrolled="true"] .text-2xl:not(.logo-text),
+.light header[data-scrolled="true"] nav a,
+.light header[data-scrolled="true"] nav button,
+.light header[data-scrolled="true"] [class*="rounded-lg"],
+header[data-theme="light"][data-scrolled="true"] .text-xl:not(.logo-text),
+header[data-theme="light"][data-scrolled="true"] .text-2xl:not(.logo-text),
+header[data-theme="light"][data-scrolled="true"] nav a,
+header[data-theme="light"][data-scrolled="true"] nav button,
+header[data-theme="light"][data-scrolled="true"] [class*="rounded-lg"] {
+  color: #fff !important;
+}
+header[data-theme="light"][data-scrolled="true"] a[href*="login"] {
+  color: #fff !important;
+}
+
+/* Force hero text to be dark in light mode */
+.light #home h1,
+#home[data-theme="light"] h1 {
+  color: #0f172a !important;
+}
+.light #home h1 span.text-indigo-600,
+#home[data-theme="light"] h1 span.text-indigo-600 {
+  color: #4f46e5 !important;
+}
+.light #home p.text-xl,
+.light #home p.text-2xl,
+#home[data-theme="light"] p.text-xl,
+#home[data-theme="light"] p.text-2xl {
+  color: #0f172a !important;
+}
+.light #home p span.font-semibold,
+#home[data-theme="light"] p span.font-semibold {
+  color: #4f46e5 !important;
+}
+.light #home [class*="rounded-full"][class*="bg-indigo"],
+#home[data-theme="light"] [class*="rounded-full"][class*="bg-indigo"] {
+  color: #312e81 !important;
+}
+.light #home .text-slate-800,
+#home[data-theme="light"] .text-slate-800 {
+  color: #1e293b !important;
+}
+.light #home .btn-primary,
+#home[data-theme="light"] .btn-primary {
+  color: #fff !important;
+}
+/* Watch Demo: white text in light mode (dark button) - handled in component with dark bg */
+.light #home .btn-secondary,
+#home[data-theme="light"] .btn-secondary {
+  color: #0f172a !important;
 }

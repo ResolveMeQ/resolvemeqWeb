@@ -73,32 +73,32 @@ const FeatureCard = ({ feature, isExpanded, onClick, index }) => {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       onClick={onClick}
-      className={`glass-card p-8 rounded-xl cursor-pointer transition-all duration-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 ${
+      className={`p-8 rounded-xl cursor-pointer transition-all duration-300 bg-white dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-lg dark:shadow-none ${
         isExpanded ? "md:col-span-2" : ""
       }`}
     >
-      <motion.div layout className="flex items-start gap-6">
+      <motion.div layout className="flex items-start gap-6 min-w-0">
         <motion.div
           layout
-          className={`${feature.color} p-4 rounded-lg bg-opacity-10 dark:bg-opacity-20`}
+          className={`${feature.color} p-4 rounded-lg bg-gray-100 dark:bg-white/10 flex-shrink-0`}
         >
           {feature.icon()}
         </motion.div>
         
-        <div className="flex-1">
-          <motion.div layout className="flex items-center justify-between">
+        <div className="flex-1 min-w-0">
+          <motion.div layout className="flex flex-wrap items-center justify-between gap-2">
             <motion.h3 layout className="text-xl font-bold text-gray-900 dark:text-white">
               {feature.title}
             </motion.h3>
             <motion.div
               layout
-              className={`text-sm font-medium ${feature.color}`}
+              className={`text-sm font-medium flex-shrink-0 ${feature.color}`}
             >
               {feature.stats}
             </motion.div>
           </motion.div>
           
-          <motion.p layout className="text-gray-600 dark:text-gray-300 mt-2">
+          <motion.p layout className="text-gray-700 dark:text-gray-300 mt-2">
             {feature.description}
           </motion.p>
           
@@ -111,7 +111,7 @@ const FeatureCard = ({ feature, isExpanded, onClick, index }) => {
                 transition={{ duration: 0.3 }}
                 className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
               >
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-gray-700 dark:text-gray-300">
                   {feature.longDescription}
                 </p>
                 <motion.button
@@ -141,13 +141,13 @@ const Features = () => {
   );
 
   return (
-    <section id="features" className="py-20 bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-6">
+    <section id="features" className="py-20 bg-white dark:bg-gray-900 overflow-x-hidden">
+      <div className="container mx-auto px-4 sm:px-6 min-w-0">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Powerful Features for Modern IT Support
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
             Our AI-powered platform combines cutting-edge technology with intuitive design
             to revolutionize your IT support experience.
           </p>
@@ -164,7 +164,7 @@ const Features = () => {
               placeholder="Search features..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm"
             />
           </motion.div>
         </div>

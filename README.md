@@ -1,3 +1,25 @@
+# ResolveMeQ Landing Page
+
+Landing site for [ResolveMeQ](https://resolvemeq.net). The app is at [app.resolvemeq.net](https://app.resolvemeq.net).
+
+## Request Demo form (CTA)
+
+The "Request Demo" form in the Contact section can either:
+
+- **Without Formspree:** Submitting shows a thank-you message and redirects to the app after 2 seconds. No data is stored.
+- **With Formspree:** Submissions are sent to [Formspree](https://formspree.io), and the user is redirected to the app after submit.
+
+### Enabling Formspree
+
+1. Create a form at [formspree.io](https://formspree.io) and get your form ID (e.g. `abcxyz` from `https://formspree.io/f/abcxyz`).
+2. In the project root, create a `.env` file (copy from `.env.example`) and set:
+   ```bash
+   REACT_APP_FORMSPREE_ID=your_form_id_here
+   ```
+3. Restart the dev server. Form submissions will POST to Formspree and then redirect to the app.
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
