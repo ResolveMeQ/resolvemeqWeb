@@ -8,7 +8,6 @@ import {
   FiArrowRight,
   FiMapPin,
   FiPhone,
-  FiGlobe,
   FiChevronUp
 } from "react-icons/fi";
 import { handleHashLink } from "../utils/scrollToSection";

@@ -7,7 +7,6 @@ import {
   FiCode,
   FiShield,
   FiActivity,
-  FiChevronDown,
   FiArrowRight,
 } from "react-icons/fi";
 
