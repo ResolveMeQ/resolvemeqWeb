@@ -1,247 +1,64 @@
-/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    /* Modern Color Palette */
-    --primary: 79 70 229;    /* Indigo */
-    --primary-dark: 67 56 202;
-    --secondary: 236 72 153; /* Pink */
-    --accent: 16 185 129;    /* Emerald */
-    /* Light mode: warm off-white background, strong text */
-    --background: 250 250 252;
-    --foreground: 30 41 59;
-    --surface: 255 255 255;
-    --surface-elevated: 248 250 252;
-    --border-light: 226 232 240;
-    --text-muted: 71 85 105;
-    
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%);
-    --gradient-dark: linear-gradient(135deg, rgb(17, 24, 39) 0%, rgb(88, 28, 135) 100%);
-    
-    /* Shadows - light mode friendly */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
-    
-    /* Glassmorphism */
-    --glass-bg: rgba(255, 255, 255, 0.85);
-    --glass-border: rgba(226, 232, 240, 0.8);
-    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
-  }
-
-  .dark {
-    --background: 17 24 39;
-    --foreground: 249 250 251;
-    --surface: 31 41 55;
-    --surface-elevated: 55 65 81;
-    --border-light: 55 65 81;
-    --text-muted: 156 163 175;
-    --glass-bg: rgba(17, 24, 39, 0.8);
-    --glass-border: rgba(55, 65, 81, 0.8);
-  }
-
   body {
-    @apply bg-[rgb(var(--background))] text-[rgb(var(--foreground))] antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
   }
 
-  html,
-  body {
-    overflow-x: hidden;
-    max-width: 100vw;
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
   }
 }
 
 @layer components {
-  .glass-card {
-    @apply backdrop-blur-lg bg-opacity-70 border border-opacity-20 shadow-lg;
-    background: var(--glass-bg);
-    border-color: var(--glass-border);
-    box-shadow: var(--glass-shadow);
-  }
-
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
-  }
-
   .btn-primary {
-    @apply px-6 py-3.5 rounded-xl font-medium text-base transition-all duration-300 
-           bg-gradient-to-r from-indigo-600 to-indigo-500 
-           hover:from-indigo-700 hover:to-indigo-600 
-           text-white shadow-lg hover:shadow-xl 
-           transform hover:-translate-y-0.5
-           border border-indigo-700/30;
-  }
-
-  /* Light mode: stronger contrast and shadow so buttons stand out */
-  .btn-primary {
-    @apply dark:border-indigo-400/20;
-  }
-  :root:not(.dark) .btn-primary {
-    box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.35);
-  }
-  :root:not(.dark) .btn-primary:hover {
-    box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.45);
+    @apply px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-150;
   }
 
   .btn-secondary {
-    @apply px-5 py-3 rounded-xl font-medium text-base transition-all duration-300
-           bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200
-           border-2 border-gray-200 dark:border-gray-600
-           hover:border-primary-500 hover:bg-gray-50 dark:hover:bg-gray-700
-           shadow-sm hover:shadow-md;
+    @apply px-6 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-medium rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 shadow-sm hover:shadow-md transition-all duration-150;
   }
 
-  /* Light mode: ensure secondary button has clear border and shadow */
-  :root:not(.dark) .btn-secondary {
-    border-color: rgb(var(--border-light));
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06);
-  }
-  :root:not(.dark) .btn-secondary:hover {
-    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.08);
+  .btn-ghost {
+    @apply px-6 py-3 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors;
   }
 
-  .section-padding {
-    @apply py-20 md:py-32;
+  .input-enterprise {
+    @apply w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:outline-none shadow-sm;
   }
 
-  .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  .card-enterprise {
+    @apply bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm;
+  }
+
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950;
+  }
+
+  .status-active {
+    @apply bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800/50;
+  }
+
+  .status-pending {
+    @apply bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50;
+  }
+
+  .status-inactive {
+    @apply bg-gray-50 dark:bg-gray-900/20 text-gray-700 dark:text-gray-400 border border-gray-200 dark:border-gray-800/50;
   }
 }
 
-/* Modern Animations */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgb(var(--background));
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgb(var(--primary));
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--primary-dark));
-}
-
-/* Base transitions */
-.transition-base {
-  @apply transition-all duration-300 ease-in-out;
-}
-
-/* Focus styles */
-.focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-[rgb(var(--primary))] focus:ring-offset-2;
-}
-
-/* Selection styles */
-::selection {
-  @apply bg-[rgb(var(--primary))] bg-opacity-20 text-[rgb(var(--primary-dark))];
-}
-
-/* Optional custom styles */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Header light mode: dark text when NOT scrolled (over hero), white text when scrolled */
-.light header:not([data-scrolled="true"]) .text-xl:not(.logo-text),
-.light header:not([data-scrolled="true"]) .text-2xl:not(.logo-text),
-.light header:not([data-scrolled="true"]) nav a,
-.light header:not([data-scrolled="true"]) nav button,
-header[data-theme="light"]:not([data-scrolled="true"]) .text-xl:not(.logo-text),
-header[data-theme="light"]:not([data-scrolled="true"]) .text-2xl:not(.logo-text),
-header[data-theme="light"]:not([data-scrolled="true"]) nav a,
-header[data-theme="light"]:not([data-scrolled="true"]) nav button {
-  color: #0f172a !important;
-}
-/* Log in is always white text in light mode (dark button) - handled in component */
-.light header .btn-primary,
-.light header a.btn-primary,
-header[data-theme="light"] .btn-primary,
-header[data-theme="light"] a.btn-primary {
-  color: #fff !important;
-}
-/* When scrolled, light header has dark bg so all text white */
-.light header[data-scrolled="true"],
-header[data-theme="light"][data-scrolled="true"] {
-  --header-text: #fff;
-}
-.light header[data-scrolled="true"] .text-xl:not(.logo-text),
-.light header[data-scrolled="true"] .text-2xl:not(.logo-text),
-.light header[data-scrolled="true"] nav a,
-.light header[data-scrolled="true"] nav button,
-.light header[data-scrolled="true"] [class*="rounded-lg"],
-header[data-theme="light"][data-scrolled="true"] .text-xl:not(.logo-text),
-header[data-theme="light"][data-scrolled="true"] .text-2xl:not(.logo-text),
-header[data-theme="light"][data-scrolled="true"] nav a,
-header[data-theme="light"][data-scrolled="true"] nav button,
-header[data-theme="light"][data-scrolled="true"] [class*="rounded-lg"] {
-  color: #fff !important;
-}
-header[data-theme="light"][data-scrolled="true"] a[href*="login"] {
-  color: #fff !important;
-}
-
-/* Force hero text to be dark in light mode */
-.light #home h1,
-#home[data-theme="light"] h1 {
-  color: #0f172a !important;
-}
-.light #home h1 span.text-indigo-600,
-#home[data-theme="light"] h1 span.text-indigo-600 {
-  color: #4f46e5 !important;
-}
-.light #home p.text-xl,
-.light #home p.text-2xl,
-#home[data-theme="light"] p.text-xl,
-#home[data-theme="light"] p.text-2xl {
-  color: #0f172a !important;
-}
-.light #home p span.font-semibold,
-#home[data-theme="light"] p span.font-semibold {
-  color: #4f46e5 !important;
-}
-.light #home [class*="rounded-full"][class*="bg-indigo"],
-#home[data-theme="light"] [class*="rounded-full"][class*="bg-indigo"] {
-  color: #312e81 !important;
-}
-.light #home .text-slate-800,
-#home[data-theme="light"] .text-slate-800 {
-  color: #1e293b !important;
-}
-.light #home .btn-primary,
-#home[data-theme="light"] .btn-primary {
-  color: #fff !important;
-}
-/* Watch Demo: white text in light mode (dark button) - handled in component with dark bg */
-.light #home .btn-secondary,
-#home[data-theme="light"] .btn-secondary {
-  color: #0f172a !important;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }

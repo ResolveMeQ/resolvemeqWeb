@@ -18,7 +18,7 @@ const AnimatedSphere = () => {
         <directionalLight position={[-2, 5, 2]} intensity={1} />
         <Sphere args={[1, 100, 200]} scale={2.5}>
           <MeshDistortMaterial
-            color={theme === 'dark' ? "#6366F1" : "#4F46E5"}
+            color={theme === 'dark' ? "#3b82f6" : "#2563eb"}
             attach="material"
             distort={0.5}
             speed={1.5}
@@ -36,21 +36,21 @@ const SocialProof = () => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.8 }}
-    className="flex items-center gap-6 mt-8"
+    className="flex items-center gap-6 mt-10"
   >
     <div className="flex -space-x-2">
       {[1, 2, 3, 4].map((i) => (
         <motion.img
           key={i}
           src={`https://i.pravatar.cc/150?img=${i + 10}`}
-          alt={`User ${i}`}
-          className="w-8 h-8 rounded-full border-2 border-gray-100 bg-white dark:border-gray-800 dark:bg-gray-800 shadow-sm"
-          whileHover={{ scale: 1.2, zIndex: 1 }}
+          alt={`Customer ${i}`}
+          className="w-10 h-10 rounded-full border-2 border-white dark:border-gray-900 shadow-sm"
+          whileHover={{ scale: 1.15, zIndex: 1 }}
         />
       ))}
     </div>
-    <div className="text-sm text-slate-800 dark:text-gray-400">
-      <span className="font-semibold text-indigo-600 dark:text-primary-400">500+</span> companies trust us
+    <div className="text-sm text-gray-700 dark:text-gray-300">
+      <span className="font-semibold text-primary-600 dark:text-primary-400">500+</span> companies trust ResolveMeQ
     </div>
   </motion.div>
 );
@@ -59,11 +59,11 @@ const FloatingActionButton = () => (
   <motion.button
     whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.9 }}
-    className="fixed bottom-8 right-8 bg-primary-600 text-white p-4 rounded-full shadow-lg border border-primary-700/30 dark:border-primary-400/20 z-50 hover:shadow-xl"
+    className="fixed bottom-8 right-8 bg-primary-600 hover:bg-primary-700 text-white p-3 rounded-lg shadow-lg z-50 transition-colors"
     onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
     aria-label="Scroll to top"
   >
-    <FiChevronUp className="w-6 h-6" />
+    <FiChevronUp className="w-5 h-5" />
   </motion.button>
 );
 
@@ -104,13 +104,13 @@ const Hero = () => {
   const particlesOptions = {
     particles: {
       number: { value: theme === 'dark' ? 50 : 35, density: { enable: true, value_area: 800 } },
-      color: { value: theme === 'dark' ? "#6366F1" : "#6366F1" },
+      color: { value: theme === 'dark' ? "#3b82f6" : "#2563eb" },
       opacity: { value: theme === 'dark' ? 0.5 : 0.22 },
       size: { value: theme === 'dark' ? 3 : 2.5 },
       line_linked: {
         enable: true,
         distance: 150,
-        color: theme === 'dark' ? "#6366F1" : "#818cf8",
+        color: theme === 'dark' ? "#3b82f6" : "#60a5fa",
         opacity: theme === 'dark' ? 0.2 : 0.12,
         width: 1,
       },
@@ -144,21 +144,20 @@ const Hero = () => {
       ref={containerRef}
       id="home"
       data-theme={theme}
-      className="min-h-screen flex items-center pt-20 md:pt-0 relative overflow-hidden bg-[#f8fafc] dark:bg-gray-900"
+      className="min-h-screen flex items-center pt-20 md:pt-0 relative overflow-hidden bg-gray-50 dark:bg-gray-950"
       style={{
         background: theme === 'dark'
           ? undefined
-          : `linear-gradient(180deg, #fafbfd 0%, #f1f5f9 50%, #eef2ff 100%)`,
+          : `linear-gradient(180deg, #fafbfd 0%, #f8fafc 50%, #f1f5f9 100%)`,
       }}
     >
-      {/* Subtle radial glow in light mode */}
       {theme === 'light' && (
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
-              rgba(99, 102, 241, 0.08), 
-              transparent 45%)`,
+              rgba(37, 99, 235, 0.06), 
+              transparent 50%)`,
           }}
         />
       )}
@@ -167,7 +166,7 @@ const Hero = () => {
           className="absolute inset-0 pointer-events-none"
           style={{
             background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
-              rgba(99, 102, 241, 0.15), 
+              rgba(59, 130, 246, 0.12), 
               transparent 50%)`,
           }}
         />
@@ -196,22 +195,23 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="inline-block px-4 py-2 rounded-full bg-indigo-200 dark:bg-primary-900/30 text-indigo-900 dark:text-primary-400 text-sm font-medium mb-6 border border-indigo-300 dark:border-transparent shadow-sm"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400 text-xs font-medium mb-6 border border-primary-200 dark:border-primary-800/50"
               >
-                🚀 The Future of IT Support
+                <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse" />
+                Enterprise AI Support Automation
               </motion.div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-slate-900 dark:text-white mb-6 break-words">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 dark:text-white mb-6 break-words tracking-tight">
                 Transform Your IT Support with{" "}
                 <motion.span
-                  className="text-indigo-600 dark:text-primary-400 relative inline-block"
+                  className="text-primary-600 dark:text-primary-400 relative inline-block"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  AI
+                  AI Automation
                   <motion.span
-                    className="absolute -bottom-2 left-0 w-full h-1 bg-indigo-600 dark:bg-primary-400 rounded-full"
+                    className="absolute -bottom-2 left-0 w-full h-1 bg-primary-600 dark:bg-primary-400 rounded-full"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.8, delay: 0.7 }}
@@ -223,52 +223,50 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="text-xl md:text-2xl text-slate-800 dark:text-gray-300 mb-10"
+                className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
               >
-                Resolve Me Quick automates{" "}
-                <span className="font-semibold text-indigo-600 dark:text-primary-400">
-                  40%+
-                </span>{" "}
-                of repetitive IT tickets, freeing your team to focus on what matters
+                Reduce ticket resolution time by{" "}
+                <span className="font-semibold text-primary-600 dark:text-primary-400">
+                  40%
+                </span>
+                {" "}and improve team efficiency by{" "}
+                <span className="font-semibold text-primary-600 dark:text-primary-400">
+                  60%
+                </span>
+                {" "}with enterprise-grade AI automation
               </motion.p>
             </motion.div>
           </FadeInDiv>
 
-          <SocialProof />
-
           <FadeInDiv delay={0.4}>
-            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+            <div className="flex flex-col sm:flex-row gap-3 mt-8">
               <motion.a
                 href="https://app.resolvemeq.net"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.03, boxShadow: "0 10px 25px rgba(79, 70, 229, 0.35)" }}
+                whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="btn-primary group inline-flex items-center justify-center gap-2 px-7 py-3.5"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-150"
                 aria-label="Get Started"
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  Get Started
-                  <FiArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-                </span>
+                Get Started
+                <FiArrowRight className="w-4 h-4" />
               </motion.a>
               
               <motion.button
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setShowVideo(true)}
-                className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 font-medium rounded-xl transition-all duration-300 ${
-                  theme === 'light'
-                    ? "bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 shadow-md hover:shadow-lg"
-                    : "btn-secondary text-primary-600 dark:text-primary-400"
-                }`}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-medium rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 shadow-sm hover:shadow-md transition-all duration-150"
                 aria-label="Watch Demo"
               >
-                <FiPlay className="w-5 h-5" />
+                <FiPlay className="w-4 h-4" />
                 Watch Demo
               </motion.button>
             </div>
           </FadeInDiv>
+
+          <SocialProof />
         </div>
 
         <div className="md:w-1/2 min-w-0 w-full">
@@ -282,16 +280,26 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={() => setShowVideo(false)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden"
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
+              <button
+                onClick={() => setShowVideo(false)}
+                className="absolute top-4 right-4 z-10 p-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors"
+                aria-label="Close video"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
               <iframe
                 className="absolute inset-0 w-full h-full"
                 src="https://www.youtube.com/embed/your-video-id"
@@ -318,7 +326,7 @@ const Hero = () => {
       >
         <button
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-          className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-primary-400 transition-colors p-2 rounded-full hover:bg-white/80 dark:hover:bg-gray-800/80"
+          className="text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors p-2 rounded-lg hover:bg-white/80 dark:hover:bg-gray-800/80"
           aria-label="Scroll down"
         >
           <FiChevronDown className="w-8 h-8" />
