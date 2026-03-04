@@ -7,7 +7,7 @@ import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { useInView } from "react-intersection-observer";
-import { FiPlay, FiArrowRight, FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { FiPlay, FiArrowRight, FiChevronDown, FiChevronUp, FiBook } from "react-icons/fi";
 
 const AnimatedSphere = () => {
   const { theme } = useTheme();
@@ -171,7 +171,7 @@ const Hero = () => {
           }}
         />
       )}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         <Particles
           id="tsparticles"
           init={particlesInit}
@@ -198,7 +198,7 @@ const Hero = () => {
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400 text-xs font-medium mb-6 border border-primary-200 dark:border-primary-800/50"
               >
                 <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse" />
-                Enterprise AI Support Automation
+                Resolve Me Quickly — AI Support Automation
               </motion.div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 dark:text-white mb-6 break-words tracking-tight">
@@ -263,7 +263,32 @@ const Hero = () => {
                 <FiPlay className="w-4 h-4" />
                 Watch Demo
               </motion.button>
+              
+              <motion.a
+                href="https://app.resolvemeq.net/knowledge-base"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-primary-600 dark:text-primary-400 font-medium rounded-lg border-2 border-primary-600 dark:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-150"
+                aria-label="Browse free Knowledge Base"
+              >
+                <FiBook className="w-4 h-4" />
+                Free Knowledge Base
+              </motion.a>
             </div>
+            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+              Need answers now?{" "}
+              <a
+                href="https://app.resolvemeq.net/knowledge-base"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-600 dark:text-primary-400 font-medium hover:underline"
+              >
+                Browse our free Knowledge Base
+              </a>{" "}
+              for instant solutions.
+            </p>
           </FadeInDiv>
 
           <SocialProof />

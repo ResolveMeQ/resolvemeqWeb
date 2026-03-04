@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 const TermsOfService = () => (
   <main className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-16">
     <Helmet>
-      <title>Terms of Service | ResolveMeQ</title>
-      <meta name="description" content="ResolveMeQ Terms of Service. Rules and conditions for using our platform." />
+      <title>Terms of Service | Resolve Me Quickly (ResolveMeQ)</title>
+      <meta name="description" content="Resolve Me Quickly (ResolveMeQ) Terms of Service. Rules and conditions for using our platform." />
+      <link rel="canonical" href="https://resolvemeq.net/terms" />
     </Helmet>
     <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
       <Link to="/" className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline text-sm font-medium mb-8">
         ← Back to Home
       </Link>
       <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">Terms of Service</h1>
-      <p className="text-gray-500 dark:text-gray-400 mb-10">Last updated: February 2025</p>
+      <p className="text-gray-500 dark:text-gray-400 mb-10">Last updated: February 2026</p>
 
       <div className="prose prose-gray dark:prose-invert max-w-none space-y-8 text-gray-700 dark:text-gray-300">
         <section>

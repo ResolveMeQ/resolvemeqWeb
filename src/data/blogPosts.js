@@ -1,0 +1,48 @@
+// Shared blog data for list and single post pages
+export const BLOG_POSTS = [
+  {
+    slug: "how-ai-transforms-it-support",
+    title: "How AI Is Transforming IT Support in 2025",
+    excerpt: "Discover how AI-powered automation is reducing ticket resolution time by up to 40% and freeing support teams to focus on complex, high-value issues.",
+    date: "February 2025",
+    readTime: "5 min read",
+    category: "AI & Automation",
+    body: "AI-powered automation is no longer a future possibility—it's here, and it's reshaping how IT support teams operate. By handling routine tickets instantly and surfacing the right answers from your knowledge base, AI can reduce resolution time by up to 40% while freeing your team to focus on complex, high-value issues that require human judgment and creativity.\n\nIn this article we explore how leading teams are deploying AI for ticket triage, automated responses, and smart escalation—and how you can get started without a massive implementation project.",
+  },
+  {
+    slug: "best-practices-ticket-routing",
+    title: "Best Practices for Smart Ticket Routing",
+    excerpt: "Learn how to set up intelligent ticket routing that considers context, priority, and team capacity—so the right person handles every ticket the first time.",
+    date: "January 2025",
+    readTime: "4 min read",
+    category: "Best Practices",
+    body: "Smart ticket routing is the backbone of an efficient helpdesk. When tickets land in the right queue—or with the right agent—resolution times drop and satisfaction goes up. This post walks through best practices: defining clear categories, using priority and context to route, and balancing load across your team so no one is overwhelmed while others sit idle.\n\nWe'll also cover how AI can suggest the best assignee based on past resolution patterns and skills.",
+  },
+  {
+    slug: "reducing-support-costs-with-automation",
+    title: "Reducing Support Costs Without Sacrificing Quality",
+    excerpt: "Practical strategies to automate repetitive IT support tasks while maintaining—or improving—user satisfaction and response times.",
+    date: "January 2025",
+    readTime: "6 min read",
+    category: "Strategy",
+    body: "Support costs can grow quickly as your company scales. The good news: automation doesn't have to mean worse service. In fact, when done right, it improves speed and consistency. We share practical strategies to identify which tickets to automate first, how to measure quality, and how to keep a human in the loop where it matters—so you reduce cost without sacrificing satisfaction.",
+  },
+  {
+    slug: "building-internal-knowledge-base",
+    title: "Building an Internal Knowledge Base That Actually Gets Used",
+    excerpt: "Tips for creating and maintaining a knowledge base that your team and AI can rely on, so resolutions are faster and more consistent.",
+    date: "December 2024",
+    readTime: "5 min read",
+    category: "Knowledge Base",
+    body: "A great knowledge base is the foundation for both human and AI-powered support. But many teams struggle with outdated articles, poor structure, and low adoption. Here we share tips for creating and maintaining a knowledge base that your team and AI can rely on: clear structure, ownership, regular reviews, and integration with your ticketing and chat tools so the right article appears at the right time.",
+  },
+  {
+    slug: "measuring-it-support-metrics",
+    title: "The IT Support Metrics That Matter Most",
+    excerpt: "Which KPIs to track for helpdesk performance, and how to use them to improve resolution times, customer satisfaction, and team productivity.",
+    date: "December 2024",
+    readTime: "4 min read",
+    category: "Analytics",
+    body: "Not all metrics are created equal. This guide covers the IT support KPIs that actually drive improvement: first response time, resolution time, CSAT, and volume by category. We'll show how to track them, set targets, and use the data to spot bottlenecks and celebrate wins—without drowning in dashboards.",
+  },
+];

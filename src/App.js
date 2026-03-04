@@ -11,6 +11,8 @@ import Pricing from "./components/Pricing";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import "./index.css";
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
                 <CTA />
               </main>
             </Layout>} />
+            <Route path="/blog" element={<Layout><Blog /></Layout>} />
+            <Route path="/blog/:slug" element={<Layout><BlogPost /></Layout>} />
             <Route path="/privacy" element={<Layout><PrivacyPolicy /></Layout>} />
             <Route path="/terms" element={<Layout><TermsOfService /></Layout>} />
             <Route path="/cookies" element={<Layout><CookiePolicy /></Layout>} />

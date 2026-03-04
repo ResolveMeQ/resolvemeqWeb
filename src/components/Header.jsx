@@ -30,6 +30,7 @@ const Header = () => {
         { name: "Enterprise", href: "#pricing" },
       ],
     },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -67,7 +68,7 @@ const Header = () => {
           >
             <motion.img
               src="/assets/logo.png"
-              alt="ResolveMeQ"
+              alt="Resolve Me Quickly - ResolveMeQ"
               className="h-8 w-auto object-contain"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
@@ -117,6 +118,16 @@ const Header = () => {
                       )}
                     </AnimatePresence>
                   </div>
+                ) : item.href.startsWith("/") ? (
+                  <Link to={item.href}>
+                    <motion.span
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="block text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                    >
+                      {item.name}
+                    </motion.span>
+                  </Link>
                 ) : (
                   <motion.a
                     href={item.href}
@@ -238,6 +249,14 @@ const Header = () => {
                           )}
                         </AnimatePresence>
                       </div>
+                    ) : item.href.startsWith("/") ? (
+                      <Link
+                        to={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className="block px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                      >
+                        {item.name}
+                      </Link>
                     ) : (
                       <a
                         href={item.href}

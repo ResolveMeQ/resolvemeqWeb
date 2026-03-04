@@ -2,37 +2,51 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FadeInDiv } from "../animations/fadeIn";
 import { useState } from "react";
 import { FiMail, FiPhone, FiCalendar, FiCheck, FiArrowRight, FiZap } from "react-icons/fi";
+import { submitContactRequest } from "../api/subscribeContact";
 
 const CTA = () => {
   const [email, setEmail] = useState("");
   const [companySize, setCompanySize] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const formAction = process.env.REACT_APP_FORMSPREE_ID
+  const useContactApi = !!process.env.REACT_APP_CONTACT_API_URL;
+  const formAction = !useContactApi && process.env.REACT_APP_FORMSPREE_ID
     ? `https://formspree.io/f/${process.env.REACT_APP_FORMSPREE_ID}`
     : "#";
 
-  const handleSubmit = (e) => {
-    if (!process.env.REACT_APP_FORMSPREE_ID) {
-      e.preventDefault();
-      setIsSubmitted(true);
-      setTimeout(() => {
-        window.location.href = "https://app.resolvemeq.net";
-      }, 2000);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (useContactApi) {
+      setSubmitError(null);
+      setIsSubmitting(true);
+      const result = await submitContactRequest(email.trim(), companySize);
+      setIsSubmitting(false);
+      if (result.ok || result.error === "API not configured") {
+        setIsSubmitted(true);
+        setTimeout(() => { window.location.href = "https://app.resolvemeq.net"; }, 2000);
+      } else {
+        setSubmitError(result.error || "Something went wrong. Please try again.");
+      }
       return;
+    }
+    if (!process.env.REACT_APP_FORMSPREE_ID) {
+      setIsSubmitted(true);
+      setTimeout(() => { window.location.href = "https://app.resolvemeq.net"; }, 2000);
     }
   };
 
   return (
     <section id="contact" className="relative py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 pointer-events-none" aria-hidden="true" />
       
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full blur-3xl" />
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative min-w-0">
+      <div className="container mx-auto px-4 sm:px-6 relative min-w-0 z-10">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <FadeInDiv delay={0.2}>
@@ -71,16 +85,19 @@ const CTA = () => {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       onSubmit={handleSubmit}
-                      action={formAction}
-                      method="POST"
+                      action={useContactApi ? undefined : formAction}
+                      method={useContactApi ? "post" : "POST"}
                       className="space-y-5"
                     >
-                      <input
-                        type="hidden"
-                        name="_next"
-                        value="https://app.resolvemeq.net"
-                      />
-                      <input type="hidden" name="_subject" value="ResolveMeQ demo request" />
+                      {!useContactApi && (
+                        <>
+                          <input type="hidden" name="_next" value="https://app.resolvemeq.net" />
+                          <input type="hidden" name="_subject" value="ResolveMeQ demo request" />
+                        </>
+                      )}
+                      {submitError && (
+                        <p className="text-sm text-red-200">{submitError}</p>
+                      )}
                       <div>
                         <label htmlFor="email" className="block text-white text-xs font-medium mb-2 uppercase tracking-wide">
                           Work Email
@@ -95,7 +112,8 @@ const CTA = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="you@company.com"
                             required
-                            className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                            disabled={isSubmitting}
+                            className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all disabled:opacity-70"
                           />
                         </div>
                       </div>
@@ -109,8 +127,9 @@ const CTA = () => {
                           name="company_size"
                           required
                           value={companySize}
-                          onChange={(e) => setCompanySize(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                          onChange={(e) => { setCompanySize(e.target.value); setSubmitError(null); }}
+                          disabled={isSubmitting}
+                          className="w-full px-4 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/50 transition-all disabled:opacity-70"
                         >
                           <option value="" className="bg-gray-800">Select company size</option>
                           <option value="1-50" className="bg-gray-800">1-50 employees</option>
@@ -122,11 +141,12 @@ const CTA = () => {
 
                       <motion.button
                         type="submit"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors shadow-md"
+                        disabled={isSubmitting}
+                        whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                        whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors shadow-md disabled:opacity-70"
                       >
-                        <span>Request Demo</span>
+                        <span>{isSubmitting ? "Sending…" : "Request Demo"}</span>
                         <FiArrowRight className="w-4 h-4" />
                       </motion.button>
                     </motion.form>
@@ -203,7 +223,19 @@ const CTA = () => {
           </div>
 
           <FadeInDiv delay={1.2}>
-            <div className="mt-12 text-center">
+            <div className="mt-12 text-center space-y-3">
+              <p className="text-sm text-white/90">
+                Or browse our{" "}
+                <a
+                  href="https://app.resolvemeq.net/knowledge-base"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white font-semibold hover:underline underline-offset-2"
+                >
+                  free Knowledge Base
+                </a>{" "}
+                for instant solutions—no signup required.
+              </p>
               <p className="text-sm text-white/80">
                 Need more information? Contact our sales team at{" "}
                 <a
