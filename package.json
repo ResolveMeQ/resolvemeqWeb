@@ -21,6 +21,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "prebuild": "node scripts/generate-sitemap.js",
+    "sitemap": "node scripts/generate-sitemap.js",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",

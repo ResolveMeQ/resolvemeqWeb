@@ -1,13 +1,13 @@
-import { Helmet } from "react-helmet-async";
+import { PageSeo } from "../seo/PageSeo";
 import { Link } from "react-router-dom";
 
 const TermsOfService = () => (
   <main className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-16">
-    <Helmet>
-      <title>Terms of Service | Resolve Me Quickly (ResolveMeQ)</title>
-      <meta name="description" content="Resolve Me Quickly (ResolveMeQ) Terms of Service. Rules and conditions for using our platform." />
-      <link rel="canonical" href="https://resolvemeq.net/terms" />
-    </Helmet>
+    <PageSeo
+      title="Terms of Service | Resolve Me Quickly (ResolveMeQ)"
+      description="Resolve Me Quickly (ResolveMeQ) Terms of Service. Rules and conditions for using our platform."
+      path="/terms"
+    />
     <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
       <Link to="/" className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline text-sm font-medium mb-8">
         ← Back to Home
@@ -51,7 +51,9 @@ const TermsOfService = () => (
 
         <section>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-3">5. Payment and Subscription</h2>
-          <p>Paid plans are subject to the pricing and billing terms presented at signup or on our website. Fees are due in advance. We may change pricing with notice; continued use after changes constitutes acceptance. Refunds are handled according to our refund policy stated at the time of purchase.</p>
+          <p>Paid plans are subject to the pricing and billing terms presented at signup or on our website. Fees are due in advance. We may change pricing with notice; continued use after changes constitutes acceptance.</p>
+          <p className="mt-3">Payments are processed securely via Dodo Payments. You can manage payment methods, upgrade or downgrade plans, and download transaction history and invoices from the Billing section of your account.</p>
+          <p className="mt-3">Refunds are handled according to our refund policy stated at the time of purchase.</p>
         </section>
 
         <section>

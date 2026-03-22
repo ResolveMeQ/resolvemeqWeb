@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FadeInDiv } from "../animations/fadeIn";
-import { FiCheck, FiX, FiHelpCircle, FiArrowRight, FiUsers, FiMessageSquare, FiZap, FiShield, FiStar } from "react-icons/fi";
+import { FiCheck, FiX, FiHelpCircle, FiArrowRight, FiUsers, FiMessageSquare, FiZap, FiShield, FiStar, FiCreditCard, FiDownload, FiRefreshCw } from "react-icons/fi";
 
 const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -186,7 +186,7 @@ const Pricing = () => {
                 </div>
 
                 <motion.a
-                  href="https://app.resolvemeq.net"
+                  href={plan.id === "enterprise" ? "https://app.resolvemeq.net/billing" : "https://app.resolvemeq.net/register"}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02 }}
@@ -238,6 +238,48 @@ const Pricing = () => {
           ))}
         </div>
 
+        {/* Payments & Billing Info */}
+        <FadeInDiv delay={0.3}>
+          <div className="mt-12 max-w-4xl mx-auto">
+            <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-6 md:p-8">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <FiCreditCard className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                Payments & Billing
+              </h3>
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div className="flex items-start gap-3">
+                  <FiCheck className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-medium text-gray-900 dark:text-white">14-day free trial</span>
+                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-0.5">No credit card required</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <FiCheck className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-medium text-gray-900 dark:text-white">Secure checkout</span>
+                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-0.5">Powered by Dodo Payments</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <FiRefreshCw className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-medium text-gray-900 dark:text-white">Upgrade or downgrade</span>
+                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-0.5">Change plans anytime in-app</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <FiDownload className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-medium text-gray-900 dark:text-white">Transaction history</span>
+                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-0.5">Invoices & receipts to download</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </FadeInDiv>
+
         <FadeInDiv delay={0.4}>
           <div className="mt-12 max-w-4xl mx-auto text-center">
             <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 md:p-10 border border-gray-200 dark:border-gray-700">
@@ -251,7 +293,7 @@ const Pricing = () => {
                 Our enterprise plan offers custom AI models, dedicated support, and advanced security features. Contact our sales team to discuss your specific requirements.
               </p>
               <motion.a
-                href="https://app.resolvemeq.net"
+                href="https://app.resolvemeq.net/billing"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}

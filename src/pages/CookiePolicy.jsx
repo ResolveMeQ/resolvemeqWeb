@@ -1,13 +1,13 @@
-import { Helmet } from "react-helmet-async";
+import { PageSeo } from "../seo/PageSeo";
 import { Link } from "react-router-dom";
 
 const CookiePolicy = () => (
   <main className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-16">
-    <Helmet>
-      <title>Cookie Policy | Resolve Me Quickly (ResolveMeQ)</title>
-      <meta name="description" content="Resolve Me Quickly (ResolveMeQ) Cookie Policy. How we use cookies and similar technologies." />
-      <link rel="canonical" href="https://resolvemeq.net/cookies" />
-    </Helmet>
+    <PageSeo
+      title="Cookie Policy | Resolve Me Quickly (ResolveMeQ)"
+      description="Resolve Me Quickly (ResolveMeQ) Cookie Policy. How we use cookies and similar technologies."
+      path="/cookies"
+    />
     <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
       <Link to="/" className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline text-sm font-medium mb-8">
         ← Back to Home

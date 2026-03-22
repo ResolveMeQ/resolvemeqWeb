@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Helmet } from "react-helmet-async";
+import { PageSeo } from "../seo/PageSeo";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiSearch, FiCalendar, FiArrowRight, FiChevronDown } from "react-icons/fi";
@@ -28,11 +28,11 @@ const Blog = () => {
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-gray-900 pt-24 pb-16">
-      <Helmet>
-        <title>Blog | Resolve Me Quickly (ResolveMeQ)</title>
-        <meta name="description" content="Insights on AI-powered IT support, ticket automation, and helpdesk best practices from the Resolve Me Quickly team." />
-        <link rel="canonical" href="https://resolvemeq.net/blog" />
-      </Helmet>
+      <PageSeo
+        title="Blog | Resolve Me Quickly (ResolveMeQ)"
+        description="Insights on AI-powered IT support, ticket automation, and helpdesk best practices from the Resolve Me Quickly team."
+        path="/blog"
+      />
 
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <Link to="/" className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline text-sm font-medium mb-6">

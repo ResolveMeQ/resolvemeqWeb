@@ -8,6 +8,7 @@ import Workflow from "./components/Workflow";
 // import Testimonials from "./components/Testimonials";
 import CTA from "./components/CTA";
 import Pricing from "./components/Pricing";
+import FAQ from "./components/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
@@ -28,6 +29,7 @@ function App() {
                 <Workflow />
                 {/* <Testimonials /> */}
                 <Pricing />
+                <FAQ />
                 <CTA />
               </main>
             </Layout>} />

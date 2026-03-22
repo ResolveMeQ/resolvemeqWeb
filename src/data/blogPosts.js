@@ -3,6 +3,7 @@ export const BLOG_POSTS = [
   {
     slug: "how-ai-transforms-it-support",
     title: "How AI Is Transforming IT Support in 2025",
+    isoDate: "2025-02-01",
     excerpt: "Discover how AI-powered automation is reducing ticket resolution time by up to 40% and freeing support teams to focus on complex, high-value issues.",
     date: "February 2025",
     readTime: "5 min read",
@@ -12,6 +13,7 @@ export const BLOG_POSTS = [
   {
     slug: "best-practices-ticket-routing",
     title: "Best Practices for Smart Ticket Routing",
+    isoDate: "2025-01-08",
     excerpt: "Learn how to set up intelligent ticket routing that considers context, priority, and team capacity—so the right person handles every ticket the first time.",
     date: "January 2025",
     readTime: "4 min read",
@@ -21,6 +23,7 @@ export const BLOG_POSTS = [
   {
     slug: "reducing-support-costs-with-automation",
     title: "Reducing Support Costs Without Sacrificing Quality",
+    isoDate: "2025-01-20",
     excerpt: "Practical strategies to automate repetitive IT support tasks while maintaining—or improving—user satisfaction and response times.",
     date: "January 2025",
     readTime: "6 min read",
@@ -30,6 +33,7 @@ export const BLOG_POSTS = [
   {
     slug: "building-internal-knowledge-base",
     title: "Building an Internal Knowledge Base That Actually Gets Used",
+    isoDate: "2024-12-05",
     excerpt: "Tips for creating and maintaining a knowledge base that your team and AI can rely on, so resolutions are faster and more consistent.",
     date: "December 2024",
     readTime: "5 min read",
@@ -39,6 +43,7 @@ export const BLOG_POSTS = [
   {
     slug: "measuring-it-support-metrics",
     title: "The IT Support Metrics That Matter Most",
+    isoDate: "2024-12-18",
     excerpt: "Which KPIs to track for helpdesk performance, and how to use them to improve resolution times, customer satisfaction, and team productivity.",
     date: "December 2024",
     readTime: "4 min read",
