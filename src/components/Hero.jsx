@@ -7,9 +7,18 @@ import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { useInView } from "react-intersection-observer";
-import { FiPlay, FiArrowRight, FiChevronDown, FiChevronUp, FiBook } from "react-icons/fi";
+import { trackEvent } from "../utils/analytics";
+import {
+  FiPlay,
+  FiArrowRight,
+  FiChevronDown,
+  FiChevronUp,
+  FiBriefcase,
+  FiShield,
+  FiLayers,
+} from "react-icons/fi";
 
-const AnimatedSphere = () => {
+const AnimatedSphere = ({ reducedMotion }) => {
   const { theme } = useTheme();
   return (
     <div className="w-full h-[300px] md:h-[400px] relative">
@@ -18,54 +27,113 @@ const AnimatedSphere = () => {
         <directionalLight position={[-2, 5, 2]} intensity={1} />
         <Sphere args={[1, 100, 200]} scale={2.5}>
           <MeshDistortMaterial
-            color={theme === 'dark' ? "#3b82f6" : "#2563eb"}
+            color={theme === "dark" ? "#3b82f6" : "#2563eb"}
             attach="material"
-            distort={0.5}
-            speed={1.5}
+            distort={reducedMotion ? 0.15 : 0.5}
+            speed={reducedMotion ? 0.3 : 1.5}
             roughness={0.2}
           />
         </Sphere>
-        <OrbitControls enableZoom={false} autoRotate />
+        <OrbitControls enableZoom={false} autoRotate={!reducedMotion} />
       </Canvas>
     </div>
   );
 };
 
-const SocialProof = () => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.8 }}
-    className="flex items-center gap-6 mt-10"
-  >
-    <div className="flex -space-x-2">
-      {[1, 2, 3, 4].map((i) => (
-        <motion.img
-          key={i}
-          src={`https://i.pravatar.cc/150?img=${i + 10}`}
-          alt={`Customer ${i}`}
-          className="w-10 h-10 rounded-full border-2 border-white dark:border-gray-900 shadow-sm"
-          whileHover={{ scale: 1.15, zIndex: 1 }}
-        />
-      ))}
-    </div>
-    <div className="text-sm text-gray-700 dark:text-gray-300">
-      <span className="font-semibold text-primary-600 dark:text-primary-400">500+</span> companies trust ResolveMeQ
-    </div>
-  </motion.div>
-);
+/** Role-based trust strip—no stock faces or unverifiable counts */
+const SocialProof = () => {
+  const items = [
+    {
+      icon: FiBriefcase,
+      label: "IT & service desks",
+      sub: "Deflect repeat asks without losing the audit trail",
+    },
+    {
+      icon: FiLayers,
+      label: "Plugs into your stack",
+      sub: "Ticketing, chat, KB—hand off with context intact",
+    },
+    {
+      icon: FiShield,
+      label: "Security-minded defaults",
+      sub: "Encryption, roles, and reviews when you need them",
+    },
+  ];
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.75 }}
+      className="mt-10 pt-8 border-t border-zinc-200/80 dark:border-zinc-800/80"
+    >
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-500 mb-4">
+        Who it’s for
+      </p>
+      <ul className="grid gap-4 sm:grid-cols-3">
+        {items.map(({ icon: Icon, label, sub }) => (
+          <li
+            key={label}
+            className="flex gap-3 rounded-xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/40 px-3 py-3 sm:flex-col sm:gap-2"
+          >
+            <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400">
+              <Icon className="w-4 h-4" aria-hidden />
+            </span>
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-snug">
+                {label}
+              </p>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
+                {sub}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+};
 
-const FloatingActionButton = () => (
-  <motion.button
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.9 }}
-    className="fixed bottom-8 right-8 bg-primary-600 hover:bg-primary-700 text-white p-3 rounded-lg shadow-lg z-50 transition-colors"
-    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-    aria-label="Scroll to top"
-  >
-    <FiChevronUp className="w-5 h-5" />
-  </motion.button>
-);
+const FloatingActionButton = () => {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 320);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  if (!visible) return null;
+  return (
+    <motion.button
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 1.06 }}
+      whileTap={{ scale: 0.94 }}
+      className="fixed bottom-8 right-8 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 p-3 rounded-xl shadow-lg z-50 transition-colors hover:bg-zinc-800 dark:hover:bg-zinc-200"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Scroll to top"
+    >
+      <FiChevronUp className="w-5 h-5" />
+    </motion.button>
+  );
+};
+
+const DEMO_VIDEO_ID = process.env.REACT_APP_HERO_DEMO_VIDEO_ID?.trim() || "";
+
+function useNarrowViewport() {
+  const [narrow, setNarrow] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 767.98px)").matches
+      : false
+  );
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767.98px)");
+    const fn = () => setNarrow(mq.matches);
+    fn();
+    mq.addEventListener("change", fn);
+    return () => mq.removeEventListener("change", fn);
+  }, []);
+  return narrow;
+}
 
 const Hero = () => {
   const { theme } = useTheme();
@@ -74,7 +142,56 @@ const Hero = () => {
     threshold: 0.1,
     triggerOnce: true,
   });
-  
+
+  const narrowViewport = useNarrowViewport();
+  const sphereMountRef = useRef(null);
+  const [sphereReady, setSphereReady] = useState(() => !narrowViewport);
+
+  const [reducedMotion, setReducedMotion] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion || !narrowViewport) {
+      setSphereReady(true);
+      return undefined;
+    }
+    setSphereReady(false);
+    const el = sphereMountRef.current;
+    if (!el) return undefined;
+    let cancelled = false;
+    const scheduleMount = () => {
+      if (cancelled) return;
+      const idle = window.requestIdleCallback || ((cb) => window.setTimeout(cb, 400));
+      idle(() => {
+        if (!cancelled) setSphereReady(true);
+      });
+    };
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          scheduleMount();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15, rootMargin: "80px" }
+    );
+    io.observe(el);
+    return () => {
+      cancelled = true;
+      io.disconnect();
+    };
+  }, [narrowViewport, reducedMotion]);
+
+  useEffect(() => {
+    if (!narrowViewport) setSphereReady(true);
+  }, [narrowViewport]);
+
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
   }, []);
@@ -82,41 +199,59 @@ const Hero = () => {
   const y = useTransform(scrollYProgress, [0, 1], [0, -300]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 40 });
   const containerRef = useRef(null);
+  const mouseRafRef = useRef(null);
+  const pendingMouseRef = useRef(null);
   const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
+    if (reducedMotion) return undefined;
+
+    const flush = () => {
+      mouseRafRef.current = null;
+      const pending = pendingMouseRef.current;
+      if (!pending || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      setMousePosition({
+        x: ((pending.clientX - rect.left) / rect.width) * 100,
+        y: ((pending.clientY - rect.top) / rect.height) * 100,
+      });
+    };
+
     const handleMouseMove = (e) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: ((e.clientX - rect.left) / rect.width) * 100,
-          y: ((e.clientY - rect.top) / rect.height) * 100,
-        });
+      pendingMouseRef.current = e;
+      if (mouseRafRef.current == null) {
+        mouseRafRef.current = requestAnimationFrame(flush);
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (mouseRafRef.current != null) cancelAnimationFrame(mouseRafRef.current);
+    };
+  }, [reducedMotion]);
+
+  const showParticles = !reducedMotion && !narrowViewport;
+  const particleCount = theme === "dark" ? 50 : 35;
 
   const particlesOptions = {
     particles: {
-      number: { value: theme === 'dark' ? 50 : 35, density: { enable: true, value_area: 800 } },
-      color: { value: theme === 'dark' ? "#3b82f6" : "#2563eb" },
-      opacity: { value: theme === 'dark' ? 0.5 : 0.22 },
-      size: { value: theme === 'dark' ? 3 : 2.5 },
+      number: { value: particleCount, density: { enable: true, value_area: 800 } },
+      color: { value: theme === "dark" ? "#3b82f6" : "#2563eb" },
+      opacity: { value: theme === "dark" ? 0.5 : 0.22 },
+      size: { value: theme === "dark" ? 3 : 2.5 },
       line_linked: {
         enable: true,
         distance: 150,
-        color: theme === 'dark' ? "#3b82f6" : "#60a5fa",
-        opacity: theme === 'dark' ? 0.2 : 0.12,
+        color: theme === "dark" ? "#3b82f6" : "#60a5fa",
+        opacity: theme === "dark" ? 0.2 : 0.12,
         width: 1,
       },
       move: {
-        enable: true,
-        speed: 2,
+        enable: !reducedMotion,
+        speed: reducedMotion ? 0 : 2,
         direction: "none",
         random: true,
         straight: false,
@@ -127,16 +262,22 @@ const Hero = () => {
     interactivity: {
       detect_on: "canvas",
       events: {
-        onhover: { enable: true, mode: "grab" },
-        onclick: { enable: true, mode: "push" },
+        onhover: { enable: !reducedMotion, mode: "grab" },
+        onclick: { enable: !reducedMotion, mode: "push" },
         resize: true,
       },
       modes: {
-        grab: { distance: 140, line_linked: { opacity: theme === 'dark' ? 0.5 : 0.25 } },
+        grab: { distance: 140, line_linked: { opacity: theme === "dark" ? 0.5 : 0.25 } },
         push: { particles_nb: 4 },
       },
     },
     retina_detect: true,
+  };
+
+  const showDemoModal = () => {
+    if (!DEMO_VIDEO_ID) return;
+    trackEvent("hero_demo_open", { video_id: DEMO_VIDEO_ID });
+    setShowVideo(true);
   };
 
   return (
@@ -144,40 +285,39 @@ const Hero = () => {
       ref={containerRef}
       id="home"
       data-theme={theme}
-      className="min-h-screen flex items-center pt-20 md:pt-0 relative overflow-hidden bg-gray-50 dark:bg-gray-950"
+      className="min-h-screen flex items-center pt-20 md:pt-0 relative overflow-hidden bg-zinc-50 dark:bg-zinc-950 scroll-mt-0"
       style={{
-        background: theme === 'dark'
-          ? undefined
-          : `linear-gradient(180deg, #fafbfd 0%, #f8fafc 50%, #f1f5f9 100%)`,
+        background:
+          theme === "dark"
+            ? undefined
+            : "linear-gradient(180deg, #fafafa 0%, #f4f4f5 45%, #e4e4e7 100%)",
       }}
     >
-      {theme === 'light' && (
+      {theme === "light" && (
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
-              rgba(37, 99, 235, 0.06), 
-              transparent 50%)`,
+              rgba(37, 99, 235, 0.055), 
+              transparent 52%)`,
           }}
         />
       )}
-      {theme === 'dark' && (
+      {theme === "dark" && (
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
-              rgba(59, 130, 246, 0.12), 
-              transparent 50%)`,
+              rgba(59, 130, 246, 0.11), 
+              transparent 52%)`,
           }}
         />
       )}
-      <div className="absolute inset-0 pointer-events-none">
-        <Particles
-          id="tsparticles"
-          init={particlesInit}
-          options={particlesOptions}
-        />
-      </div>
+      {showParticles && (
+        <div className="absolute inset-0 pointer-events-none">
+          <Particles id="tsparticles-hero" init={particlesInit} options={particlesOptions} />
+        </div>
+      )}
 
       <motion.div
         ref={ref}
@@ -195,107 +335,109 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400 text-xs font-medium mb-6 border border-primary-200 dark:border-primary-800/50"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/80 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 text-xs font-medium mb-6 border border-zinc-200/90 dark:border-zinc-800 shadow-sm"
               >
-                <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse" />
-                Resolve Me Quickly — AI Support Automation
+                <span
+                  className={`w-1.5 h-1.5 bg-primary-600 rounded-full ${reducedMotion ? "" : "animate-pulse"}`}
+                />
+                Resolve Me Quickly — IT support automation
               </motion.div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 dark:text-white mb-6 break-words tracking-tight">
-                Transform Your IT Support with{" "}
+
+              <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-semibold leading-[1.1] text-zinc-900 dark:text-zinc-50 mb-6 break-words tracking-tight">
+                Transform your IT support with{" "}
                 <motion.span
                   className="text-primary-600 dark:text-primary-400 relative inline-block"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  AI Automation
+                  AI automation
                   <motion.span
-                    className="absolute -bottom-2 left-0 w-full h-1 bg-primary-600 dark:bg-primary-400 rounded-full"
+                    className="absolute -bottom-2 left-0 w-full h-1 bg-primary-600 dark:bg-primary-400 rounded-full origin-left"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.8, delay: 0.7 }}
                   />
                 </motion.span>
               </h1>
-              
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
+                className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed"
               >
-                Reduce ticket resolution time by{" "}
-                <span className="font-semibold text-primary-600 dark:text-primary-400">
-                  40%
-                </span>
-                {" "}and improve team efficiency by{" "}
-                <span className="font-semibold text-primary-600 dark:text-primary-400">
-                  60%
-                </span>
-                {" "}with enterprise-grade AI automation
+                Cut time stuck in tier-1 triage and give every ticket a clear next step—backed by
+                your knowledge, your policies, and your tools.
               </motion.p>
             </motion.div>
           </FadeInDiv>
 
           <FadeInDiv delay={0.4}>
-            <div className="flex flex-col sm:flex-row gap-3 mt-8">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-2">
               <motion.a
-                href="https://app.resolvemeq.net"
+                href="https://app.resolvemeq.net/register"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent("cta_get_started", { placement: "hero", destination: "register" })}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-150"
-                aria-label="Get Started"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium rounded-xl shadow-md hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all duration-150"
+                aria-label="Get started with ResolveMeQ"
               >
-                Get Started
+                Get started
                 <FiArrowRight className="w-4 h-4" />
               </motion.a>
-              
+
               <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setShowVideo(true)}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-medium rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 shadow-sm hover:shadow-md transition-all duration-150"
-                aria-label="Watch Demo"
+                type="button"
+                whileHover={{ scale: DEMO_VIDEO_ID ? 1.02 : 1 }}
+                whileTap={{ scale: DEMO_VIDEO_ID ? 0.98 : 1 }}
+                onClick={showDemoModal}
+                disabled={!DEMO_VIDEO_ID}
+                title={!DEMO_VIDEO_ID ? "Demo video coming soon" : undefined}
+                className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border font-medium transition-all duration-150 ${
+                  DEMO_VIDEO_ID
+                    ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 shadow-sm"
+                    : "bg-zinc-100 dark:bg-zinc-800/80 text-zinc-400 dark:text-zinc-500 border-zinc-200 dark:border-zinc-700 cursor-not-allowed"
+                }`}
+                aria-label={DEMO_VIDEO_ID ? "Watch demo video" : "Demo video not available yet"}
               >
                 <FiPlay className="w-4 h-4" />
-                Watch Demo
+                Watch demo
               </motion.button>
-              
-              <motion.a
-                href="https://app.resolvemeq.net/knowledge-base"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-primary-600 dark:text-primary-400 font-medium rounded-lg border-2 border-primary-600 dark:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-150"
-                aria-label="Browse free Knowledge Base"
-              >
-                <FiBook className="w-4 h-4" />
-                Free Knowledge Base
-              </motion.a>
             </div>
-            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-              Need answers now?{" "}
+            <p className="mt-5 text-sm text-zinc-600 dark:text-zinc-400">
+              Prefer to browse first?{" "}
               <a
                 href="https://app.resolvemeq.net/knowledge-base"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary-600 dark:text-primary-400 font-medium hover:underline"
+                onClick={() => trackEvent("cta_outbound", { placement: "hero", destination: "knowledge_base" })}
+                className="font-medium text-primary-600 dark:text-primary-400 hover:underline underline-offset-2"
               >
-                Browse our free Knowledge Base
-              </a>{" "}
-              for instant solutions.
+                Open the free knowledge base
+              </a>
+              <span className="text-zinc-500 dark:text-zinc-500"> — no account.</span>
             </p>
           </FadeInDiv>
 
           <SocialProof />
         </div>
 
-        <div className="md:w-1/2 min-w-0 w-full">
-          <AnimatedSphere />
+        <div ref={sphereMountRef} className="md:w-1/2 min-w-0 w-full">
+          {sphereReady ? (
+            <AnimatedSphere reducedMotion={reducedMotion} />
+          ) : (
+            <div
+              className="w-full h-[300px] md:h-[400px] rounded-2xl border border-zinc-200/80 dark:border-zinc-800 bg-gradient-to-br from-zinc-100 to-zinc-200/60 dark:from-zinc-900 dark:to-zinc-950 flex items-center justify-center"
+              aria-hidden
+            >
+              <span className="text-xs font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-600">
+                Loading visual…
+              </span>
+            </div>
+          )}
         </div>
       </motion.div>
 
@@ -313,10 +455,11 @@ const Hero = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl"
+              className="relative w-full max-w-4xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <button
+                type="button"
                 onClick={() => setShowVideo(false)}
                 className="absolute top-4 right-4 z-10 p-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors"
                 aria-label="Close video"
@@ -327,10 +470,11 @@ const Hero = () => {
               </button>
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/your-video-id"
-                title="Product Demo"
+                src={`https://www.youtube-nocookie.com/embed/${DEMO_VIDEO_ID}?rel=0`}
+                title="ResolveMeQ product demo"
+                loading="lazy"
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 allowFullScreen
               />
             </motion.div>
@@ -338,25 +482,33 @@ const Hero = () => {
         )}
       </AnimatePresence>
 
-      <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <button
-          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-          className="text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors p-2 rounded-lg hover:bg-white/80 dark:hover:bg-gray-800/80"
-          aria-label="Scroll down"
+      {reducedMotion ? (
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+            className="text-zinc-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors p-2 rounded-xl hover:bg-white/80 dark:hover:bg-zinc-900/80"
+            aria-label="Scroll down"
+          >
+            <FiChevronDown className="w-8 h-8" />
+          </button>
+        </div>
+      ) : (
+        <motion.div
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <FiChevronDown className="w-8 h-8" />
-        </button>
-      </motion.div>
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+            className="text-zinc-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors p-2 rounded-xl hover:bg-white/80 dark:hover:bg-zinc-900/80"
+            aria-label="Scroll down"
+          >
+            <FiChevronDown className="w-8 h-8" />
+          </button>
+        </motion.div>
+      )}
 
       <FloatingActionButton />
     </section>

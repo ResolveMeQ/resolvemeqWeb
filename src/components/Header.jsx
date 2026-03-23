@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiMenu, FiX, FiSun, FiMoon, FiChevronDown, FiLogIn, FiUserPlus } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
-import { handleHashLink } from "../utils/scrollToSection";
+import { handleHashLink, navigateToSolutionsTab } from "../utils/scrollToSection";
+import { trackEvent } from "../utils/analytics";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -23,11 +25,12 @@ const Header = () => {
     },
     {
       name: "Solutions",
-      href: "#pricing",
+      href: "#solutions",
       dropdown: [
-        { name: "Starter", href: "#pricing" },
-        { name: "Pro", href: "#pricing" },
-        { name: "Enterprise", href: "#pricing" },
+        { name: "By industry", href: "#solutions", tab: "industry" },
+        { name: "By team", href: "#solutions", tab: "team" },
+        { name: "Household", href: "#solutions", tab: "household" },
+        { name: "Individual", href: "#solutions", tab: "individual" },
       ],
     },
     { name: "Blog", href: "/blog" },
@@ -106,7 +109,12 @@ const Header = () => {
                               key={subItem.name}
                               href={subItem.href}
                               onClick={(e) => {
-                                handleHashLink(e, subItem.href);
+                                e.preventDefault();
+                                if (subItem.tab) {
+                                  navigateToSolutionsTab(subItem.tab, navigate);
+                                } else {
+                                  handleHashLink(e, subItem.href, navigate);
+                                }
                                 setActiveDropdown(null);
                               }}
                               className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
@@ -131,7 +139,7 @@ const Header = () => {
                 ) : (
                   <motion.a
                     href={item.href}
-                    onClick={(e) => handleHashLink(e, item.href)}
+                    onClick={(e) => handleHashLink(e, item.href, navigate)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
@@ -170,6 +178,7 @@ const Header = () => {
               href="https://app.resolvemeq.net/signup"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent("cta_get_started", { placement: "header", destination: "signup" })}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="flex items-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg shadow-md transition-all duration-150"
@@ -236,7 +245,12 @@ const Header = () => {
                                   key={subItem.name}
                                   href={subItem.href}
                                   onClick={(e) => {
-                                    handleHashLink(e, subItem.href);
+                                    e.preventDefault();
+                                    if (subItem.tab) {
+                                      navigateToSolutionsTab(subItem.tab, navigate);
+                                    } else {
+                                      handleHashLink(e, subItem.href, navigate);
+                                    }
                                     setIsOpen(false);
                                     setActiveDropdown(null);
                                   }}
@@ -261,7 +275,7 @@ const Header = () => {
                       <a
                         href={item.href}
                         onClick={(e) => {
-                          handleHashLink(e, item.href);
+                          handleHashLink(e, item.href, navigate);
                           setIsOpen(false);
                         }}
                         className="block px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
@@ -287,6 +301,7 @@ const Header = () => {
                   href="https://app.resolvemeq.net/signup"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackEvent("cta_get_started", { placement: "header_mobile", destination: "signup" })}
                   className="flex items-center justify-center gap-2 px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg shadow-md transition-all duration-150"
                 >
                   <FiUserPlus className="w-4 h-4" />

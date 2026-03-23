@@ -1,7 +1,10 @@
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Header from "./Header";
 import Footer from "./Footer";
+import CookieConsentBanner from "./CookieConsentBanner";
+import { HOME_PAGE_SECTION_IDS, scrollToSection } from "../utils/scrollToSection";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_OG_DESCRIPTION,
@@ -16,8 +19,36 @@ import {
 } from "../seo/siteDefaults";
 
 const Layout = ({ children }) => {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
+  const navigate = useNavigate();
   const isHome = pathname === "/";
+
+  useEffect(() => {
+    const id = location.hash.replace(/^#/, "");
+    if (!id) return;
+
+    if (
+      pathname !== "/" &&
+      HOME_PAGE_SECTION_IDS.has(id) &&
+      !document.getElementById(id)
+    ) {
+      navigate(`/#${id}`, { replace: true });
+      return;
+    }
+
+    if (pathname === "/") {
+      let cancelled = false;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (!cancelled) scrollToSection(id);
+        });
+      });
+      return () => {
+        cancelled = true;
+      };
+    }
+  }, [pathname, location.hash, navigate]);
 
   return (
     <>
@@ -42,8 +73,11 @@ const Layout = ({ children }) => {
         </Helmet>
       )}
       <Header />
-      <div className="min-w-0 overflow-x-hidden">{children}</div>
+      <div className="min-w-0 overflow-x-hidden">
+        <Outlet />
+      </div>
       <Footer />
+      <CookieConsentBanner />
     </>
   );
 };

@@ -1,8 +1,14 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+jest.mock("./components/Hero", () => ({
+  __esModule: true,
+  default: function MockHero() {
+    return <div>Hero</div>;
+  },
+}));
+
+test("renders marketing home", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getAllByRole("link", { name: "Blog" }).length).toBeGreaterThan(0);
 });

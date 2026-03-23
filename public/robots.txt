@@ -3,5 +3,5 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Sitemap & feeds
 Sitemap: https://resolvemeq.net/sitemap.xml

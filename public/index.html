@@ -8,15 +8,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#4F46E5" />
   <link rel="canonical" href="https://resolvemeq.net/" />
+  <link rel="alternate" type="application/rss+xml" title="ResolveMeQ Journal" href="https://resolvemeq.net/rss.xml" />
   <meta name="msvalidate.01" content="5BAD73DDDA2DE538A91E3B3E6E45FC39" />
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Consent Mode defaults (deny) before gtag loads; GA4 loads but limits cookies until update. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("consent", "default", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+      wait_for_update: 500
+    });
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-88Q91TRD9Q"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-88Q91TRD9Q');
+    gtag("js", new Date());
+    gtag("config", "G-88Q91TRD9Q");
+    try {
+      if (localStorage.getItem("resolvemeq_consent_v1") === "analytics") {
+        gtag("consent", "update", {
+          analytics_storage: "granted",
+          ad_storage: "denied",
+          ad_user_data: "denied",
+          ad_personalization: "denied"
+        });
+      }
+    } catch (e) {}
   </script>
   
   <!-- Primary Meta Tags -->
@@ -220,6 +242,30 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Yes. Resolve Me Quickly is built for enterprise with advanced security, custom integrations, dedicated support, and scalability for large teams and high ticket volumes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do we have to replace our help desk or ticketing tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. ResolveMeQ is designed to sit alongside the systems you already use—ticketing, chat, identity, and knowledge—and to hand work back to them with structured context. Most teams connect first, then expand automation over time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when the 14-day trial ends?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You choose a plan and add a payment method when you are ready. Nothing charges automatically until you confirm upgrade in billing. Downgrades and upgrades stay in your control from the app."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is our data handled?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Data is encrypted in transit and at rest, with role-based access so only people you authorize see tickets and settings. Enterprise customers can discuss retention, regions, and review artifacts as part of onboarding."
           }
         }
       ]

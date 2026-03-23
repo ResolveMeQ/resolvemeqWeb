@@ -1,5 +1,6 @@
 import { PageSeo } from "../seo/PageSeo";
 import { Link } from "react-router-dom";
+import { openCookieConsentUi } from "../consent/cookieConsentStorage";
 
 const CookiePolicy = () => (
   <main className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-16">
@@ -57,9 +58,14 @@ const CookiePolicy = () => (
                 <td className="p-3">Persistent</td>
               </tr>
               <tr>
-                <td className="p-3">Analytics (e.g. usage stats)</td>
+                <td className="p-3">Google Analytics (GA4) — only if you accept analytics</td>
                 <td className="p-3">Analytics</td>
-                <td className="p-3">As per provider</td>
+                <td className="p-3">As per Google&apos;s policy</td>
+              </tr>
+              <tr>
+                <td className="p-3">Cookie choice (essential vs analytics)</td>
+                <td className="p-3">Functional</td>
+                <td className="p-3">Persistent (local storage)</td>
               </tr>
             </tbody>
           </table>
@@ -76,7 +82,18 @@ const CookiePolicy = () => (
           <p>You can control cookies in several ways:</p>
           <ul className="list-disc pl-6 space-y-1 mt-2">
             <li><strong>Browser settings:</strong> most browsers let you block or delete cookies. Note that blocking all cookies may affect site functionality.</li>
-            <li><strong>Our consent tool:</strong> where we use non-essential cookies, we may offer a consent banner or settings page to let you choose categories.</li>
+            <li>
+              <strong>Our consent tool:</strong> when you first visit, you can choose &ldquo;Essential only&rdquo; or
+              &ldquo;Accept analytics&rdquo; for Google Analytics. You can change this anytime via{" "}
+              <button
+                type="button"
+                onClick={() => openCookieConsentUi()}
+                className="font-semibold text-primary-600 dark:text-primary-400 hover:underline"
+              >
+                Cookie settings
+              </button>{" "}
+              in the site footer.
+            </li>
             <li><strong>Opt-out links:</strong> for specific third-party analytics or advertising, we may provide opt-out links where applicable.</li>
           </ul>
         </section>

@@ -1,0 +1,5 @@
+# SPA fallback: serve index.html for client routes (blog slugs, 404 UI, etc.)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

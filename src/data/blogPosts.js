@@ -1,53 +1,219 @@
-// Shared blog data for list and single post pages
+// Shared blog data for list and single post pages.
+// Body: paragraphs separated by \n\n; use "## Title" and "### Title" for headings.
+// Optional per post: ogImage — absolute https URL or site path (e.g. "/assets/og-image.png") for Open Graph / Twitter / JSON-LD.
+
 export const BLOG_POSTS = [
   {
     slug: "how-ai-transforms-it-support",
     title: "How AI Is Transforming IT Support in 2025",
     isoDate: "2025-02-01",
-    excerpt: "Discover how AI-powered automation is reducing ticket resolution time by up to 40% and freeing support teams to focus on complex, high-value issues.",
+    excerpt:
+      "A practical look at where AI helps IT desks today—triage, knowledge, and escalation—without pretending the humans go away.",
     date: "February 2025",
-    readTime: "5 min read",
+    readTime: "12 min read",
     category: "AI & Automation",
-    body: "AI-powered automation is no longer a future possibility—it's here, and it's reshaping how IT support teams operate. By handling routine tickets instantly and surfacing the right answers from your knowledge base, AI can reduce resolution time by up to 40% while freeing your team to focus on complex, high-value issues that require human judgment and creativity.\n\nIn this article we explore how leading teams are deploying AI for ticket triage, automated responses, and smart escalation—and how you can get started without a massive implementation project.",
+    body: `For most organizations, the question is no longer whether AI belongs in the service desk—it’s where it earns its keep without creating new failure modes. The teams we talk to aren’t trying to replace tier-1 overnight; they’re trying to stop the same questions from bouncing between three queues before anyone solves the root cause.
+
+This article is about that middle path: automation that respects your policies, your tooling, and the fact that some tickets will always need a person who can read context.
+
+## From “chatbot in the corner” to workflow-aware assistance
+
+Early IT chat experiments often failed because they were disconnected from ticketing, identity, and knowledge. A user would get a plausible paragraph that didn’t match your VPN runbook, or an answer that conflicted with what security expects. Modern setups treat the conversation as the front end of a structured flow: capture intent, attach evidence (device, location, error text), then either resolve from approved content or open a ticket with a useful starting point.
+
+That shift matters because it changes what you measure. Instead of “did the bot reply,” you track first-contact resolution for well-defined intents, time-to-first-action for escalations, and repeat rates for the same issue class.
+
+## What to automate first (and what to leave alone)
+
+Good first candidates share a few traits: high volume, clear success criteria, and documentation your team already trusts. Password resets, MFA lockouts, standard software installs, and “how do I connect to the VPN” are classic examples—if your articles are accurate and your identity stack supports safe automation.
+
+Poor first candidates are the ones where the cost of a wrong answer is high or the inputs are messy: vague “internet is slow” reports without diagnostics, access requests that need manager approval, or anything that routinely turns into a multi-team investigation. Those are better handled with structured intake and smart routing than with a fully automated resolution path on day one.
+
+## Knowledge quality is the ceiling
+
+AI suggestions are only as good as the corpus you point them at. If your knowledge base is a graveyard of PDFs from 2019, automation will amplify confusion, not remove it. Teams that see durable gains usually pair AI rollout with a lightweight editorial rhythm: owners per category, stale-article review, and explicit “retired” states so old guidance stops surfacing.
+
+You don’t need perfection on day one—you need a honest baseline and a process to improve it weekly.
+
+## Escalation that doesn’t reset the conversation
+
+The best handoffs read like a briefing, not a transcript dump. When automation stops, the human should see what was tried, what failed, and what the system would try next if it had permissions. That single change often shaves more time off resolution than another five percentage points of deflection.
+
+## Getting started without a twelve-month program
+
+Pick one channel (portal chat, Teams, or email-to-ticket), one category of tickets, and one success metric. Run a pilot for four to six weeks with a weekly review of failures. Expand only when the failure modes are understood—not when the slide deck says you’re “AI-enabled.”
+
+If you keep humans in the loop, measure honestly, and treat knowledge as a product, AI stops being a slogan and becomes part of how your desk keeps pace with the business.`,
   },
   {
     slug: "best-practices-ticket-routing",
     title: "Best Practices for Smart Ticket Routing",
     isoDate: "2025-01-08",
-    excerpt: "Learn how to set up intelligent ticket routing that considers context, priority, and team capacity—so the right person handles every ticket the first time.",
+    excerpt:
+      "Design routing rules that reflect how work really flows: skills, load, time zones, and the difference between urgency and impact.",
     date: "January 2025",
-    readTime: "4 min read",
+    readTime: "11 min read",
     category: "Best Practices",
-    body: "Smart ticket routing is the backbone of an efficient helpdesk. When tickets land in the right queue—or with the right agent—resolution times drop and satisfaction goes up. This post walks through best practices: defining clear categories, using priority and context to route, and balancing load across your team so no one is overwhelmed while others sit idle.\n\nWe'll also cover how AI can suggest the best assignee based on past resolution patterns and skills.",
+    body: `Ticket routing is one of those invisible systems that everyone feels when it breaks. Users notice when everything goes to a single “IT” bucket. Agents notice when security tickets land on the hardware team. Leadership notices when SLAs look fine on paper while real priorities stall.
+
+Smart routing isn’t about fancier labels—it’s about matching work to the people who can finish it with the least round-trip.
+
+## Start with categories people actually use
+
+If your request types are so granular that users guess wrong half the time, your data—and your automation—will be noisy. If they’re so broad that every ticket says “General IT,” you can’t route or report meaningfully. The workable middle is usually ten to twenty top-level intents at the portal, with sub-types used internally after triage.
+
+Run a quarterly review of miscategorized tickets. If two categories constantly bleed into each other, merge them or split on a dimension users understand (“Laptop” vs “Phone” beats “Endpoint A” vs “Endpoint B”).
+
+## Separate priority from impact
+
+“Urgent” is emotional; impact is operational. A single user blocked from payroll is urgent to them; a degraded VPN for two hundred remote workers is urgent to the business. Routing rules should encode impact and dependency, not just the red exclamation mark in the subject line.
+
+Many teams use a simple matrix: user count affected, revenue or compliance sensitivity, and whether there’s a known workaround. That feeds both queue assignment and executive communication when things go sideways.
+
+## Load and skills: the forgotten variables
+
+Even perfect category logic fails if one queue is underwater. Rotation policies help, but they’re a bandage if underlying volume is uneven. Look at arrivals by hour and time zone, not just daily totals. If APAC opens tickets into a queue that nobody owns until US morning, you’ll always look slow—even if your SLA math says you’re “green.”
+
+Skill-based routing is powerful when skills are maintained. If your CMDB says everyone on the network team can handle firewalls but only two people actually do, your rules will keep disappointing you. Keep skill tags small, audited, and tied to real escalation patterns.
+
+## When to bring AI into routing
+
+AI is most useful when language is messy but patterns are stable: vague descriptions that still map to known problem classes, or subject lines that don’t match your portal vocabulary. The goal is suggestion, not silent reassignment—show agents why a ticket was scored a certain way, and let them correct it so the model learns your org’s language.
+
+## Metrics that tell the truth
+
+Time-to-first-touch by queue, reopen rate after first response, and percentage of tickets reassigned within an hour are blunt but honest signals. Pair them with qualitative review: sample twenty tickets a week and ask, “Did this land in the right place on the first try?”
+
+Routing is never “done.” It’s a living system that should change when hiring changes, when tools change, and when the business opens a new site. Treat it that way and the helpdesk stops feeling like a black hole.`,
   },
   {
     slug: "reducing-support-costs-with-automation",
     title: "Reducing Support Costs Without Sacrificing Quality",
     isoDate: "2025-01-20",
-    excerpt: "Practical strategies to automate repetitive IT support tasks while maintaining—or improving—user satisfaction and response times.",
+    excerpt:
+      "Cost cutting that sticks usually comes from fewer round trips and less rework—not from shaving minutes off handle time in a spreadsheet.",
     date: "January 2025",
-    readTime: "6 min read",
+    readTime: "10 min read",
     category: "Strategy",
-    body: "Support costs can grow quickly as your company scales. The good news: automation doesn't have to mean worse service. In fact, when done right, it improves speed and consistency. We share practical strategies to identify which tickets to automate first, how to measure quality, and how to keep a human in the loop where it matters—so you reduce cost without sacrificing satisfaction.",
+    body: `When finance asks IT to “do more with less,” the worst response is a blunt hiring freeze with no change to how work flows. The best response is to remove repetitive work, shorten escalation chains, and make it obvious where quality is slipping before users churn internally.
+
+Automation is one lever—but it’s not the only one, and it’s never free.
+
+## Where the money actually goes
+
+Labor dominates service desk budgets, but the hidden costs are often rework: tickets bounced between teams, duplicate incidents for the same root cause, and “swivel chair” diagnostics where three people collect the same screenshots. If you only automate the easy 10% of tickets but cut rework by a third, the savings can dwarf a flashy chatbot pilot.
+
+Start by tagging a month of tickets with “reopened,” “reassigned,” and “duplicate follow-up.” That histogram tells you where to invest first.
+
+## Automation that protects quality
+
+Cheap automation pushes users into self-service that doesn’t work, which drives more phone calls and more shadow IT. Good automation finishes the job for simple cases and makes complex cases faster by structuring data up front. Measure CSAT and time-to-resolution together; if one improves and the other tanks, you’re trading quality for throughput in a way that won’t hold.
+
+Keep humans in the loop for access changes, anything touching regulated data, and any workflow where a wrong click breaks production.
+
+## Self-service people will actually use
+
+Portals fail when search is bad, articles are stale, and the path to a human is hidden. If your KB opens with a wall of PDFs, fix that before you buy another tool. Short articles, consistent titles, and “last verified” dates signal that someone owns the content.
+
+Pair self-service with gentle deflection: suggest two articles before offering a form, but never trap users in a loop when they’re clearly stuck.
+
+## Governance without bureaucracy
+
+You need owners: who approves new automated actions, who reviews failures weekly, and who can roll back a change in minutes when something misfires in prod. That’s not paperwork for its own sake—it’s how you keep automation from becoming tomorrow’s incident root cause.
+
+## The honest ROI conversation
+
+Frame savings as capacity reclaimed, not heads removed. “We freed six FTE equivalents of triage time” is a story hiring managers and project teams can use. “We cut two agents” might be true eventually, but it’s the wrong opening line if you want partnership from the people doing the work.
+
+Automation and good routing compound. Fix rework first, then automate the clean, high-volume paths, and costs usually follow without a race to the bottom on service quality.`,
   },
   {
     slug: "building-internal-knowledge-base",
     title: "Building an Internal Knowledge Base That Actually Gets Used",
     isoDate: "2024-12-05",
-    excerpt: "Tips for creating and maintaining a knowledge base that your team and AI can rely on, so resolutions are faster and more consistent.",
+    excerpt:
+      "Structure, ownership, and habits that keep articles findable for humans and trustworthy for automation—not another graveyard of PDFs.",
     date: "December 2024",
-    readTime: "5 min read",
+    readTime: "13 min read",
     category: "Knowledge Base",
-    body: "A great knowledge base is the foundation for both human and AI-powered support. But many teams struggle with outdated articles, poor structure, and low adoption. Here we share tips for creating and maintaining a knowledge base that your team and AI can rely on: clear structure, ownership, regular reviews, and integration with your ticketing and chat tools so the right article appears at the right time.",
+    body: `Most internal knowledge bases don’t die from lack of tools—they die from lack of habit. Someone launches Confluence or SharePoint with good intentions, three teams publish in different formats, and six months later everyone asks questions in Slack because search returns seventeen versions of “VPN setup.”
+
+A usable KB is a behavior change project disguised as a documentation project.
+
+## Design for the person who’s stressed
+
+Your reader is often annoyed, in a hurry, and on a small screen. Lead with the outcome (“Connect to VPN on Windows 11”) not the history of your network architecture. Put prerequisites up front: required software, permissions, and links to related tickets or forms.
+
+One topic per article. If you’re covering install, troubleshooting, and uninstall in the same page, split them. Long scrolling walls signal “nobody owns this.”
+
+## Templates beat blank pages
+
+Give authors a skeleton: purpose, audience, steps, verification, escalation path, owner, last reviewed date. Consistent headings make search and AI retrieval both work better because the model can rely on structure, not just keywords.
+
+## Ownership beats volunteerism
+
+“Everyone contributes” usually means no one contributes. Assign categories to named owners—network, identity, collaboration, HRIS integrations—and give them a quarterly quota that’s small but non-zero: review five articles, retire two, add one net-new for recurring incidents you saw last quarter.
+
+Celebrate fixes. When someone updates an article that prevented ten tickets, say so in your IT newsletter or standup. Knowledge work is invisible unless you make it visible.
+
+## Integrate where questions already happen
+
+Articles should surface inside the ticketing tool, chat, and email templates agents use—not only on a wiki nobody bookmarks. If agents paste the same workaround into tickets weekly, that workaround should become an article with their name on the byline.
+
+## Feeding automation without feeding garbage
+
+If you plan to use AI to suggest articles, you need explicit “approved for self-service” flags and a way to exclude drafts. Nothing erodes trust faster than an automated suggestion that points to an internal-only doc or an outdated screenshot.
+
+## Measure adoption, not page views alone
+
+Track deflection after suggested articles, agent insertions of KB links, and time spent on page for top tasks. High views with high bounce can mean SEO-ish titles that don’t match content—fix the mismatch instead of celebrating traffic.
+
+A knowledge base that gets used feels boring in the best way: fewer surprises, faster onboarding for new agents, and a calmer queue. That’s worth the maintenance discipline.`,
   },
   {
     slug: "measuring-it-support-metrics",
     title: "The IT Support Metrics That Matter Most",
     isoDate: "2024-12-18",
-    excerpt: "Which KPIs to track for helpdesk performance, and how to use them to improve resolution times, customer satisfaction, and team productivity.",
+    excerpt:
+      "A focused set of KPIs that tie the help desk to business outcomes—without drowning leaders in dashboards nobody opens.",
     date: "December 2024",
-    readTime: "4 min read",
+    readTime: "11 min read",
     category: "Analytics",
-    body: "Not all metrics are created equal. This guide covers the IT support KPIs that actually drive improvement: first response time, resolution time, CSAT, and volume by category. We'll show how to track them, set targets, and use the data to spot bottlenecks and celebrate wins—without drowning in dashboards.",
+    body: `Dashboards multiply faster than insights. If your service desk reviews twenty charts in a weekly meeting but can’t answer “are we getting faster for the work that matters?” your metrics program is decoration.
+
+The goal is a small set of numbers everyone agrees on, tied to actions when they move the wrong direction.
+
+## Start with the user’s timeline
+
+Mean time to resolve (MTTR) is common, but it hides ugly variance. Pair it with time-to-first meaningful response—not auto-replies—and the percentage of tickets resolved without reassignment. Those two expose process friction early.
+
+For internal customers, add a lightweight periodic survey (two questions: “Did we solve it?” “How easy was it?”) sampled across channels so you’re not only hearing from the angriest 1%.
+
+## Volume and mix tell you where to invest
+
+Ticket counts by category trend over quarters, not days. Spikes in access requests might follow a hiring wave; jumps in “Wi-Fi” after an office move point to infrastructure debt. If you only watch SLA compliance, you’ll miss the story the mix is telling.
+
+Normalize by headcount when comparing sites or business units—raw counts punish larger teams unfairly.
+
+## Agent health metrics (the ones people avoid)
+
+Throughput per agent is tempting for micromanagers and toxic for quality. Better signals: overtime hours, after-hours volume, reopen rates by individual (with context), and training hours completed. Burnout shows up in rework and attrition before it shows up in a single chart.
+
+Use team-level aggregates for coaching conversations, not leaderboard rankings on a wall.
+
+## Business-aligned measures
+
+Pick one or two metrics tied to what the company cares about this year: onboarding time-to-productivity, downtime minutes for revenue systems, or audit findings related to access. IT support won’t own all of those end-to-end, but you can show contribution—faster laptop provisioning, fewer P1 incidents, cleaner access reviews.
+
+When executives see IT metrics adjacent to business metrics, budgets get easier.
+
+## Review rhythm beats real-time everything
+
+Daily ops can watch queues in real time; leadership should review trends monthly with pre-reads, not live dashboard theater. Publish a one-page narrative: what changed, what we think caused it, what we’re doing next. That document ages into a useful historical record—unlike a forgotten BI bookmark.
+
+## Goodhart’s law still applies
+
+When a metric becomes a target, it ceases to be a good measure. If you bonus on closed ticket counts, you’ll get premature closes and ticket splitting. If you hammer first response time, you’ll get empty acknowledgments. Pair every target metric with a guardrail metric and occasional manual audits.
+
+Fewer charts, clearer ownership, and honest narratives will beat another ten widgets on a wall. Your future self—and your users—will notice.`,
   },
 ];

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Resolve Me Quickly — Journal</title>
+    <link>https://resolvemeq.net/blog</link>
+    <description>Product notes, IT operations, and support automation from ResolveMeQ.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Mar 2026 18:44:38 GMT</lastBuildDate>
+    <atom:link href="https://resolvemeq.net/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How AI Is Transforming IT Support in 2025</title>
+      <link>https://resolvemeq.net/blog/how-ai-transforms-it-support</link>
+      <guid isPermaLink="true">https://resolvemeq.net/blog/how-ai-transforms-it-support</guid>
+      <pubDate>Sat, 01 Feb 2025 12:00:00 GMT</pubDate>
+      <description>A practical look at where AI helps IT desks today—triage, knowledge, and escalation—without pretending the humans go away.</description>
+    </item>
+    <item>
+      <title>Reducing Support Costs Without Sacrificing Quality</title>
+      <link>https://resolvemeq.net/blog/reducing-support-costs-with-automation</link>
+      <guid isPermaLink="true">https://resolvemeq.net/blog/reducing-support-costs-with-automation</guid>
+      <pubDate>Mon, 20 Jan 2025 12:00:00 GMT</pubDate>
+      <description>Cost cutting that sticks usually comes from fewer round trips and less rework—not from shaving minutes off handle time in a spreadsheet.</description>
+    </item>
+    <item>
+      <title>Best Practices for Smart Ticket Routing</title>
+      <link>https://resolvemeq.net/blog/best-practices-ticket-routing</link>
+      <guid isPermaLink="true">https://resolvemeq.net/blog/best-practices-ticket-routing</guid>
+      <pubDate>Wed, 08 Jan 2025 12:00:00 GMT</pubDate>
+      <description>Design routing rules that reflect how work really flows: skills, load, time zones, and the difference between urgency and impact.</description>
+    </item>
+    <item>
+      <title>The IT Support Metrics That Matter Most</title>
+      <link>https://resolvemeq.net/blog/measuring-it-support-metrics</link>
+      <guid isPermaLink="true">https://resolvemeq.net/blog/measuring-it-support-metrics</guid>
+      <pubDate>Wed, 18 Dec 2024 12:00:00 GMT</pubDate>
+      <description>A focused set of KPIs that tie the help desk to business outcomes—without drowning leaders in dashboards nobody opens.</description>
+    </item>
+    <item>
+      <title>Building an Internal Knowledge Base That Actually Gets Used</title>
+      <link>https://resolvemeq.net/blog/building-internal-knowledge-base</link>
+      <guid isPermaLink="true">https://resolvemeq.net/blog/building-internal-knowledge-base</guid>
+      <pubDate>Thu, 05 Dec 2024 12:00:00 GMT</pubDate>
+      <description>Structure, ownership, and habits that keep articles findable for humans and trustworthy for automation—not another graveyard of PDFs.</description>
+    </item>
+  </channel>
+</rss>

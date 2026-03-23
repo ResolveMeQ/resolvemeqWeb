@@ -2,18 +2,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "./context/ThemeContext";
 import Layout from "./components/Layout";
-import Hero from "./components/Hero";
-import Features from "./components/Features";
-import Workflow from "./components/Workflow";
-// import Testimonials from "./components/Testimonials";
-import CTA from "./components/CTA";
-import Pricing from "./components/Pricing";
-import FAQ from "./components/FAQ";
+import MarketingHome from "./pages/MarketingHome";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import NotFound from "./pages/NotFound";
 import "./index.css";
 
 function App() {
@@ -22,22 +17,15 @@ function App() {
       <ThemeProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout>
-              <main>
-                <Hero />
-                <Features />
-                <Workflow />
-                {/* <Testimonials /> */}
-                <Pricing />
-                <FAQ />
-                <CTA />
-              </main>
-            </Layout>} />
-            <Route path="/blog" element={<Layout><Blog /></Layout>} />
-            <Route path="/blog/:slug" element={<Layout><BlogPost /></Layout>} />
-            <Route path="/privacy" element={<Layout><PrivacyPolicy /></Layout>} />
-            <Route path="/terms" element={<Layout><TermsOfService /></Layout>} />
-            <Route path="/cookies" element={<Layout><CookiePolicy /></Layout>} />
+            <Route path="/" element={<Layout />}>
+              <Route index element={<MarketingHome />} />
+              <Route path="blog" element={<Blog />} />
+              <Route path="blog/:slug" element={<BlogPost />} />
+              <Route path="privacy" element={<PrivacyPolicy />} />
+              <Route path="terms" element={<TermsOfService />} />
+              <Route path="cookies" element={<CookiePolicy />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
