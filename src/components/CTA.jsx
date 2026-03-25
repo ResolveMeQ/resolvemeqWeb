@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FiMail,
   FiPhone,
@@ -8,7 +9,7 @@ import {
   FiArrowRight,
   FiExternalLink,
 } from "react-icons/fi";
-import { submitContactRequest } from "../api/subscribeContact";
+import { submitContactRequest, isContactApiConfigured } from "../api/subscribeContact";
 import { trackEvent } from "../utils/analytics";
 
 const highlights = [
@@ -31,7 +32,7 @@ const CTA = () => {
   const [submitError, setSubmitError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const useContactApi = !!process.env.REACT_APP_CONTACT_API_URL;
+  const useContactApi = isContactApiConfigured();
   const formAction = !useContactApi && process.env.REACT_APP_FORMSPREE_ID
     ? `https://formspree.io/f/${process.env.REACT_APP_FORMSPREE_ID}`
     : "#";
@@ -43,7 +44,7 @@ const CTA = () => {
       setIsSubmitting(true);
       const result = await submitContactRequest(email.trim(), companySize);
       setIsSubmitting(false);
-      if (result.ok || result.error === "API not configured") {
+      if (result.ok) {
         trackEvent("contact_form_submit", { method: "api" });
         setIsSubmitted(true);
         setTimeout(() => {
@@ -94,7 +95,7 @@ const CTA = () => {
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 mb-4"
+              className="type-eyebrow mb-4"
             >
               Get started
             </motion.p>
@@ -103,10 +104,10 @@ const CTA = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.05 }}
-              className="text-3xl sm:text-4xl md:text-[2.65rem] font-semibold text-white tracking-tight leading-[1.12] mb-6"
+              className="type-section-title-on-dark mb-6"
             >
               Ready to transform{" "}
-              <span className="text-zinc-400 font-normal block sm:inline sm:ml-1">
+              <span className="type-section-title-muted-on-dark block sm:inline sm:ml-1">
                 your IT support?
               </span>
             </motion.h2>
@@ -115,7 +116,7 @@ const CTA = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-base sm:text-lg text-zinc-400 leading-relaxed mb-8 max-w-lg"
+              className="type-lede-on-dark mb-8 max-w-lg"
             >
               Start a trial on your own timeline—or drop your work email and we’ll route you to the
               right next step. No spam, no twenty-field forms.
@@ -138,13 +139,13 @@ const CTA = () => {
                 Open the app
                 <FiExternalLink className="w-4 h-4 opacity-70" />
               </a>
-              <a
-                href="#pricing"
+              <Link
+                to="/pricing"
                 className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-white/15 bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors backdrop-blur-sm"
               >
                 Compare plans
                 <FiArrowRight className="w-4 h-4 opacity-80" />
-              </a>
+              </Link>
             </motion.div>
 
             <ul className="space-y-6">
@@ -187,12 +188,12 @@ const CTA = () => {
             transition={{ delay: 0.12, duration: 0.45 }}
             className="lg:col-span-7 xl:col-span-6 w-full"
           >
-            <div className="rounded-2xl border border-zinc-200/10 bg-white p-6 sm:p-8 md:p-9 shadow-[0_24px_80px_-20px_rgba(0,0,0,0.55)] dark:bg-zinc-100">
+            <div className="rounded-2xl border border-zinc-200/10 bg-white p-6 sm:p-8 md:p-9 shadow-[0_24px_80px_-20px_rgba(0,0,0,0.55)] dark:bg-white">
               <div className="mb-6">
-                <h3 className="text-lg font-semibold text-zinc-900 tracking-tight">
+                <h3 className="type-card-title text-zinc-900 dark:text-zinc-900">
                   Request a walkthrough
                 </h3>
-                <p className="text-sm text-zinc-600 mt-2 leading-relaxed">
+                <p className="type-body mt-2 text-zinc-600 dark:text-zinc-700">
                   We’ll use this to personalize your demo—not to add you to a generic nurture stream.
                 </p>
               </div>
@@ -292,8 +293,10 @@ const CTA = () => {
                     <div className="w-14 h-14 bg-emerald-50 border border-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
                       <FiCheck className="w-7 h-7 text-emerald-600" />
                     </div>
-                    <h3 className="text-lg font-semibold text-zinc-900 mb-2">You’re on the list</h3>
-                    <p className="text-sm text-zinc-600 leading-relaxed max-w-xs mx-auto">
+                    <h3 className="type-card-title mb-2 text-zinc-900 dark:text-zinc-900">
+                      You’re on the list
+                    </h3>
+                    <p className="type-body text-sm max-w-xs mx-auto text-zinc-600 dark:text-zinc-700">
                       We’ll follow up shortly. Redirecting you to the app…
                     </p>
                   </motion.div>

@@ -1,6 +1,21 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { FiStar, FiChevronLeft, FiChevronRight, FiMessageSquare, FiTrendingUp, FiUsers } from "react-icons/fi";
+import {
+  FiStar,
+  FiChevronLeft,
+  FiChevronRight,
+  FiMessageSquare,
+  FiTrendingUp,
+  FiUsers,
+  FiActivity,
+} from "react-icons/fi";
+
+/** Same headline outcomes as FAQ, Hero, and SEO—shown on every card for consistency */
+const OUTCOME_METRICS = [
+  { label: "Resolution time", value: "40% faster" },
+  { label: "Team efficiency", value: "60% higher" },
+  { label: "Organizations", value: "500+ companies" },
+];
 
 const testimonials = [
   {
@@ -8,13 +23,10 @@ const testimonials = [
     name: "Sarah Johnson",
     role: "IT Director",
     company: "TechCorp Inc.",
-    content: "ResolveMeQ has transformed our IT support operations. The AI-powered system handles 40% of our tickets instantly, and the smart escalation ensures our team focuses on complex issues.",
+    content:
+      "ResolveMeQ has transformed our IT support operations. Smart routing and escalation mean our tier-1 queue finally scales with the business—without losing the audit trail.",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    metrics: {
-      resolutionTime: "75% faster",
-      satisfaction: "95% satisfaction",
-      costReduction: "40% lower costs",
-    },
+    metrics: OUTCOME_METRICS,
     rating: 5,
   },
   {
@@ -22,13 +34,10 @@ const testimonials = [
     name: "Michael Chen",
     role: "CTO",
     company: "InnovateTech",
-    content: "The integration was seamless, and the results were immediate. Our support team is now more efficient, and our employees get faster resolutions to their IT issues.",
+    content:
+      "The integration was seamless, and the results were immediate. Our support team is measurably more efficient, and employees get faster resolutions to their IT issues.",
     avatar: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    metrics: {
-      resolutionTime: "60% faster",
-      satisfaction: "92% satisfaction",
-      costReduction: "35% lower costs",
-    },
+    metrics: OUTCOME_METRICS,
     rating: 5,
   },
   {
@@ -36,13 +45,10 @@ const testimonials = [
     name: "Emily Rodriguez",
     role: "IT Manager",
     company: "Global Solutions",
-    content: "The AI's ability to understand and resolve complex issues is impressive. It's like having an additional team member who's available 24/7.",
+    content:
+      "The AI's ability to understand and route common issues is impressive. It feels like an additional team member who's available 24/7—with context that reaches the right person.",
     avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    metrics: {
-      resolutionTime: "80% faster",
-      satisfaction: "98% satisfaction",
-      costReduction: "45% lower costs",
-    },
+    metrics: OUTCOME_METRICS,
     rating: 5,
   },
 ];
@@ -107,10 +113,13 @@ const TestimonialCard = ({ testimonial, isActive }) => {
           </div>
           
           <div className="mt-auto grid grid-cols-3 gap-2 sm:gap-3 pt-4 border-t border-gray-100 dark:border-slate-700">
-            {Object.entries(testimonial.metrics).map(([key, value]) => (
-              <div key={key} className="text-center py-2 px-2 rounded-xl bg-gray-50 dark:bg-slate-700/50 border border-gray-100 dark:border-slate-600/50">
+            {testimonial.metrics.map(({ label, value }) => (
+              <div
+                key={label}
+                className="text-center py-2 px-2 rounded-xl bg-gray-50 dark:bg-slate-700/50 border border-gray-100 dark:border-slate-600/50"
+              >
                 <p className="text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
-                  {key.replace(/([A-Z])/g, " $1").trim()}
+                  {label}
                 </p>
                 <p className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-300 mt-0.5">
                   {value}
@@ -166,7 +175,7 @@ const Testimonials = () => {
             Trusted by IT Leaders
           </h2>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Join hundreds of companies that have transformed their IT support with ResolveMeQ
+            Join 500+ organizations that have transformed their IT support with ResolveMeQ
           </p>
         </motion.div>
 
@@ -236,13 +245,17 @@ const Testimonials = () => {
               <div className="p-3 rounded-xl bg-indigo-500/10 dark:bg-indigo-400/10 border border-indigo-500/20 dark:border-indigo-400/20">
                 <FiTrendingUp className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               </div>
-              <span className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium">45% Avg. Ticket Reduction</span>
+              <span className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium">
+                40% faster resolution
+              </span>
             </div>
             <div className="flex items-center gap-3">
               <div className="p-3 rounded-xl bg-indigo-500/10 dark:bg-indigo-400/10 border border-indigo-500/20 dark:border-indigo-400/20">
-                <FiStar className="w-5 h-5 text-amber-400 dark:text-amber-400 fill-amber-400" />
+                <FiActivity className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               </div>
-              <span className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium">4.9/5 Customer Rating</span>
+              <span className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium">
+                60% team efficiency
+              </span>
             </div>
           </div>
         </motion.div>

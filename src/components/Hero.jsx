@@ -66,7 +66,7 @@ const SocialProof = () => {
       transition={{ delay: 0.75 }}
       className="mt-10 pt-8 border-t border-zinc-200/80 dark:border-zinc-800/80"
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-500 mb-4">
+      <p className="type-eyebrow mb-4">
         Who it’s for
       </p>
       <ul className="grid gap-4 sm:grid-cols-3">
@@ -343,7 +343,7 @@ const Hero = () => {
                 Resolve Me Quickly — IT support automation
               </motion.div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-semibold leading-[1.1] text-zinc-900 dark:text-zinc-50 mb-6 break-words tracking-tight">
+              <h1 className="type-display mb-6">
                 Transform your IT support with{" "}
                 <motion.span
                   className="text-primary-600 dark:text-primary-400 relative inline-block"
@@ -365,10 +365,19 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed"
+                className="type-display-sub mb-4"
               >
                 Cut time stuck in tier-1 triage and give every ticket a clear next step—backed by
                 your knowledge, your policies, and your tools.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.65 }}
+                className="text-sm text-zinc-600 dark:text-zinc-400 mb-8 max-w-xl"
+              >
+                Typical outcomes teams report: 40% faster ticket resolution, 60% higher team
+                efficiency—trusted by 500+ companies.
               </motion.p>
             </motion.div>
           </FadeInDiv>

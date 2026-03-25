@@ -1,6 +1,8 @@
+import { SECTION_ID_TO_PATH } from "../seo/marketingSectionSeo";
+
 const SOLUTIONS_TAB_STORAGE_KEY = "resolvemeq-pending-solutions-tab";
 
-/** Section ids on the marketing home page (for /blog#foo → /#foo when no local anchor exists). */
+/** Section ids on the marketing home page (for /blog#foo → /features when no local anchor exists). */
 export const HOME_PAGE_SECTION_IDS = new Set([
   "home",
   "contact",
@@ -26,11 +28,16 @@ function isHomePath(pathname) {
 /**
  * @param {React.MouseEvent} e
  * @param {string} hash e.g. "#contact"
- * @param {import("react-router-dom").NavigateFunction} [navigate] pass from useNavigate() so blog/policy routes reach home sections
+ * @param {import("react-router-dom").NavigateFunction} [navigate] pass from useNavigate() so blog/policy routes reach marketing sections
  */
 export const handleHashLink = (e, hash, navigate) => {
   e.preventDefault();
   const sectionId = hash.replace(/^#/, "");
+  const path = SECTION_ID_TO_PATH[sectionId];
+  if (path && typeof navigate === "function") {
+    navigate(path);
+    return;
+  }
   if (!isHomePath(window.location.pathname)) {
     if (typeof navigate === "function") {
       navigate(`/#${sectionId}`);
@@ -43,20 +50,14 @@ export const handleHashLink = (e, hash, navigate) => {
   window.history.pushState(null, "", `#${sectionId}`);
 };
 
-/** Opens #solutions and switches the Solutions section tab (used by header nav). */
+/** Navigate to /solutions and optionally pre-select a tab (sessionStorage). */
 export const navigateToSolutionsTab = (tabId, navigate) => {
-  if (!isHomePath(window.location.pathname)) {
-    sessionStorage.setItem(SOLUTIONS_TAB_STORAGE_KEY, tabId);
-    if (typeof navigate === "function") {
-      navigate("/#solutions");
-    } else {
-      window.location.assign("/#solutions");
-    }
-    return;
+  sessionStorage.setItem(SOLUTIONS_TAB_STORAGE_KEY, tabId);
+  if (typeof navigate === "function") {
+    navigate("/solutions");
+  } else {
+    window.location.assign("/solutions");
   }
-  scrollToSection("solutions");
-  window.history.pushState(null, "", "#solutions");
-  window.dispatchEvent(new CustomEvent("solutions-set-tab", { detail: tabId }));
 };
 
 /** Call once from Solutions on mount after navigating from another route with a tab pre-selected. */

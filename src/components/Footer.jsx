@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   FiTwitter,
   FiLinkedin,
-  FiGithub,
+  FiInstagram,
   FiMail,
   FiArrowRight,
   FiMapPin,
@@ -12,14 +12,12 @@ import {
   FiChevronUp,
   FiCheck,
 } from "react-icons/fi";
-import { handleHashLink } from "../utils/scrollToSection";
 
 import { subscribeNewsletter } from "../api/subscribeContact";
 import { trackEvent } from "../utils/analytics";
 import { openCookieConsentUi } from "../consent/cookieConsentStorage";
 
 const Footer = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [subscribeError, setSubscribeError] = useState(null);
@@ -36,11 +34,6 @@ const Footer = () => {
       setEmail("");
       setIsSubscribed(true);
       setTimeout(() => setIsSubscribed(false), 5000);
-    } else if (result.error === "API not configured") {
-      trackEvent("newsletter_subscribe", { placement: "footer", mode: "demo" });
-      setEmail("");
-      setIsSubscribed(true);
-      setTimeout(() => setIsSubscribed(false), 5000);
     } else {
       setSubscribeError(result.error || "Something went wrong. Please try again.");
     }
@@ -54,10 +47,10 @@ const Footer = () => {
     {
       title: "Product",
       links: [
-        { name: "Solutions", href: "#solutions" },
-        { name: "Features", href: "#features" },
-        { name: "How It Works", href: "#workflow" },
-        { name: "Pricing", href: "#pricing" },
+        { name: "Solutions", href: "/solutions" },
+        { name: "Features", href: "/features" },
+        { name: "How It Works", href: "/workflow" },
+        { name: "Pricing", href: "/pricing" },
         { name: "Knowledge Base", href: "https://app.resolvemeq.net/knowledge-base", external: true },
         { name: "Go to App", href: "https://app.resolvemeq.net", external: true },
       ],
@@ -65,9 +58,10 @@ const Footer = () => {
     {
       title: "Company",
       links: [
-        { name: "About", href: "#contact" },
+        { name: "About", href: "/contact" },
         { name: "Blog", href: "/blog" },
-        { name: "Contact", href: "#contact" },
+        { name: "Newsletter", href: "/newsletter" },
+        { name: "Contact", href: "/contact" },
       ],
     },
     {
@@ -113,7 +107,7 @@ const Footer = () => {
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-500 mb-3"
+                className="type-eyebrow mb-3"
               >
                 Newsletter
               </motion.p>
@@ -123,10 +117,10 @@ const Footer = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.05 }}
-                className="text-2xl sm:text-3xl md:text-4xl font-semibold text-zinc-900 dark:text-zinc-50 tracking-tight leading-tight mb-4"
+                className="type-section-title mb-4"
               >
                 Stay updated
-                <span className="text-zinc-500 dark:text-zinc-400 font-normal block sm:inline sm:ml-1">
+                <span className="type-section-title-muted block sm:inline sm:ml-1">
                   on what we ship
                 </span>
               </motion.h2>
@@ -135,7 +129,7 @@ const Footer = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-md"
+                className="type-lede max-w-md"
               >
                 Product notes, IT automation ideas, and changelog-style updates—low frequency, no fluff.
               </motion.p>
@@ -229,18 +223,18 @@ const Footer = () => {
                 className="h-8 w-auto object-contain"
               />
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h3 className="type-card-title">
                   Resolve Me Quickly
                 </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">ResolveMeQ</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-500">ResolveMeQ</p>
               </div>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 max-w-md">
-              Resolve Me Quickly (ResolveMeQ) — AI-powered IT support automation. Reduce resolution time by 40%, improve team efficiency. Trusted by 500+ companies.
+            <p className="type-body mb-6 max-w-md">
+              Resolve Me Quickly (ResolveMeQ) — AI-powered IT support automation. Reduce ticket resolution time by 40%, improve team efficiency by 60%. Trusted by 500+ companies.
             </p>
             <div className="space-y-2.5">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 min-w-0">
+                <div key={index} className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 min-w-0">
                   {info.icon}
                   <span className="break-words">{info.text}</span>
                 </div>
@@ -251,7 +245,7 @@ const Footer = () => {
                 href="https://twitter.com/resolvemeq"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer"
+                className="w-9 h-9 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer"
                 aria-label="Twitter"
               >
                 <FiTwitter size={18} />
@@ -260,19 +254,19 @@ const Footer = () => {
                 href="https://linkedin.com/company/resolvemeq"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer"
+                className="w-9 h-9 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer"
                 aria-label="LinkedIn"
               >
                 <FiLinkedin size={18} />
               </a>
               <a
-                href="https://github.com/resolvemeq"
+                href="https://www.instagram.com/resolvemeq"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer"
-                aria-label="GitHub"
+                className="w-9 h-9 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer"
+                aria-label="Instagram"
               >
-                <FiGithub size={18} />
+                <FiInstagram size={18} />
               </a>
             </div>
           </motion.div>
@@ -285,7 +279,7 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-4 uppercase tracking-wide">
+              <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 mb-4 uppercase tracking-wide">
                 {column.title}
               </h4>
               <ul className="space-y-2.5">
@@ -296,25 +290,17 @@ const Footer = () => {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-pointer"
+                        className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-pointer"
                       >
                         {link.name}
                       </a>
-                    ) : link.href.startsWith("/") ? (
+                    ) : (
                       <Link
                         to={link.href}
-                        className="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-pointer"
+                        className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-pointer"
                       >
                         {link.name}
                       </Link>
-                    ) : (
-                      <a
-                        href={link.href}
-                        onClick={(e) => handleHashLink(e, link.href, navigate)}
-                        className="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-pointer"
-                      >
-                        {link.name}
-                      </a>
                     )}
                   </li>
                 ))}
@@ -328,16 +314,16 @@ const Footer = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
-          className="border-t border-gray-200 dark:border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 min-w-0"
+          className="border-t border-zinc-200 dark:border-zinc-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 min-w-0"
         >
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-            <p className="text-gray-500 dark:text-gray-400 text-sm">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">
               © {new Date().getFullYear()} Resolve Me Quickly (ResolveMeQ). All rights reserved.
             </p>
             <button
               type="button"
               onClick={() => openCookieConsentUi()}
-              className="text-sm text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-left sm:text-center"
+              className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-left sm:text-center"
             >
               Cookie settings
             </button>
@@ -348,7 +334,7 @@ const Footer = () => {
             onClick={scrollToTop}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer"
+            className="w-9 h-9 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-primary-600 hover:text-white transition-colors cursor-pointer"
             aria-label="Scroll to top"
           >
             <FiChevronUp size={18} />

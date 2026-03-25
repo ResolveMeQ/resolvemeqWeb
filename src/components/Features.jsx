@@ -20,7 +20,7 @@ const features = [
     longDescription:
       "Natural-language intake maps common issues to runbooks and past resolutions. Teams typically see a meaningful drop in first-line volume within weeks, without sacrificing audit trails.",
     icon: FiZap,
-    stats: "40% faster",
+    stats: "40% faster resolution",
   },
   {
     title: "Smart escalation",
@@ -102,7 +102,7 @@ const FeatureRow = ({ feature, isExpanded, onClick, index, showDivider }) => {
 
         <div className="flex-1 min-w-0 pt-0.5">
           <div className="flex items-start justify-between gap-4 mb-2">
-            <h3 className="text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-50 tracking-tight pr-2">
+            <h3 className="type-card-title pr-2">
               {feature.title}
             </h3>
             <FiChevronDown
@@ -112,7 +112,7 @@ const FeatureRow = ({ feature, isExpanded, onClick, index, showDivider }) => {
               aria-hidden
             />
           </div>
-          <p className="text-[15px] sm:text-base leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-2xl">
+            <p className="type-body max-w-2xl">
             {feature.description}
           </p>
         </div>
@@ -128,7 +128,7 @@ const FeatureRow = ({ feature, isExpanded, onClick, index, showDivider }) => {
             className="overflow-hidden"
           >
             <div className="px-5 sm:px-8 pb-7 sm:pb-8 pt-0 border-t border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/25">
-              <p className="text-sm sm:text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-2xl mb-5 pt-5">
+              <p className="type-body max-w-2xl mb-5 pt-5">
                 {feature.longDescription}
               </p>
               <a
@@ -176,7 +176,7 @@ const Features = () => {
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-500 mb-4"
+            className="type-eyebrow mb-4"
           >
             Platform
           </motion.p>
@@ -185,17 +185,17 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-3xl sm:text-4xl md:text-[2.75rem] font-semibold text-zinc-900 dark:text-zinc-50 tracking-tight leading-[1.15] mb-5"
+            className="type-section-title mb-5"
           >
             Enterprise-grade features,
-            <span className="text-zinc-500 dark:text-zinc-400 font-normal"> without the clutter</span>
+            <span className="type-section-title-muted"> without the clutter</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10"
+            className="type-lede mb-10"
           >
             One surface for deflection, escalation, integrations, and reporting—so your team spends
             time on incidents that need judgment, not on re-explaining Wi‑Fi for the ninth time.

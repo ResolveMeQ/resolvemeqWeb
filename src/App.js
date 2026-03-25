@@ -19,6 +19,13 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<MarketingHome />} />
+              <Route path="features" element={<MarketingHome />} />
+              <Route path="solutions" element={<MarketingHome />} />
+              <Route path="workflow" element={<MarketingHome />} />
+              <Route path="pricing" element={<MarketingHome />} />
+              <Route path="faq" element={<MarketingHome />} />
+              <Route path="contact" element={<MarketingHome />} />
+              <Route path="newsletter" element={<MarketingHome />} />
               <Route path="blog" element={<Blog />} />
               <Route path="blog/:slug" element={<BlogPost />} />
               <Route path="privacy" element={<PrivacyPolicy />} />

@@ -187,21 +187,16 @@ const Solutions = () => {
   return (
     <section
       id="solutions"
-      className="relative py-20 md:py-24 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 scroll-mt-20"
+      className="relative py-20 md:py-24 bg-white dark:bg-zinc-950 border-t border-zinc-200/80 dark:border-zinc-800 scroll-mt-20"
       aria-labelledby="solutions-heading"
     >
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <div className="max-w-2xl mb-10 md:mb-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500 dark:text-gray-400 mb-3">
-            Where you fit
-          </p>
-          <h2
-            id="solutions-heading"
-            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white tracking-tight mb-4"
-          >
+          <p className="type-eyebrow mb-4">Where you fit</p>
+          <h2 id="solutions-heading" className="type-section-title mb-4">
             IT support that actually tells people what to do next
           </h2>
-          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="type-lede">
             ResolveMeQ isn’t a slide deck about “AI.” It’s the place employees, family members, or you
             open when something breaks: we capture the problem, suggest fixes from what already worked
             for your org (or your home runbook), and hand off cleanly when a human still needs to step in.
@@ -209,7 +204,7 @@ const Solutions = () => {
         </div>
 
         <div
-          className="flex flex-wrap gap-2 p-1 rounded-xl bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 w-full md:w-fit mb-10"
+          className="flex flex-wrap gap-2 p-1 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 w-full md:w-fit mb-10"
           role="tablist"
           aria-label="Choose how you want to explore solutions"
         >
@@ -226,8 +221,8 @@ const Solutions = () => {
                 onClick={() => applyTab(id)}
                 className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors min-w-0 ${
                   selected
-                    ? "bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm border border-gray-200/80 dark:border-gray-700"
-                    : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 border border-transparent"
+                    ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 shadow-sm border border-zinc-200/80 dark:border-zinc-700"
+                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 border border-transparent"
                 }`}
               >
                 <Icon className="w-4 h-4 flex-shrink-0 opacity-80" aria-hidden />
@@ -250,15 +245,13 @@ const Solutions = () => {
             className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start"
           >
             <div className="lg:col-span-5 space-y-6">
-              <h3 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white leading-snug">
-                {data.headline}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-[15px]">
+              <h3 className="type-subsection-title">{data.headline}</h3>
+              <p className="type-body">
                 {data.lede}
               </p>
               <ul className="space-y-3">
                 {data.outcomes.map((line) => (
-                  <li key={line} className="flex gap-3 text-sm text-gray-700 dark:text-gray-300">
+                  <li key={line} className="flex gap-3 text-sm text-zinc-700 dark:text-zinc-300">
                     <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 dark:text-primary-400">
                       <FiCheck className="w-3 h-3" aria-hidden />
                     </span>
@@ -278,17 +271,17 @@ const Solutions = () => {
             </div>
 
             <div className="lg:col-span-7">
-              <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-200 dark:bg-gray-800 p-px overflow-hidden">
+              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-800 p-px overflow-hidden">
                 <div className="grid sm:grid-cols-2 gap-px">
                   {data.cards.map((card) => (
                     <div
                       key={card.title}
-                      className="bg-white dark:bg-gray-950 p-5 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-900/90 transition-colors min-h-[7.5rem]"
+                      className="bg-white dark:bg-zinc-950 p-5 sm:p-6 hover:bg-zinc-50 dark:hover:bg-zinc-900/90 transition-colors min-h-[7.5rem]"
                     >
-                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
+                      <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
                         {card.title}
                       </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                      <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         {card.text}
                       </p>
                     </div>

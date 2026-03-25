@@ -4,6 +4,24 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Arial",
+          "sans-serif",
+        ],
+      },
+      letterSpacing: {
+        eyebrow: "0.2em",
+        "eyebrow-tight": "0.14em",
+      },
       colors: {
         primary: {
           50: "#eff6ff",

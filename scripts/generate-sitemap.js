@@ -14,8 +14,23 @@ const slugs = [...content.matchAll(/\bslug:\s*"([^"]+)"/g)].map((m) => m[1]);
 
 const lastmod = new Date().toISOString().slice(0, 10);
 
+const marketingSections = [
+  "features",
+  "solutions",
+  "workflow",
+  "pricing",
+  "faq",
+  "contact",
+  "newsletter",
+];
+
 const entries = [
   { loc: `${SITE}/`, changefreq: "weekly", priority: "1.0" },
+  ...marketingSections.map((path) => ({
+    loc: `${SITE}/${path}`,
+    changefreq: "weekly",
+    priority: "0.9",
+  })),
   { loc: `${SITE}/blog`, changefreq: "weekly", priority: "0.85" },
   ...slugs.map((slug) => ({
     loc: `${SITE}/blog/${encodeURIComponent(slug)}`,

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import {
   FiMessageSquare,
@@ -33,11 +33,17 @@ const steps = [
   },
 ];
 
-/** Minimal pipeline graphic (Vercel / Stripe-style abstract diagram). */
+const FLOW_PATH =
+  "M 48 110 C 100 110, 100 50, 200 50 C 300 50, 300 110, 352 110";
+
+/** Pipeline graphic with optional signal animation along the path. */
 function WorkflowDiagram({ className }) {
+  const reduceMotion = useReducedMotion();
+  const animate = !reduceMotion;
+
   return (
     <svg
-      viewBox="0 0 400 220"
+      viewBox="0 0 400 228"
       className={className}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -49,16 +55,106 @@ function WorkflowDiagram({ className }) {
           <stop offset="50%" stopColor="rgb(59 130 246 / 0.55)" />
           <stop offset="100%" stopColor="rgb(59 130 246 / 0.35)" />
         </linearGradient>
+        <linearGradient id="workflow-flow-dash" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="rgb(59 130 246 / 0.15)" />
+          <stop offset="50%" stopColor="rgb(59 130 246 / 0.85)" />
+          <stop offset="100%" stopColor="rgb(59 130 246 / 0.15)" />
+        </linearGradient>
+        <radialGradient id="signal-core" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="rgb(96 165 250)" />
+          <stop offset="70%" stopColor="rgb(37 99 235)" />
+          <stop offset="100%" stopColor="rgb(37 99 235 / 0)" />
+        </radialGradient>
+        <filter id="workflow-signal-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="1.5" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        {/* Invisible geometry for motion paths (SMIL) */}
+        <path id="workflow-path-geom" d={FLOW_PATH} fill="none" stroke="none" />
       </defs>
 
-      {/* Track */}
+      {/* Soft backdrop */}
+      <rect
+        x="8"
+        y="20"
+        width="384"
+        height="168"
+        rx="16"
+        className="fill-zinc-100/80 dark:fill-zinc-950/40 stroke-zinc-200/60 dark:stroke-zinc-800/60"
+        strokeWidth="1"
+      />
+
+      {/* Base track */}
       <path
-        d="M 48 110 C 100 110, 100 50, 200 50 C 300 50, 300 110, 352 110"
+        d={FLOW_PATH}
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        className="text-zinc-200 dark:text-zinc-700 opacity-90"
+      />
+
+      {/* Animated dashed “carrier” layer */}
+      <path
+        d={FLOW_PATH}
         stroke="url(#workflow-line)"
         strokeWidth="2"
         strokeLinecap="round"
+        strokeDasharray="6 14"
         className="dark:opacity-90"
-      />
+      >
+        {animate && (
+          <animate
+            attributeName="stroke-dashoffset"
+            from="0"
+            to="-20"
+            dur="1.2s"
+            repeatCount="indefinite"
+          />
+        )}
+      </path>
+
+      {/* Brighter flow overlay */}
+      <path
+        d={FLOW_PATH}
+        stroke="url(#workflow-flow-dash)"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeDasharray="4 18"
+        opacity={0.85}
+      >
+        {animate && (
+          <animate
+            attributeName="stroke-dashoffset"
+            from="0"
+            to="-22"
+            dur="1.4s"
+            repeatCount="indefinite"
+          />
+        )}
+      </path>
+
+      {/* Signal packets */}
+      {animate && (
+        <g filter="url(#workflow-signal-glow)">
+          {[0, 0.95, 1.9].map((delay, i) => (
+            <g key={i}>
+              <circle r="5" fill="url(#signal-core)" opacity="0.45">
+                <animateMotion dur="2.85s" repeatCount="indefinite" begin={`${delay}s`} rotate="auto">
+                  <mpath href="#workflow-path-geom" />
+                </animateMotion>
+              </circle>
+              <circle r="2.25" fill="rgb(255 255 255 / 0.95)" className="dark:fill-zinc-100">
+                <animateMotion dur="2.85s" repeatCount="indefinite" begin={`${delay}s`} rotate="auto">
+                  <mpath href="#workflow-path-geom" />
+                </animateMotion>
+              </circle>
+            </g>
+          ))}
+        </g>
+      )}
 
       {/* Nodes */}
       <g>
@@ -91,6 +187,24 @@ function WorkflowDiagram({ className }) {
         />
       </g>
 
+      {/* Node ring pulses */}
+      {animate && (
+        <g className="text-primary-500/40 dark:text-primary-400/35">
+          <circle cx="48" cy="110" r="10" fill="none" stroke="currentColor" strokeWidth="1">
+            <animate attributeName="r" values="10;14;10" dur="2.4s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.5;0;0.5" dur="2.4s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="200" cy="50" r="10" fill="none" stroke="currentColor" strokeWidth="1">
+            <animate attributeName="r" values="10;14;10" dur="2.4s" repeatCount="indefinite" begin="0.35s" />
+            <animate attributeName="opacity" values="0.5;0;0.5" dur="2.4s" repeatCount="indefinite" begin="0.35s" />
+          </circle>
+          <circle cx="352" cy="110" r="10" fill="none" stroke="currentColor" strokeWidth="1">
+            <animate attributeName="r" values="10;14;10" dur="2.4s" repeatCount="indefinite" begin="0.7s" />
+            <animate attributeName="opacity" values="0.5;0;0.5" dur="2.4s" repeatCount="indefinite" begin="0.7s" />
+          </circle>
+        </g>
+      )}
+
       <text
         x="48"
         y="114"
@@ -119,10 +233,9 @@ function WorkflowDiagram({ className }) {
         Outcome
       </text>
 
-      {/* Floating labels */}
       <text
         x="200"
-        y="200"
+        y="206"
         textAnchor="middle"
         className="fill-zinc-400 dark:fill-zinc-500"
         style={{ fontSize: "11px" }}
@@ -157,17 +270,12 @@ const Workflow = () => {
               transition={{ duration: 0.45 }}
               className="mb-12 md:mb-14 max-w-2xl"
             >
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-500 mb-4">
-                How it works
-              </p>
-              <h2 className="text-3xl sm:text-4xl md:text-[2.65rem] font-semibold text-zinc-900 dark:text-zinc-50 tracking-tight leading-[1.12] mb-5">
+              <p className="type-eyebrow mb-4">How it works</p>
+              <h2 className="type-section-title mb-5">
                 Three steps.
-                <span className="text-zinc-500 dark:text-zinc-400 font-normal">
-                  {" "}
-                  No mystery handoffs.
-                </span>
+                <span className="type-section-title-muted"> No mystery handoffs.</span>
               </h2>
-              <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              <p className="type-lede">
                 The same story whether you’re on the service desk or the receiving end: capture cleanly,
                 decide with evidence, finish or escalate without starting over.
               </p>
@@ -207,10 +315,10 @@ const Workflow = () => {
                           {step.subtitle}
                         </span>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-50 tracking-tight mb-3">
+                      <h3 className="type-card-title mb-3">
                         {step.title}
                       </h3>
-                      <p className="text-[15px] sm:text-base leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-xl">
+                      <p className="type-body max-w-xl">
                         {step.description}
                       </p>
                     </div>
@@ -228,9 +336,7 @@ const Workflow = () => {
             className="lg:col-span-5 lg:sticky lg:top-28"
           >
             <div className="rounded-2xl border border-zinc-200/90 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/40 backdrop-blur-sm p-6 sm:p-8 shadow-[0_1px_0_rgba(0,0,0,0.04)] dark:shadow-[0_1px_0_rgba(255,255,255,0.04)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-500 mb-4">
-                Flow
-              </p>
+              <p className="type-eyebrow mb-4">Flow</p>
               <WorkflowDiagram className="w-full h-auto text-zinc-400 dark:text-zinc-500" />
 
               {/* Horizontal stepper — desktop-friendly summary */}

@@ -2,22 +2,22 @@
 export const SITE_URL = "https://resolvemeq.net";
 
 export const DEFAULT_TITLE =
-  "Resolve Me Quickly (ResolveMeQ) - #1 AI-Powered IT Support Automation";
+  "Resolve Me Quickly (ResolveMeQ) - AI-Powered IT Support Automation";
 
 export const DEFAULT_DESCRIPTION =
-  "Resolve Me Quickly (ResolveMeQ) is the leading AI-powered IT support automation platform. Reduce ticket resolution time by 40%, improve team efficiency by 60%. Trusted by 500+ companies. Start free today.";
+  "Resolve Me Quickly (ResolveMeQ) is an AI-powered IT support automation platform. Reduce ticket resolution time by 40%, improve team efficiency by 60%. Trusted by 500+ companies. Start free today.";
 
 export const DEFAULT_OG_TITLE =
   "Resolve Me Quickly (ResolveMeQ) - AI-Powered IT Support Automation";
 
 export const DEFAULT_OG_DESCRIPTION =
-  "Resolve Me Quickly (ResolveMeQ): leading AI-powered IT support automation. Reduce resolution time by 40%, improve efficiency by 60%. Trusted by 500+ companies.";
+  "Resolve Me Quickly (ResolveMeQ): AI-powered IT support automation. Reduce ticket resolution time by 40%, improve team efficiency by 60%. Trusted by 500+ companies.";
 
 export const DEFAULT_TWITTER_TITLE =
   "Resolve Me Quickly (ResolveMeQ) - AI-Powered IT Support";
 
 export const DEFAULT_TWITTER_DESCRIPTION =
-  "Resolve Me Quickly (ResolveMeQ): leading AI-powered IT support automation. Reduce resolution time by 40%, improve efficiency by 60%.";
+  "Resolve Me Quickly (ResolveMeQ): AI-powered IT support automation. Reduce ticket resolution time by 40%, improve team efficiency by 60%.";
 
 export const OG_SITE_NAME = "Resolve Me Quickly | ResolveMeQ";
 

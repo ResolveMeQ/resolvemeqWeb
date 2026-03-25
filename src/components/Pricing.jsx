@@ -109,7 +109,7 @@ const Pricing = () => {
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-500 mb-4"
+            className="type-eyebrow mb-4"
           >
             Pricing
           </motion.p>
@@ -118,20 +118,17 @@ const Pricing = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-3xl sm:text-4xl md:text-[2.65rem] font-semibold text-zinc-900 dark:text-zinc-50 tracking-tight leading-[1.12] mb-5"
+            className="type-section-title mb-5"
           >
             Predictable seats.
-            <span className="text-zinc-500 dark:text-zinc-400 font-normal">
-              {" "}
-              No spreadsheet gymnastics.
-            </span>
+            <span className="type-section-title-muted"> No spreadsheet gymnastics.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10"
+            className="type-lede mb-10"
           >
             14-day trial on paid tiers. No card to start. Switch billing cadence whenever your finance
             team stops debating “monthly vs. annual.”
@@ -211,7 +208,7 @@ const Pricing = () => {
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 mb-4">
                     <Icon className="w-5 h-5" aria-hidden />
                   </span>
-                  <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 tracking-tight">
+                  <h3 className="type-card-title">
                     {plan.name}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">

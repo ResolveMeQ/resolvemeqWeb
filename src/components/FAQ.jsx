@@ -58,7 +58,7 @@ const FAQ = () => {
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-500 mb-4"
+            className="type-eyebrow mb-4"
           >
             FAQ
           </motion.p>
@@ -68,17 +68,17 @@ const FAQ = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-3xl sm:text-4xl font-semibold text-zinc-900 dark:text-zinc-50 tracking-tight leading-[1.15] mb-4"
+            className="type-section-title mb-4"
           >
             Questions we hear
-            <span className="text-zinc-500 dark:text-zinc-400 font-normal"> before a pilot</span>
+            <span className="type-section-title-muted"> before a pilot</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl mx-auto"
+            className="type-lede max-w-xl mx-auto"
           >
             Straight answers—same ones we surface to search engines so there’s no fine print between
             the marketing site and reality.
@@ -137,7 +137,7 @@ const FAQ = () => {
                       className="overflow-hidden"
                     >
                       <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0">
-                        <p className="text-sm sm:text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400 border-t border-zinc-100 dark:border-zinc-800/80 pt-4">
+                        <p className="type-body border-t border-zinc-100 dark:border-zinc-800/80 pt-4">
                           {item.answer}
                         </p>
                       </div>
