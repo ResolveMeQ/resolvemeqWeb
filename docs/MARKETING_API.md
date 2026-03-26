@@ -497,7 +497,7 @@ curl -X POST http://localhost:8000/api/contact \
 ## Support
 
 For technical support or questions about the API, contact:
-- **Email:** support@resolvemeq.net
+- **Email:** info@resolvemeq.net
 - **Documentation:** https://docs.resolvemeq.net
 
 ---

@@ -85,7 +85,7 @@ const Footer = () => {
     },
     {
       icon: <FiMail className="w-4 h-4" />,
-      text: "contact@resolvemeq.net",
+      text: "info@resolvemeq.net",
     },
   ];
 

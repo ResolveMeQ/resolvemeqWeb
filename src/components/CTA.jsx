@@ -326,10 +326,10 @@ const CTA = () => {
               <p>
                 Sales:{" "}
                 <a
-                  href="mailto:sales@resolvemeq.net"
+                  href="mailto:info@resolvemeq.net"
                   className="text-zinc-300 hover:text-white font-medium underline underline-offset-2 decoration-white/20 hover:decoration-white/40"
                 >
-                  sales@resolvemeq.net
+                  info@resolvemeq.net
                 </a>
               </p>
             </motion.div>

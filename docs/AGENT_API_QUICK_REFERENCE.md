@@ -511,7 +511,7 @@ try {
 
 - Full Documentation: [AGENT_API.md](./AGENT_API.md)
 - API Explorer: https://api.resolvemeq.net/swagger
-- Support: support@resolvemeq.net
+- Support: info@resolvemeq.net
 
 ---
 

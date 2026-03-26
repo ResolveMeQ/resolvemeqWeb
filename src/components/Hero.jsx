@@ -2,9 +2,8 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { FadeInDiv } from "../animations/fadeIn";
 import { useTheme } from "../context/ThemeContext";
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import Particles from "react-tsparticles";
+import { HeroPipelineVisual } from "./HeroPipelineVisual";
 import { loadFull } from "tsparticles";
 import { useInView } from "react-intersection-observer";
 import { trackEvent } from "../utils/analytics";
@@ -17,28 +16,6 @@ import {
   FiShield,
   FiLayers,
 } from "react-icons/fi";
-
-const AnimatedSphere = ({ reducedMotion }) => {
-  const { theme } = useTheme();
-  return (
-    <div className="w-full h-[300px] md:h-[400px] relative">
-      <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[-2, 5, 2]} intensity={1} />
-        <Sphere args={[1, 100, 200]} scale={2.5}>
-          <MeshDistortMaterial
-            color={theme === "dark" ? "#3b82f6" : "#2563eb"}
-            attach="material"
-            distort={reducedMotion ? 0.15 : 0.5}
-            speed={reducedMotion ? 0.3 : 1.5}
-            roughness={0.2}
-          />
-        </Sphere>
-        <OrbitControls enableZoom={false} autoRotate={!reducedMotion} />
-      </Canvas>
-    </div>
-  );
-};
 
 /** Role-based trust strip—no stock faces or unverifiable counts */
 const SocialProof = () => {
@@ -144,8 +121,6 @@ const Hero = () => {
   });
 
   const narrowViewport = useNarrowViewport();
-  const sphereMountRef = useRef(null);
-  const [sphereReady, setSphereReady] = useState(() => !narrowViewport);
 
   const [reducedMotion, setReducedMotion] = useState(false);
   useEffect(() => {
@@ -155,42 +130,6 @@ const Hero = () => {
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
   }, []);
-
-  useEffect(() => {
-    if (reducedMotion || !narrowViewport) {
-      setSphereReady(true);
-      return undefined;
-    }
-    setSphereReady(false);
-    const el = sphereMountRef.current;
-    if (!el) return undefined;
-    let cancelled = false;
-    const scheduleMount = () => {
-      if (cancelled) return;
-      const idle = window.requestIdleCallback || ((cb) => window.setTimeout(cb, 400));
-      idle(() => {
-        if (!cancelled) setSphereReady(true);
-      });
-    };
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          scheduleMount();
-          io.disconnect();
-        }
-      },
-      { threshold: 0.15, rootMargin: "80px" }
-    );
-    io.observe(el);
-    return () => {
-      cancelled = true;
-      io.disconnect();
-    };
-  }, [narrowViewport, reducedMotion]);
-
-  useEffect(() => {
-    if (!narrowViewport) setSphereReady(true);
-  }, [narrowViewport]);
 
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
@@ -434,19 +373,8 @@ const Hero = () => {
           <SocialProof />
         </div>
 
-        <div ref={sphereMountRef} className="md:w-1/2 min-w-0 w-full">
-          {sphereReady ? (
-            <AnimatedSphere reducedMotion={reducedMotion} />
-          ) : (
-            <div
-              className="w-full h-[300px] md:h-[400px] rounded-2xl border border-zinc-200/80 dark:border-zinc-800 bg-gradient-to-br from-zinc-100 to-zinc-200/60 dark:from-zinc-900 dark:to-zinc-950 flex items-center justify-center"
-              aria-hidden
-            >
-              <span className="text-xs font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-600">
-                Loading visual…
-              </span>
-            </div>
-          )}
+        <div className="md:w-1/2 min-w-0 w-full">
+          <HeroPipelineVisual reducedMotion={reducedMotion} />
         </div>
       </motion.div>
 

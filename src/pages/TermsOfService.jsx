@@ -32,7 +32,7 @@ const TermsOfService = () => (
 
         <section>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-3">3. Account and Registration</h2>
-          <p>You must provide accurate registration information and keep your account secure. You are responsible for all activity under your account. You must notify us promptly of any unauthorized use at <a href="mailto:contact@resolvemeq.net" className="text-primary-600 dark:text-primary-400 hover:underline">contact@resolvemeq.net</a>.</p>
+          <p>You must provide accurate registration information and keep your account secure. You are responsible for all activity under your account. You must notify us promptly of any unauthorized use at <a href="mailto:info@resolvemeq.net" className="text-primary-600 dark:text-primary-400 hover:underline">info@resolvemeq.net</a>.</p>
         </section>
 
         <section>
@@ -93,7 +93,7 @@ const TermsOfService = () => (
 
         <section>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-3">13. Contact</h2>
-          <p>Questions about these Terms: <a href="mailto:contact@resolvemeq.net" className="text-primary-600 dark:text-primary-400 hover:underline">contact@resolvemeq.net</a>. Phone: <a href="tel:+237681775574" className="text-primary-600 dark:text-primary-400 hover:underline">+237 681 775 574</a>. Website: <a href="https://www.resolvemeq.net" className="text-primary-600 dark:text-primary-400 hover:underline">www.resolvemeq.net</a>.</p>
+          <p>Questions about these Terms: <a href="mailto:info@resolvemeq.net" className="text-primary-600 dark:text-primary-400 hover:underline">info@resolvemeq.net</a>. Phone: <a href="tel:+237681775574" className="text-primary-600 dark:text-primary-400 hover:underline">+237 681 775 574</a>. Website: <a href="https://www.resolvemeq.net" className="text-primary-600 dark:text-primary-400 hover:underline">www.resolvemeq.net</a>.</p>
         </section>
       </div>
     </div>
