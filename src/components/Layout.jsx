@@ -12,6 +12,14 @@ const Layout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // In SPA navigation, scroll position is preserved by default.
+    // For normal page routes (privacy, terms, blog, etc.), reset to top.
+    // For hash navigation, let section scrolling handle positioning.
+    if (location.hash) return;
+    window.scrollTo(0, 0);
+  }, [pathname, location.hash]);
+
+  useEffect(() => {
     const id = location.hash.replace(/^#/, "");
     if (!id) return;
 

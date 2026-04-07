@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Hero from "../components/Hero";
+import IntegrationsStrip from "../components/IntegrationsStrip";
 import Solutions from "../components/Solutions";
 import Features from "../components/Features";
 import Workflow from "../components/Workflow";
@@ -43,6 +44,7 @@ const MarketingHome = () => {
       <Hero />
       <Solutions />
       <Features />
+      <IntegrationsStrip />
       <Workflow />
       <Pricing />
       <FAQ />
