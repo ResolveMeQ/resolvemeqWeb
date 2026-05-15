@@ -6,6 +6,7 @@ const fs = require("fs");
 const path = require("path");
 
 const SITE = "https://resolvemeq.net";
+const BLOG_AUTHOR_NAME = "Nyuydine Bill";
 const blogFile = path.join(__dirname, "..", "src", "data", "blogPosts.js");
 const outFile = path.join(__dirname, "..", "public", "rss.xml");
 
@@ -53,12 +54,13 @@ const items = posts
       <guid isPermaLink="true">${escapeXml(link)}</guid>
       <pubDate>${escapeXml(pubDate(p.isoDate))}</pubDate>
       <description>${escapeXml(p.excerpt)}</description>
+      <dc:creator>${escapeXml(BLOG_AUTHOR_NAME)}</dc:creator>
     </item>`;
   })
   .join("\n");
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Resolve Me Quickly — Journal</title>
     <link>${SITE}/blog</link>

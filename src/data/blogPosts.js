@@ -2,6 +2,9 @@
 // Body: paragraphs separated by \n\n; use "## Title" and "### Title" for headings.
 // Optional per post: ogImage — absolute https URL or site path (e.g. "/assets/og-image.png") for Open Graph / Twitter / JSON-LD.
 
+/** Display name for byline, structured data, and RSS (journal articles). */
+export const BLOG_AUTHOR_NAME = "Nyuydine Bill";
+
 export const BLOG_POSTS = [
   {
     slug: "how-ai-transforms-it-support",

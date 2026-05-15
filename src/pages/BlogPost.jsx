@@ -1,7 +1,7 @@
 import { useParams, Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { BLOG_POSTS } from "../data/blogPosts";
+import { BLOG_POSTS, BLOG_AUTHOR_NAME } from "../data/blogPosts";
 import { FiArrowLeft, FiClock, FiChevronDown } from "react-icons/fi";
 import { PageSeo } from "../seo/PageSeo";
 import { OG_IMAGE, SITE_URL } from "../seo/siteDefaults";
@@ -108,8 +108,8 @@ const BlogPost = () => {
     url: postUrl,
     datePublished: post.isoDate,
     author: {
-      "@type": "Organization",
-      name: "Resolve Me Quickly",
+      "@type": "Person",
+      name: BLOG_AUTHOR_NAME,
       url: SITE_URL,
     },
     publisher: {
@@ -158,6 +158,7 @@ const BlogPost = () => {
         ogImage={shareImage}
         twitterImage={shareImage}
         articlePublishedTime={`${post.isoDate}T12:00:00.000Z`}
+        articleAuthor={BLOG_AUTHOR_NAME}
       />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(blogPostingLd)}</script>
@@ -212,7 +213,7 @@ const BlogPost = () => {
             </div>
             <div className="min-w-0">
               <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                Resolve Me Quickly
+                {BLOG_AUTHOR_NAME}
               </p>
               <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">
                 Editorial · IT operations & support

@@ -16,6 +16,7 @@ import {
  * @param {string} [props.ogImage] - Absolute URL
  * @param {string} [props.twitterImage] - Absolute URL
  * @param {string} [props.articlePublishedTime] - ISO 8601 for og:article:published_time
+ * @param {string} [props.articleAuthor] - og:article:author (e.g. blog byline)
  * @param {string} [props.socialTitle] - og/twitter title when shorter than the document title
  * @param {boolean} [props.noindex]
  */
@@ -27,6 +28,7 @@ export function PageSeo({
   ogImage = OG_IMAGE,
   twitterImage = TWITTER_IMAGE,
   articlePublishedTime,
+  articleAuthor,
   socialTitle,
   noindex,
 }) {
@@ -54,6 +56,9 @@ export function PageSeo({
       {articlePublishedTime && (
         <meta property="article:published_time" content={articlePublishedTime} />
       )}
+      {articleAuthor ? (
+        <meta property="article:author" content={articleAuthor} />
+      ) : null}
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={url} />

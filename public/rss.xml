@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Resolve Me Quickly — Journal</title>
     <link>https://resolvemeq.net/blog</link>
     <description>Product notes, IT operations, and support automation from ResolveMeQ.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Apr 2026 11:43:11 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2026 06:45:43 GMT</lastBuildDate>
     <atom:link href="https://resolvemeq.net/rss.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How AI Is Transforming IT Support in 2025</title>
@@ -13,6 +13,7 @@
       <guid isPermaLink="true">https://resolvemeq.net/blog/how-ai-transforms-it-support</guid>
       <pubDate>Sat, 01 Feb 2025 12:00:00 GMT</pubDate>
       <description>A practical look at where AI helps IT desks today—triage, knowledge, and escalation—without pretending the humans go away.</description>
+      <dc:creator>Nyuydine Bill</dc:creator>
     </item>
     <item>
       <title>Reducing Support Costs Without Sacrificing Quality</title>
@@ -20,6 +21,7 @@
       <guid isPermaLink="true">https://resolvemeq.net/blog/reducing-support-costs-with-automation</guid>
       <pubDate>Mon, 20 Jan 2025 12:00:00 GMT</pubDate>
       <description>Cost cutting that sticks usually comes from fewer round trips and less rework—not from shaving minutes off handle time in a spreadsheet.</description>
+      <dc:creator>Nyuydine Bill</dc:creator>
     </item>
     <item>
       <title>Best Practices for Smart Ticket Routing</title>
@@ -27,6 +29,7 @@
       <guid isPermaLink="true">https://resolvemeq.net/blog/best-practices-ticket-routing</guid>
       <pubDate>Wed, 08 Jan 2025 12:00:00 GMT</pubDate>
       <description>Design routing rules that reflect how work really flows: skills, load, time zones, and the difference between urgency and impact.</description>
+      <dc:creator>Nyuydine Bill</dc:creator>
     </item>
     <item>
       <title>The IT Support Metrics That Matter Most</title>
@@ -34,6 +37,7 @@
       <guid isPermaLink="true">https://resolvemeq.net/blog/measuring-it-support-metrics</guid>
       <pubDate>Wed, 18 Dec 2024 12:00:00 GMT</pubDate>
       <description>A focused set of KPIs that tie the help desk to business outcomes—without drowning leaders in dashboards nobody opens.</description>
+      <dc:creator>Nyuydine Bill</dc:creator>
     </item>
     <item>
       <title>Building an Internal Knowledge Base That Actually Gets Used</title>
@@ -41,6 +45,7 @@
       <guid isPermaLink="true">https://resolvemeq.net/blog/building-internal-knowledge-base</guid>
       <pubDate>Thu, 05 Dec 2024 12:00:00 GMT</pubDate>
       <description>Structure, ownership, and habits that keep articles findable for humans and trustworthy for automation—not another graveyard of PDFs.</description>
+      <dc:creator>Nyuydine Bill</dc:creator>
     </item>
   </channel>
 </rss>
