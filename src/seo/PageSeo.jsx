@@ -37,7 +37,7 @@ export function PageSeo({
   const ogTwitterTitle = socialTitle ?? title;
 
   return (
-    <Helmet>
+    <Helmet prioritizeSeoTags>
       <title>{title}</title>
       <meta name="description" content={description} />
       {noindex ? (

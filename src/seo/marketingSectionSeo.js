@@ -91,6 +91,12 @@ export function getMarketingPageSeo(pathname) {
     },
   };
 
-  const fallback = pages["/"];
+  /** Self-canonical for paths not in the map (avoids sitemap URL → homepage canonical mismatch). */
+  const fallback = {
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    path,
+    socialTitle: DEFAULT_OG_TITLE,
+  };
   return pages[path] ?? fallback;
 }
