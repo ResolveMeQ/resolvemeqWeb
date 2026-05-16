@@ -7,7 +7,11 @@
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#4F46E5" />
-  <!-- Canonical + per-route OG/Twitter are set by react-helmet-async (PageSeo); do not hardcode here or every URL appears as non-canonical to /. -->
+  <title>ResolveMeQ</title>
+  <!-- Per-URL canonical + meta + body intro: seo-intros.js then seo-boot.js; keep in sync with PageSeo / marketingSectionSeo. -->
+  <link rel="canonical" id="rmq-canonical" href="https://resolvemeq.net/" />
+  <script src="%PUBLIC_URL%/seo-intros.js"></script>
+  <script src="%PUBLIC_URL%/seo-boot.js"></script>
   <link rel="alternate" type="application/rss+xml" title="ResolveMeQ Journal" href="https://resolvemeq.net/rss.xml" />
   <meta name="msvalidate.01" content="5BAD73DDDA2DE538A91E3B3E6E45FC39" />
 
@@ -41,16 +45,7 @@
     } catch (e) {}
   </script>
   
-  <!-- Primary Meta Tags -->
-  <title>Resolve Me Quickly (ResolveMeQ) - AI-Powered IT Support Automation</title>
-  <meta name="title" content="Resolve Me Quickly (ResolveMeQ) - AI-Powered IT Support Automation">
-  <meta name="description" content="Resolve Me Quickly (ResolveMeQ) is an AI-powered IT support automation platform. Reduce ticket resolution time by 40%, improve team efficiency by 60%. Trusted by 500+ companies. Start free today.">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://resolvemeq.net/">
-  <meta property="og:title" content="Resolve Me Quickly (ResolveMeQ) - AI-Powered IT Support Automation">
-  <meta property="og:description" content="Resolve Me Quickly (ResolveMeQ): AI-powered IT support automation. Reduce ticket resolution time by 40%, improve team efficiency by 60%. Trusted by 500+ companies.">
+  <!-- Open Graph / Facebook: shared image; url/title/description set by seo-boot.js + PageSeo on navigation. -->
   <meta property="og:image" content="https://resolvemeq.net/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -58,15 +53,12 @@
   <meta property="og:site_name" content="Resolve Me Quickly | ResolveMeQ">
   <meta property="og:locale" content="en_US">
   
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://resolvemeq.net/">
-  <meta property="twitter:title" content="Resolve Me Quickly (ResolveMeQ) - AI-Powered IT Support">
-  <meta property="twitter:description" content="Resolve Me Quickly (ResolveMeQ): AI-powered IT support automation. Reduce ticket resolution time by 40%, improve team efficiency by 60%.">
-  <meta property="twitter:image" content="https://resolvemeq.net/assets/twitter-image.png">
-  <meta property="twitter:image:alt" content="Resolve Me Quickly (ResolveMeQ) - AI-Powered IT Support">
-  <meta property="twitter:creator" content="@resolvemeq">
-  <meta property="twitter:site" content="@resolvemeq">
+  <!-- Twitter: shared card + image; url/title/description set by seo-boot.js + PageSeo. -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://resolvemeq.net/assets/twitter-image.png">
+  <meta name="twitter:image:alt" content="Resolve Me Quickly (ResolveMeQ) - AI-Powered IT Support">
+  <meta name="twitter:creator" content="@resolvemeq">
+  <meta name="twitter:site" content="@resolvemeq">
   
   <!-- Additional SEO Meta Tags -->
   <meta name="keywords" content="Resolve Me Quickly, ResolveMeQ, IT support automation, AI help desk, ticket management, IT service desk, AI support, IT automation, help desk software, ITSM, service desk, AI support platform">
@@ -204,7 +196,7 @@
           "description": "For large organizations requiring enterprise-grade features"
         }
       ],
-      "description": "Resolve Me Quickly (ResolveMeQ) is an AI-powered IT support automation platform that reduces ticket resolution time by 40% and improves team efficiency by 60%.",
+      "description": "Resolve Me Quickly (ResolveMeQ) automates IT support with AI to reduce resolution time and keep teams efficient.",
       "featureList": [
         "AI-powered ticket resolution",
         "Automated workflow management",
@@ -305,7 +297,8 @@
   </script>
   <!-- Crawlable links in initial HTML (SPA shell); JS app adds the full UI. Avoids "0 outlinks" for non-JS audits. -->
   <style>
-    .seo-static-links {
+    .seo-static-links,
+    .seo-static-h1 {
       position: absolute;
       width: 1px;
       height: 1px;
@@ -316,9 +309,26 @@
       white-space: nowrap;
       border: 0;
     }
+    .seo-static-body {
+      position: absolute;
+      left: -10000px;
+      width: 720px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      pointer-events: none;
+    }
+    .seo-static-body p {
+      margin: 0 0 0.75rem;
+      font-size: 15px;
+      line-height: 1.55;
+    }
   </style>
 </head>
 <body>
+  <!-- Primary H1 for non-JS / first-byte audits; text set in seo-boot.js; removed after React mounts (Layout.jsx). -->
+  <!-- Off-screen intro paragraphs for word-count / thin-content audits; filled by seo-boot.js; removed with H1. -->
+  <h1 id="rmq-h1" class="seo-static-h1">Resolve Me Quickly (ResolveMeQ)</h1>
   <nav class="seo-static-links" aria-label="Primary pages">
     <a href="https://resolvemeq.net/">Home</a>
     <a href="https://resolvemeq.net/features">Features</a>
@@ -336,6 +346,7 @@
     <a href="https://twitter.com/resolvemeq" rel="noopener noreferrer me">Twitter</a>
     <a href="https://www.linkedin.com/company/resolvemeq" rel="noopener noreferrer me">LinkedIn</a>
   </nav>
+  <section id="rmq-seo-body" class="seo-static-body" aria-hidden="true"></section>
   <noscript>You need to enable JavaScript to run this application.</noscript>
   <div id="root"></div>
 </body>

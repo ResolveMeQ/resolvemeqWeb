@@ -1,4 +1,5 @@
 // Shared blog data for list and single post pages.
+// Journal article titles: keep slug→title in sync with public/seo-boot.js (BLOG_H1_BY_SLUG) and long intros with public/seo-intros.js (/blog/{slug} keys).
 // Body: paragraphs separated by \n\n; use "## Title" and "### Title" for headings.
 // Optional per post: ogImage — absolute https URL or site path (e.g. "/assets/og-image.png") for Open Graph / Twitter / JSON-LD.
 

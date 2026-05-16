@@ -1,5 +1,7 @@
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_TITLE, DEFAULT_TITLE } from "./siteDefaults";
 
+/** When changing titles/descriptions here, update public/seo-boot.js (first-paint SEO for crawlers). */
+
 /** Pathname (with leading slash) → scroll target id on the marketing page */
 export const MARKETING_PATH_TO_SECTION = {
   "/": null,

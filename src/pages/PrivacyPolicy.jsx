@@ -1,4 +1,5 @@
 import { PageSeo } from "../seo/PageSeo";
+import { SITE_URL } from "../seo/siteDefaults";
 import { Link } from "react-router-dom";
 
 const PrivacyPolicy = () => (
@@ -103,7 +104,11 @@ const PrivacyPolicy = () => (
         <section>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-3">12. Contact Us</h2>
           <p>
-            For privacy-related questions: <a href="mailto:info@resolvemeq.net" className="text-primary-600 dark:text-primary-400 hover:underline">info@resolvemeq.net</a>. Phone: <a href="tel:+237681775574" className="text-primary-600 dark:text-primary-400 hover:underline">+237 681 775 574</a>. Website: <a href="https://www.resolvemeq.net" className="text-primary-600 dark:text-primary-400 hover:underline">www.resolvemeq.net</a>.
+            For privacy-related questions: <a href="mailto:info@resolvemeq.net" className="text-primary-600 dark:text-primary-400 hover:underline">info@resolvemeq.net</a>. Phone: <a href="tel:+237681775574" className="text-primary-600 dark:text-primary-400 hover:underline">+237 681 775 574</a>. Website:{" "}
+            <a href={SITE_URL} className="text-primary-600 dark:text-primary-400 hover:underline">
+              resolvemeq.net
+            </a>
+            .
           </p>
         </section>
       </div>

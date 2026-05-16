@@ -7,7 +7,9 @@ import {
 } from "./siteDefaults";
 
 /**
- * Per-route title, description, canonical, Open Graph, and Twitter cards.
+ * Per-route title, description, Open Graph, and Twitter cards.
+ * Canonical `<link id="rmq-canonical">` is set in public/index.html + public/seo-boot.js
+ * and updated on client navigation in Layout.jsx.
  * @param {object} props
  * @param {string} props.title - Full document title
  * @param {string} props.description - Meta description
@@ -42,9 +44,7 @@ export function PageSeo({
       <meta name="description" content={description} />
       {noindex ? (
         <meta name="robots" content="noindex, follow" />
-      ) : (
-        <link rel="canonical" href={url} />
-      )}
+      ) : null}
 
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={url} />
