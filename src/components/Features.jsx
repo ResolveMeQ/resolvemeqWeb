@@ -23,13 +23,13 @@ const features = [
     stats: "40% faster resolution",
   },
   {
-    title: "Smart escalation",
+    title: "Real escalation, not a black hole",
     description:
-      "When AI isn’t enough, the handoff includes full context: history, attempted steps, and suggested next actions for the agent.",
+      "When AI isn’t enough, a real person picks it up—your own team, or ours—with the full history and attempted steps already attached.",
     longDescription:
-      "Escalation packets are structured so tier-2 and specialists spend less time interviewing the user and more time fixing the root cause. Nothing gets lost between channels.",
+      "No re-explaining the problem, no separate portal to check. The reply lands in the same conversation your employee already started, and priority drives how fast someone gets to it.",
     icon: FiUserCheck,
-    stats: "Rich context",
+    stats: "Human-backed",
   },
   {
     title: "Continuous learning",

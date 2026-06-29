@@ -17,6 +17,11 @@ const FAQ_ITEMS = [
       "ResolveMeQ uses AI to intelligently route tickets, suggest solutions, automate repetitive tasks, and provide real-time insights so your support team works faster and more efficiently.",
   },
   {
+    question: "What happens when the AI can’t solve a ticket?",
+    answer:
+      "It escalates to a real person—your own team, or ResolveMeQ’s support staff—with the full conversation and attempted steps attached. The reply shows up in the same chat your employee already started, not a separate inbox.",
+  },
+  {
     question: "Is Resolve Me Quickly (ResolveMeQ) suitable for enterprise?",
     answer:
       "Yes. Resolve Me Quickly is built for enterprise with advanced security, custom integrations, dedicated support, and scalability for large teams and high ticket volumes.",
