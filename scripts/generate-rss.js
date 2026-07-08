@@ -1,7 +1,6 @@
 /**
- * Writes public/rss.xml from merged blog sources:
- * static src/data/blogPosts.js + GET /api/blog/ at build time.
- * Run via prebuild alongside generate-sitemap.js.
+ * Writes public/rss.xml — offline/fallback only.
+ * Production: resolvemeq.net/rss.xml is proxied to Django (live DB feed).
  */
 const fs = require("fs");
 const path = require("path");

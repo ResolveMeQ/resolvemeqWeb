@@ -1,7 +1,7 @@
 /**
- * Regenerates public/sitemap.xml from marketing routes + blog posts.
- * Blog slugs: static src/data/blogPosts.js merged with GET /api/blog/ at build time.
- * Run via: npm run prebuild (before production build).
+ * Regenerates public/sitemap.xml — offline/fallback only.
+ * Production: resolvemeq.net/sitemap.xml is proxied to Django (live DB sitemap).
+ * Run via: npm run prebuild
  */
 const fs = require("fs");
 const path = require("path");
