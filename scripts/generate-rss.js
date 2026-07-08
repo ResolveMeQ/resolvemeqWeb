@@ -1,32 +1,14 @@
 /**
- * Writes public/rss.xml from src/data/blogPosts.js (same slug/title/date/excerpt order as source).
+ * Writes public/rss.xml from merged blog sources:
+ * static src/data/blogPosts.js + GET /api/blog/ at build time.
  * Run via prebuild alongside generate-sitemap.js.
  */
 const fs = require("fs");
 const path = require("path");
+const { loadBlogPostsForBuild } = require("./blogFeedSource");
 
 const SITE = "https://resolvemeq.net";
-const BLOG_AUTHOR_NAME = "Nyuydine Bill";
-const blogFile = path.join(__dirname, "..", "src", "data", "blogPosts.js");
 const outFile = path.join(__dirname, "..", "public", "rss.xml");
-
-const content = fs.readFileSync(blogFile, "utf8");
-
-function extractPosts(src) {
-  const posts = [];
-  const re =
-    /slug:\s*"([^"]+)"[\s\S]*?title:\s*"([^"]+)"[\s\S]*?isoDate:\s*"([^"]+)"[\s\S]*?excerpt:\s*"([^"]*)"/g;
-  let m;
-  while ((m = re.exec(src)) !== null) {
-    posts.push({
-      slug: m[1],
-      title: m[2],
-      isoDate: m[3],
-      excerpt: m[4],
-    });
-  }
-  return posts;
-}
 
 function escapeXml(str) {
   return str
@@ -42,24 +24,25 @@ function pubDate(isoDate) {
   return d.toUTCString();
 }
 
-const posts = extractPosts(content);
-posts.sort((a, b) => (a.isoDate < b.isoDate ? 1 : a.isoDate > b.isoDate ? -1 : 0));
+async function main() {
+  const { posts, authorName, apiCount, staticCount } = await loadBlogPostsForBuild();
 
-const items = posts
-  .map((p) => {
-    const link = `${SITE}/blog/${encodeURIComponent(p.slug)}`;
-    return `    <item>
-      <title>${escapeXml(p.title)}</title>
+  const items = posts
+    .map((post) => {
+      const link = `${SITE}/blog/${encodeURIComponent(post.slug)}`;
+      const creator = post.authorName || authorName;
+      return `    <item>
+      <title>${escapeXml(post.title)}</title>
       <link>${escapeXml(link)}</link>
       <guid isPermaLink="true">${escapeXml(link)}</guid>
-      <pubDate>${escapeXml(pubDate(p.isoDate))}</pubDate>
-      <description>${escapeXml(p.excerpt)}</description>
-      <dc:creator>${escapeXml(BLOG_AUTHOR_NAME)}</dc:creator>
+      <pubDate>${escapeXml(pubDate(post.isoDate))}</pubDate>
+      <description>${escapeXml(post.excerpt)}</description>
+      <dc:creator>${escapeXml(creator)}</dc:creator>
     </item>`;
-  })
-  .join("\n");
+    })
+    .join("\n");
 
-const xml = `<?xml version="1.0" encoding="UTF-8"?>
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Resolve Me Quickly — Journal</title>
@@ -73,5 +56,13 @@ ${items}
 </rss>
 `;
 
-fs.writeFileSync(outFile, xml, "utf8");
-console.log(`Wrote ${posts.length} items to public/rss.xml`);
+  fs.writeFileSync(outFile, xml, "utf8");
+  console.log(
+    `Wrote ${posts.length} items to public/rss.xml (${apiCount} API + ${staticCount} static, merged by slug)`
+  );
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

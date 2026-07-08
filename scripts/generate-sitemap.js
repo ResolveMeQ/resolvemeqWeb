@@ -1,18 +1,14 @@
 /**
- * Regenerates public/sitemap.xml from static routes + slugs in src/data/blogPosts.js.
+ * Regenerates public/sitemap.xml from marketing routes + blog posts.
+ * Blog slugs: static src/data/blogPosts.js merged with GET /api/blog/ at build time.
  * Run via: npm run prebuild (before production build).
  */
 const fs = require("fs");
 const path = require("path");
+const { loadBlogPostsForBuild } = require("./blogFeedSource");
 
 const SITE = "https://resolvemeq.net";
-const blogFile = path.join(__dirname, "..", "src", "data", "blogPosts.js");
 const outFile = path.join(__dirname, "..", "public", "sitemap.xml");
-
-const content = fs.readFileSync(blogFile, "utf8");
-const slugs = [...content.matchAll(/\bslug:\s*"([^"]+)"/g)].map((m) => m[1]);
-
-const lastmod = new Date().toISOString().slice(0, 10);
 
 const marketingSections = [
   "features",
@@ -24,24 +20,6 @@ const marketingSections = [
   "newsletter",
 ];
 
-const entries = [
-  { loc: `${SITE}/`, changefreq: "weekly", priority: "1.0" },
-  ...marketingSections.map((path) => ({
-    loc: `${SITE}/${path}`,
-    changefreq: "weekly",
-    priority: "0.9",
-  })),
-  { loc: `${SITE}/blog`, changefreq: "weekly", priority: "0.85" },
-  ...slugs.map((slug) => ({
-    loc: `${SITE}/blog/${encodeURIComponent(slug)}`,
-    changefreq: "monthly",
-    priority: "0.75",
-  })),
-  { loc: `${SITE}/privacy`, changefreq: "monthly", priority: "0.7" },
-  { loc: `${SITE}/terms`, changefreq: "monthly", priority: "0.7" },
-  { loc: `${SITE}/cookies`, changefreq: "monthly", priority: "0.7" },
-];
-
 function escapeXml(str) {
   return str
     .replace(/&/g, "&amp;")
@@ -50,22 +28,54 @@ function escapeXml(str) {
     .replace(/"/g, "&quot;");
 }
 
-const body = entries
-  .map(
-    (e) => `  <url>
-    <loc>${escapeXml(e.loc)}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>${e.changefreq}</changefreq>
-    <priority>${e.priority}</priority>
-  </url>`
-  )
-  .join("\n");
+async function main() {
+  const buildDate = new Date().toISOString().slice(0, 10);
+  const { posts, apiCount, staticCount } = await loadBlogPostsForBuild();
 
-const xml = `<?xml version="1.0" encoding="UTF-8"?>
+  const entries = [
+    { loc: `${SITE}/`, changefreq: "weekly", priority: "1.0", lastmod: buildDate },
+    ...marketingSections.map((section) => ({
+      loc: `${SITE}/${section}`,
+      changefreq: "weekly",
+      priority: "0.9",
+      lastmod: buildDate,
+    })),
+    { loc: `${SITE}/blog`, changefreq: "weekly", priority: "0.85", lastmod: buildDate },
+    ...posts.map((post) => ({
+      loc: `${SITE}/blog/${encodeURIComponent(post.slug)}`,
+      changefreq: "monthly",
+      priority: "0.75",
+      lastmod: post.isoDate || buildDate,
+    })),
+    { loc: `${SITE}/privacy`, changefreq: "monthly", priority: "0.7", lastmod: buildDate },
+    { loc: `${SITE}/terms`, changefreq: "monthly", priority: "0.7", lastmod: buildDate },
+    { loc: `${SITE}/cookies`, changefreq: "monthly", priority: "0.7", lastmod: buildDate },
+  ];
+
+  const body = entries
+    .map(
+      (entry) => `  <url>
+    <loc>${escapeXml(entry.loc)}</loc>
+    <lastmod>${entry.lastmod}</lastmod>
+    <changefreq>${entry.changefreq}</changefreq>
+    <priority>${entry.priority}</priority>
+  </url>`
+    )
+    .join("\n");
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${body}
 </urlset>
 `;
 
-fs.writeFileSync(outFile, xml, "utf8");
-console.log(`Wrote ${entries.length} URLs to public/sitemap.xml`);
+  fs.writeFileSync(outFile, xml, "utf8");
+  console.log(
+    `Wrote ${entries.length} URLs to public/sitemap.xml (${posts.length} blog posts: ${apiCount} API + ${staticCount} static, merged by slug)`
+  );
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
