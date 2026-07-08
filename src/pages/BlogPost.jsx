@@ -6,12 +6,14 @@ import { FiArrowLeft, FiClock, FiChevronDown } from "react-icons/fi";
 import { PageSeo } from "../seo/PageSeo";
 import { OG_IMAGE, SITE_URL } from "../seo/siteDefaults";
 import { buildBlogArticleParts } from "../utils/renderBlogBody";
+import { fetchBlogPostBySlug } from "../api/blog";
 
 const HEADER_OFFSET = 72;
 
 function resolveShareImage(post) {
-  if (!post?.ogImage) return OG_IMAGE;
-  const o = post.ogImage;
+  const candidate = post?.ogImage || post?.imageUrl;
+  if (!candidate) return OG_IMAGE;
+  const o = candidate;
   if (o.startsWith("http://") || o.startsWith("https://")) return o;
   const path = o.startsWith("/") ? o : `/${o}`;
   return `${SITE_URL}${path}`;
@@ -20,12 +22,37 @@ function resolveShareImage(post) {
 const BlogPost = () => {
   const { slug } = useParams();
   const location = useLocation();
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const staticPost = BLOG_POSTS.find((p) => p.slug === slug);
+  const [post, setPost] = useState(staticPost || null);
+  const [loading, setLoading] = useState(!staticPost);
   const articleRef = useRef(null);
   const [progress, setProgress] = useState(0);
 
+  useEffect(() => {
+    let active = true;
+    setPost(staticPost || null);
+    setLoading(!staticPost);
+
+    (async () => {
+      const result = await fetchBlogPostBySlug(slug);
+      if (!active) return;
+      if (result.ok && result.post) {
+        setPost(result.post);
+      } else if (!staticPost) {
+        setPost(null);
+      }
+      setLoading(false);
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [slug, staticPost]);
+
+  const authorName = post?.authorName || BLOG_AUTHOR_NAME;
+
   const { toc, nodes } = useMemo(
-    () => (post ? buildBlogArticleParts(post.body) : { toc: [], nodes: [] }),
+    () => (post?.body ? buildBlogArticleParts(post.body) : { toc: [], nodes: [] }),
     [post]
   );
 
@@ -56,7 +83,18 @@ const BlogPost = () => {
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", updateProgress);
     };
-  }, [updateProgress, slug]);
+  }, [updateProgress, slug, post]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-zinc-50 dark:bg-zinc-950 pt-24 pb-16">
+        <PageSeo title="Loading… | Blog | Resolve Me Quickly (ResolveMeQ)" path={location.pathname} />
+        <div className="container mx-auto px-4 sm:px-6 max-w-xl text-center py-20 text-sm text-zinc-500">
+          Loading article…
+        </div>
+      </main>
+    );
+  }
 
   if (!post) {
     return (
@@ -98,6 +136,7 @@ const BlogPost = () => {
   const path = `/blog/${post.slug}`;
   const postUrl = `${SITE_URL}${path}`;
   const shareImage = resolveShareImage(post);
+  const heroImage = post.imageUrl || post.ogImage;
 
   const blogPostingLd = {
     "@context": "https://schema.org",
@@ -109,7 +148,7 @@ const BlogPost = () => {
     datePublished: post.isoDate,
     author: {
       "@type": "Person",
-      name: BLOG_AUTHOR_NAME,
+      name: authorName,
       url: SITE_URL,
     },
     publisher: {
@@ -158,13 +197,12 @@ const BlogPost = () => {
         ogImage={shareImage}
         twitterImage={shareImage}
         articlePublishedTime={`${post.isoDate}T12:00:00.000Z`}
-        articleAuthor={BLOG_AUTHOR_NAME}
+        articleAuthor={authorName}
       />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(blogPostingLd)}</script>
       </Helmet>
 
-      {/* Reading progress — sits under fixed header */}
       <div
         className="fixed left-0 right-0 z-[45] h-[3px] bg-zinc-200/90 dark:bg-zinc-800 top-16 md:top-[4.5rem] pointer-events-none"
         aria-hidden
@@ -200,7 +238,6 @@ const BlogPost = () => {
             </span>
           </div>
 
-          {/* Author byline */}
           <div className="flex items-center gap-3 mb-8 pb-8 border-b border-zinc-200/80 dark:border-zinc-800/80">
             <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 overflow-hidden">
               <img
@@ -212,9 +249,7 @@ const BlogPost = () => {
               />
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                {BLOG_AUTHOR_NAME}
-              </p>
+              <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{authorName}</p>
               <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">
                 Editorial · IT operations & support
               </p>
@@ -227,10 +262,15 @@ const BlogPost = () => {
           <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed border-l-2 border-primary-500/50 pl-5">
             {post.excerpt}
           </p>
+
+          {heroImage && (
+            <div className="mt-10 overflow-hidden rounded-2xl border border-zinc-200/90 dark:border-zinc-800 aspect-[16/9] bg-zinc-100 dark:bg-zinc-900">
+              <img src={heroImage} alt="" className="h-full w-full object-cover" />
+            </div>
+          )}
         </header>
 
         <div className="lg:grid lg:grid-cols-12 lg:gap-10 lg:items-start">
-          {/* Mobile TOC */}
           {toc.length > 0 && (
             <div className="lg:hidden mb-10 -mt-2">
               <details className="group rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/50 overflow-hidden">
@@ -243,7 +283,6 @@ const BlogPost = () => {
             </div>
           )}
 
-          {/* Desktop sticky TOC */}
           {toc.length > 0 && (
             <aside className="hidden lg:block lg:col-span-4 xl:col-span-3">
               <div className="sticky top-28">{tocNav}</div>

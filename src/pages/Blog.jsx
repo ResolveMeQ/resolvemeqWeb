@@ -1,18 +1,41 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { PageSeo } from "../seo/PageSeo";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiSearch, FiArrowRight, FiArrowLeft } from "react-icons/fi";
 import { BLOG_POSTS } from "../data/blogPosts";
-
-const CATEGORIES = [...new Set(BLOG_POSTS.map((p) => p.category))].sort();
+import { fetchBlogPosts, mergeBlogPosts } from "../api/blog";
 
 const Blog = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
+  const [posts, setPosts] = useState(BLOG_POSTS);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const result = await fetchBlogPosts();
+      if (!active) return;
+      if (result.ok && result.posts.length > 0) {
+        setPosts(mergeBlogPosts(result.posts, BLOG_POSTS));
+      } else {
+        setPosts(BLOG_POSTS);
+      }
+      setLoading(false);
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const categories = useMemo(
+    () => [...new Set(posts.map((p) => p.category))].sort(),
+    [posts]
+  );
 
   const filteredPosts = useMemo(() => {
-    return BLOG_POSTS.filter((post) => {
+    return posts.filter((post) => {
       const matchSearch =
         !search ||
         post.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -21,7 +44,7 @@ const Blog = () => {
       const matchCategory = !category || post.category === category;
       return matchSearch && matchCategory;
     });
-  }, [search, category]);
+  }, [posts, search, category]);
 
   return (
     <main className="min-h-screen bg-zinc-50 dark:bg-zinc-950 pt-24 pb-24">
@@ -31,7 +54,6 @@ const Blog = () => {
         path="/blog"
       />
 
-      {/* Hero band — Vercel / Linear changelog-style */}
       <div className="border-b border-zinc-200/90 dark:border-zinc-800/90 bg-white/70 dark:bg-zinc-950/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 sm:px-6 max-w-3xl py-14 md:py-16">
           <Link
@@ -75,7 +97,7 @@ const Blog = () => {
               >
                 All
               </button>
-              {CATEGORIES.map((cat) => (
+              {categories.map((cat) => (
                 <button
                   key={cat}
                   type="button"
@@ -94,9 +116,10 @@ const Blog = () => {
         </div>
       </div>
 
-      {/* Index list — editorial rows */}
       <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
-        {filteredPosts.length > 0 ? (
+        {loading ? (
+          <p className="py-16 text-center text-sm text-zinc-500 dark:text-zinc-500">Loading articles…</p>
+        ) : filteredPosts.length > 0 ? (
           <ul className="divide-y divide-zinc-200/80 dark:divide-zinc-800/80">
             {filteredPosts.map((post, index) => (
               <motion.li
@@ -109,6 +132,16 @@ const Blog = () => {
                   to={`/blog/${post.slug}`}
                   className="group block py-10 md:py-12 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:focus-visible:ring-offset-zinc-950 rounded-lg -mx-2 px-2"
                 >
+                  {(post.imageUrl || post.ogImage) && (
+                    <div className="mb-5 overflow-hidden rounded-xl border border-zinc-200/90 dark:border-zinc-800 aspect-[2/1] bg-zinc-100 dark:bg-zinc-900">
+                      <img
+                        src={post.imageUrl || post.ogImage}
+                        alt=""
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-zinc-500 dark:text-zinc-500 mb-3">
                     <time dateTime={post.isoDate}>{post.date}</time>
                     <span aria-hidden className="text-zinc-300 dark:text-zinc-600">
