@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   FiZap,
   FiUserCheck,
+  FiCheckSquare,
   FiTrendingUp,
   FiCode,
   FiShield,
@@ -30,6 +31,15 @@ const features = [
       "No re-explaining the problem, no separate portal to check. The reply lands in the same conversation your employee already started, and priority drives how fast someone gets to it.",
     icon: FiUserCheck,
     stats: "Human-backed",
+  },
+  {
+    title: "Multi-step workflows",
+    description:
+      "Onboarding, offboarding, provisioning—requests that need several people and steps become a shared checklist instead of a thread everyone loses track of.",
+    longDescription:
+      "Each step goes to the right team, simple checkpoints can resolve themselves, and anyone can see exactly what's done and what's next—no more chasing handoffs over chat.",
+    icon: FiCheckSquare,
+    stats: "7 starter templates",
   },
   {
     title: "Continuous learning",

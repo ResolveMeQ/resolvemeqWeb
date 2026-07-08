@@ -49,18 +49,32 @@ const Header = () => {
   };
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      data-theme={theme}
-      data-scrolled={isScrolled}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm shadow-sm border-b border-zinc-200 dark:border-zinc-800"
-          : "bg-transparent"
-      }`}
-    >
+    <>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-zinc-950/50 lg:hidden"
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        data-theme={theme}
+        data-scrolled={isScrolled}
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm shadow-sm border-b border-zinc-200 dark:border-zinc-800"
+            : "bg-transparent"
+        }`}
+      >
       <div className="container mx-auto px-4 sm:px-6 py-4 min-w-0">
         <div className="flex justify-between items-center">
           <Link
@@ -303,7 +317,8 @@ const Header = () => {
           )}
         </AnimatePresence>
       </div>
-    </motion.header>
+      </motion.header>
+    </>
   );
 };
 
