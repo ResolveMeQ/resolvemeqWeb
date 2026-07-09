@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FiZap,
   FiUserCheck,
@@ -19,63 +20,63 @@ const features = [
     description:
       "Deflect repetitive tickets with guided flows and answers pulled from your knowledge base—before they hit a human queue.",
     longDescription:
-      "Natural-language intake maps common issues to runbooks and past resolutions. Teams typically see a meaningful drop in first-line volume within weeks, without sacrificing audit trails.",
+      "Natural-language intake maps common issues to runbooks and KB articles. The AI returns step-by-step guidance with confidence scores and citations—not generic chatbot text. Dashboard metrics show deflection rate for your workspace.",
     icon: FiZap,
-    stats: "40% faster resolution",
+    stats: "KB-grounded AI",
   },
   {
     title: "Real escalation, not a black hole",
     description:
-      "When AI isn’t enough, a real person picks it up—your own team, or ours—with the full history and attempted steps already attached.",
+      "When AI isn’t enough, a real person picks it up—with the full history, attempted steps, and predictive routing suggestions on the escalation queue.",
     longDescription:
-      "No re-explaining the problem, no separate portal to check. The reply lands in the same conversation your employee already started, and priority drives how fast someone gets to it.",
+      "No re-explaining the problem. Agents claim tickets atomically, see routing hints based on category history and workload, and reply in the same conversation the employee started.",
     icon: FiUserCheck,
     stats: "Human-backed",
   },
   {
     title: "Multi-step workflows",
     description:
-      "Onboarding, offboarding, provisioning—requests that need several people and steps become a shared checklist instead of a thread everyone loses track of.",
+      "Onboarding, offboarding, provisioning—curated playbooks with SLAs, step claims, connector auto-checks, and per-step AI assistant.",
     longDescription:
-      "Each step goes to the right team, simple checkpoints can resolve themselves, and anyone can see exactly what's done and what's next—no more chasing handoffs over chat.",
+      "Human-authored templates—not LLM-invented processes. Each step has owners and due dates; Slack/Teams notify assignees. Okta, Google, and M365 can verify account state. Employee onboarding playbook ships out of the box.",
     icon: FiCheckSquare,
-    stats: "7 starter templates",
+    stats: "Playbooks + SLAs",
   },
   {
-    title: "Continuous learning",
+    title: "Automation rules",
     description:
-      "Every resolved ticket strengthens suggestions—scoped to your org so accuracy improves where it matters for you.",
+      "Trigger workflows, escalations, notifications, and outbound webhooks when tickets match your conditions—no custom fork.",
     longDescription:
-      "Feedback loops tie outcomes back to the models and knowledge you approve. You stay in control of what gets promoted to automated guidance.",
+      "Rules fire on ticket created, status changed, low confidence, and more. Every execution is logged. Pair with outbound webhooks for SIEM, ITSM, or partner systems.",
     icon: FiTrendingUp,
-    stats: "Improves over time",
+    stats: "Rules engine",
   },
   {
     title: "API & integrations",
     description:
-      "Connect ticketing, identity, chat, and monitoring so ResolveMeQ sits inside the stack you already run.",
+      "Slack, Teams, Okta, Google Workspace, Microsoft 365, Jira Cloud, Partner REST API, and signed outbound webhooks.",
     longDescription:
-      "REST and webhooks fit common ITSM and collaboration tools. The goal is one operational picture—not another siloed dashboard.",
+      "Partner API keys (scoped tickets, workflows, rules) let external systems create intake and track playbooks. Full setup in our documentation—no GitHub required.",
     icon: FiCode,
-    stats: "50+ connectors",
+    stats: "8+ live connectors",
   },
   {
     title: "Enterprise security",
     description:
-      "Encryption in transit and at rest, role-based access, and practices aligned with SOC 2 expectations for sensitive support data.",
+      "Immutable compliance audit log with CSV export, role-based access, agent circuit breaker, and MSP multi-client mode.",
     longDescription:
-      "Granular controls for who sees what, retention you can reason about, and an architecture designed for review by security and compliance partners—not just marketing checkboxes.",
+      "Append-only audit events for tickets, workflows, rules, and MSP actions. Settings → Security for browse and export. Agent outages fail gracefully within 30 seconds—not hung tickets.",
     icon: FiShield,
-    stats: "SOC 2 aligned",
+    stats: "Audit-ready",
   },
   {
     title: "Operational analytics",
     description:
-      "Volume, deflection, time-to-resolution, and recurring themes—so you can justify the program and fix systemic issues.",
+      "Deflection by category, AI confidence calibration vs outcomes, workflow bottleneck detection, and CSV export.",
     longDescription:
-      "Dashboards and exports that leadership and IT ops can agree on: fewer anecdotes, clearer trends, and drill-down when something spikes.",
+      "See which categories automate well, whether high-confidence buckets actually resolve without escalation, and which playbook steps stall. Built for quarterly business reviews—not vanity charts.",
     icon: FiActivity,
-    stats: "Real-time views",
+    stats: "Calibration built-in",
   },
 ];
 
@@ -141,16 +142,14 @@ const FeatureRow = ({ feature, isExpanded, onClick, index, showDivider }) => {
               <p className="type-body max-w-2xl mb-5 pt-5">
                 {feature.longDescription}
               </p>
-              <a
-                href="https://app.resolvemeq.net"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/docs"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors group/link"
                 onClick={(e) => e.stopPropagation()}
               >
-                Open app
+                Read the docs
                 <FiArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5" />
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

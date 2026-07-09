@@ -51,15 +51,23 @@ const Footer = () => {
         { name: "Features", href: "/features" },
         { name: "How It Works", href: "/workflow" },
         { name: "Pricing", href: "/pricing" },
+        { name: "Documentation", href: "/docs" },
         { name: "Knowledge Base", href: "https://app.resolvemeq.net/knowledge-base", external: true },
         { name: "Go to App", href: "https://app.resolvemeq.net", external: true },
+      ],
+    },
+    {
+      title: "Resources",
+      links: [
+        { name: "Documentation", href: "/docs" },
+        { name: "Partner API guide", href: "/docs/partner-api" },
+        { name: "Blog", href: "/blog" },
       ],
     },
     {
       title: "Company",
       links: [
         { name: "About", href: "/contact" },
-        { name: "Blog", href: "/blog" },
         { name: "Newsletter", href: "/newsletter" },
         { name: "Contact", href: "/contact" },
       ],

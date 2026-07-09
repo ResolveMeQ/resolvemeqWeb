@@ -20,6 +20,7 @@ const Header = () => {
         { name: "Features", to: "/features" },
         { name: "How It Works", to: "/workflow" },
         { name: "Pricing", to: "/pricing" },
+        { name: "Documentation", to: "/docs" },
       ],
     },
     {

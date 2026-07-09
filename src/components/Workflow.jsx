@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Link } from "react-router-dom";
 import {
   FiMessageSquare,
   FiCpu,
@@ -379,7 +380,17 @@ const Workflow = () => {
               </li>
               <li className="flex gap-2">
                 <span className="text-primary-500 dark:text-primary-400 flex-shrink-0">—</span>
-                <span>Audit-friendly trails: what was suggested, what ran, and who touched the ticket.</span>
+                <span>Immutable compliance audit log plus per-ticket history—what was suggested, executed, and exported.</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-primary-500 dark:text-primary-400 flex-shrink-0">—</span>
+                <span>
+                  Full product manual at{" "}
+                  <Link to="/docs" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
+                    resolvemeq.net/docs
+                  </Link>
+                  —workflows, rules, integrations, and Partner API.
+                </span>
               </li>
             </ul>
           </motion.aside>

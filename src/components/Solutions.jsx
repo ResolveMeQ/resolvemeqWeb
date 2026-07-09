@@ -41,8 +41,8 @@ const CONTENT = {
         text: "Stores, warehouses, and drivers ping IT around the clock. Give them one reliable place to start.",
       },
       {
-        title: "Professional services",
-        text: "Partners and consultants lose billable minutes to IT friction. Cut the wait on standard requests.",
+        title: "MSP & professional services",
+        text: "Run multiple client workspaces from a parent MSP account—isolated data per client, shared playbooks where you need them.",
       },
       {
         title: "Education",

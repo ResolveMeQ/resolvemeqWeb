@@ -20,6 +20,21 @@ const marketingSections = [
   "newsletter",
 ];
 
+/** Keep in sync with src/data/productManual.js slugs */
+const docSlugs = [
+  "overview",
+  "getting-started",
+  "tickets-and-ai",
+  "knowledge-base",
+  "workflows",
+  "automation-rules",
+  "integrations",
+  "analytics",
+  "msp-mode",
+  "security-and-audit",
+  "partner-api",
+];
+
 function escapeXml(str) {
   return str
     .replace(/&/g, "&amp;")
@@ -41,6 +56,13 @@ async function main() {
       lastmod: buildDate,
     })),
     { loc: `${SITE}/blog`, changefreq: "weekly", priority: "0.85", lastmod: buildDate },
+    { loc: `${SITE}/docs`, changefreq: "weekly", priority: "0.9", lastmod: buildDate },
+    ...docSlugs.map((slug) => ({
+      loc: `${SITE}/docs/${slug}`,
+      changefreq: "monthly",
+      priority: slug === "partner-api" || slug === "overview" ? "0.85" : "0.8",
+      lastmod: buildDate,
+    })),
     ...posts.map((post) => ({
       loc: `${SITE}/blog/${encodeURIComponent(post.slug)}`,
       changefreq: "monthly",

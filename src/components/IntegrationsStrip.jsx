@@ -1,13 +1,19 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-const LogoCard = ({ children, label }) => (
-  <div className="flex items-center gap-3 rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-950/55 backdrop-blur-sm px-4 py-3 shadow-[0_1px_0_rgba(0,0,0,0.04)] dark:shadow-[0_1px_0_rgba(255,255,255,0.04)]">
-    <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
+const LogoCard = ({ children, label, sublabel }) => (
+  <div className="flex items-center gap-3 rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-950/55 backdrop-blur-sm px-4 py-3 shadow-[0_1px_0_rgba(0,0,0,0.04)] dark:shadow-[0_1px_0_rgba(255,255,255,0.04)] min-w-0">
+    <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-xs font-bold text-zinc-600 dark:text-zinc-300">
       {children}
     </span>
-    <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-      {label}
-    </span>
+    <div className="min-w-0">
+      <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 block truncate">
+        {label}
+      </span>
+      {sublabel && (
+        <span className="text-[11px] text-zinc-500 dark:text-zinc-500">{sublabel}</span>
+      )}
+    </div>
   </div>
 );
 
@@ -35,6 +41,17 @@ const TeamsLogo = () => (
   </svg>
 );
 
+const INTEGRATIONS = [
+  { label: "Slack", sublabel: "Notify & intake", logo: <SlackLogo /> },
+  { label: "Microsoft Teams", sublabel: "Notify & intake", logo: <TeamsLogo /> },
+  { label: "Okta", sublabel: "Directory read", logo: "Ok" },
+  { label: "Google Workspace", sublabel: "Directory read", logo: "G" },
+  { label: "Microsoft 365", sublabel: "Directory read", logo: "M" },
+  { label: "Jira Cloud", sublabel: "Escalate sync", logo: "Ji" },
+  { label: "Partner API", sublabel: "REST + webhooks", logo: "API" },
+  { label: "Webhooks", sublabel: "Outbound events", logo: "↗" },
+];
+
 const IntegrationsStrip = () => {
   return (
     <section
@@ -42,49 +59,51 @@ const IntegrationsStrip = () => {
       className="relative py-14 md:py-16 bg-white dark:bg-[#09090b] border-y border-zinc-200/60 dark:border-zinc-800/80"
     >
       <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
-        <header className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
-          <div className="max-w-2xl">
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="type-eyebrow mb-3"
-            >
-              Integrations
-            </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.05 }}
-              className="type-section-title"
-            >
-              Meet users where they already work
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="type-lede mt-4"
-            >
-              Connect ResolveMeQ to chat channels so tickets can be created and updated without leaving Slack or
-              Microsoft Teams.
-            </motion.p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <LogoCard label="Slack">
-              <SlackLogo />
-            </LogoCard>
-            <LogoCard label="Microsoft Teams">
-              <TeamsLogo />
-            </LogoCard>
-          </div>
+        <header className="mb-8 max-w-2xl">
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="type-eyebrow mb-3"
+          >
+            Integrations
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.05 }}
+            className="type-section-title"
+          >
+            Connect chat, identity, and ticketing
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="type-lede mt-4"
+          >
+            Slack and Teams for notifications and intake. Okta, Google, and Microsoft 365 for
+            workflow verification. Jira for escalate sync. Partner API and webhooks for custom
+            systems—see our{" "}
+            <Link to="/docs/integrations" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
+              integrations guide
+            </Link>
+            .
+          </motion.p>
         </header>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          {INTEGRATIONS.map((item) => (
+            <LogoCard key={item.label} label={item.label} sublabel={item.sublabel}>
+              {item.logo}
+            </LogoCard>
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
 export default IntegrationsStrip;
-

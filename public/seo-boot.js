@@ -123,6 +123,27 @@
       twTitle: "Cookie Policy | " + BASE,
       h1: "Cookie Policy",
     },
+    "/docs": {
+      title: "Documentation — " + BASE,
+      desc: "Complete ResolveMeQ product manual: tickets, AI chat, workflows, automation rules, integrations, analytics, MSP mode, security audit log, and Partner API.",
+      ogTitle: "Documentation | " + BASE,
+      twTitle: "Documentation | " + BASE,
+      h1: "ResolveMeQ product manual",
+    },
+  };
+
+  var DOCS_H1_BY_SLUG = {
+    overview: "Platform overview",
+    "getting-started": "Getting started",
+    "tickets-and-ai": "Tickets and AI chat",
+    "knowledge-base": "Knowledge base",
+    workflows: "Workflows and playbooks",
+    "automation-rules": "Automation rules",
+    integrations: "Integrations",
+    analytics: "Analytics and metrics",
+    "msp-mode": "MSP mode",
+    "security-and-audit": "Security and audit log",
+    "partner-api": "Partner API",
   };
 
   function introForPath(p) {
@@ -145,6 +166,19 @@
         ogTitle: articleH1 ? articleH1 + " | " + BASE : "Journal — " + BASE,
         twTitle: articleH1 ? articleH1 + " | " + BASE : "Journal — " + BASE,
         h1: articleH1 || "ResolveMeQ journal article",
+        intro: introForPath(path),
+      };
+    }
+    if (path.indexOf("/docs/") === 0) {
+      var docSlug = path.slice(6);
+      var docH1 = DOCS_H1_BY_SLUG[docSlug];
+      return {
+        title: docH1 ? docH1 + " — ResolveMeQ Documentation" : "Documentation — " + BASE,
+        desc:
+          "ResolveMeQ documentation: how to use tickets, workflows, integrations, analytics, and the Partner API.",
+        ogTitle: docH1 ? docH1 + " | ResolveMeQ Docs" : "Documentation | " + BASE,
+        twTitle: docH1 ? docH1 + " | ResolveMeQ Docs" : "Documentation | " + BASE,
+        h1: docH1 || "ResolveMeQ documentation",
         intro: introForPath(path),
       };
     }

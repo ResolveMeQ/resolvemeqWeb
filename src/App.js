@@ -8,6 +8,8 @@ import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import Docs from "./pages/Docs";
+import DocsArticle from "./pages/DocsArticle";
 import NotFound from "./pages/NotFound";
 import "./index.css";
 
@@ -28,6 +30,8 @@ function App() {
               <Route path="newsletter" element={<MarketingHome />} />
               <Route path="blog" element={<Blog />} />
               <Route path="blog/:slug" element={<BlogPost />} />
+              <Route path="docs" element={<Docs />} />
+              <Route path="docs/:slug" element={<DocsArticle />} />
               <Route path="privacy" element={<PrivacyPolicy />} />
               <Route path="terms" element={<TermsOfService />} />
               <Route path="cookies" element={<CookiePolicy />} />

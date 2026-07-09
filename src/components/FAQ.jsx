@@ -24,7 +24,22 @@ const FAQ_ITEMS = [
   {
     question: "Is Resolve Me Quickly (ResolveMeQ) suitable for enterprise?",
     answer:
-      "Yes. Resolve Me Quickly is built for enterprise with advanced security, custom integrations, dedicated support, and scalability for large teams and high ticket volumes.",
+      "Yes. ResolveMeQ includes an immutable compliance audit log with CSV export, scoped Partner API keys, MSP multi-client mode, agent circuit breaker (30s max timeout), and advanced analytics for confidence calibration. See our documentation for security and Partner API setup.",
+  },
+  {
+    question: "What integrations are available today?",
+    answer:
+      "Live connectors include Slack, Microsoft Teams, Okta (read), Google Workspace (read), Microsoft 365 (read), Jira Cloud (escalate sync), outbound webhooks, and the Partner REST API. Setup guides are in our documentation at resolvemeq.net/docs.",
+  },
+  {
+    question: "Do you support multi-step workflows like onboarding?",
+    answer:
+      "Yes. Curated workflow templates cover onboarding, offboarding, and provisioning—with step SLAs, Slack/Teams notifications, connector auto-checks, and a per-step AI assistant. The employee onboarding playbook ships as a bundle you can install in your workspace.",
+  },
+  {
+    question: "Can partners integrate without a custom fork?",
+    answer:
+      "Yes. The Partner API (scoped keys for tickets, workflows, and rules) plus signed outbound webhooks let external systems create intake and track playbook progress. Full reference is in our Partner API documentation—no GitHub link required.",
   },
   {
     question: "Do we have to replace our help desk or ticketing tool?",
