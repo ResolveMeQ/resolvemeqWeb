@@ -17,7 +17,7 @@ import {
   FiLayers,
 } from "react-icons/fi";
 
-/** Role-based trust strip—no stock faces or unverifiable counts */
+/** Role-based trust strip, no stock faces or unverifiable counts */
 const SocialProof = () => {
   const items = [
     {
@@ -28,7 +28,7 @@ const SocialProof = () => {
     {
       icon: FiLayers,
       label: "Plugs into your stack",
-      sub: "Ticketing, chat, KB—hand off with context intact",
+      sub: "Ticketing, chat, KB, hand off with context intact",
     },
     {
       icon: FiShield,
@@ -279,7 +279,7 @@ const Hero = () => {
                 <span
                   className={`w-1.5 h-1.5 bg-primary-600 rounded-full ${reducedMotion ? "" : "animate-pulse"}`}
                 />
-                Resolve Me Quickly — IT support automation
+                Resolve Me Quickly, IT support automation
               </motion.div>
 
               <h1 className="type-display mb-6">
@@ -306,7 +306,7 @@ const Hero = () => {
                 transition={{ delay: 0.6 }}
                 className="type-display-sub mb-4"
               >
-                Cut time stuck in tier-1 triage and give every ticket a clear next step—backed by
+                Cut time stuck in tier-1 triage and give every ticket a clear next step, backed by
                 your knowledge, your policies, and your tools.
               </motion.p>
               <motion.p
@@ -316,7 +316,7 @@ const Hero = () => {
                 className="text-sm text-zinc-600 dark:text-zinc-400 mb-8 max-w-xl"
               >
                 Typical outcomes teams report: 40% faster ticket resolution, 60% higher team
-                efficiency—trusted by 500+ companies.
+                efficiency, trusted by 500+ companies.
               </motion.p>
             </motion.div>
           </FadeInDiv>
@@ -366,7 +366,7 @@ const Hero = () => {
               >
                 Open the free knowledge base
               </a>
-              <span className="text-zinc-500 dark:text-zinc-500"> — no account.</span>
+              <span className="text-zinc-500 dark:text-zinc-500">, no account.</span>
             </p>
           </FadeInDiv>
 

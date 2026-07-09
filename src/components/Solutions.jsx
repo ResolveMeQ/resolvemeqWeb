@@ -21,7 +21,7 @@ const CONTENT = {
   industry: {
     headline: "Regulated volume, thin IT, or lots of locations",
     lede:
-      "ResolveMeQ is your front line for everyday IT requests: password resets, VPN, access, hardware triage, and repeat “how do I…?” questions—routed correctly before they clog your queue.",
+      "ResolveMeQ is your front line for everyday IT requests: password resets, VPN, access, hardware triage, and repeat “how do I…?” questions, routed correctly before they clog your queue.",
     outcomes: [
       "Fewer tickets stuck in “unknown owner” limbo",
       "Consistent answers that match your policies",
@@ -34,7 +34,7 @@ const CONTENT = {
       },
       {
         title: "Financial services",
-        text: "High expectations for response time and control—automate the routine without bypassing risk rules.",
+        text: "High expectations for response time and control, automate the routine without bypassing risk rules.",
       },
       {
         title: "Retail & logistics",
@@ -42,11 +42,11 @@ const CONTENT = {
       },
       {
         title: "MSP & professional services",
-        text: "Run multiple client workspaces from a parent MSP account—isolated data per client, shared playbooks where you need them.",
+        text: "Run multiple client workspaces from a parent MSP account, isolated data per client, shared playbooks where you need them.",
       },
       {
         title: "Education",
-        text: "Semester spikes and device diversity—deflect repeat questions and route lab vs. admin issues cleanly.",
+        text: "Semester spikes and device diversity, deflect repeat questions and route lab vs. admin issues cleanly.",
       },
       {
         title: "Tech & SaaS",
@@ -70,15 +70,15 @@ const CONTENT = {
       },
       {
         title: "Security & compliance",
-        text: "Phishing reports, access reviews, and policy questions—steer people to the right workflow first.",
+        text: "Phishing reports, access reviews, and policy questions, steer people to the right workflow first.",
       },
       {
         title: "HR & people ops",
-        text: "Onboarding laptops, MFA lockouts, and app access—reduce back-and-forth between HR and IT.",
+        text: "Onboarding laptops, MFA lockouts, and app access, reduce back-and-forth between HR and IT.",
       },
       {
         title: "Operations & facilities",
-        text: "When “something’s broken” could be IT, vendor, or building—start with structured intake.",
+        text: "When “something’s broken” could be IT, vendor, or building, start with structured intake.",
       },
       {
         title: "Office of the CIO",
@@ -93,7 +93,7 @@ const CONTENT = {
   household: {
     headline: "One roof, several laptops, and recurring “can you fix this?”",
     lede:
-      "Families with remote workers, students, and shared Wi‑Fi see the same few problems on repeat. ResolveMeQ gives everyone a calm, step-by-step place to start—without turning the household group chat into tier‑1 support.",
+      "Families with remote workers, students, and shared Wi‑Fi see the same few problems on repeat. ResolveMeQ gives everyone a calm, step-by-step place to start, without turning the household group chat into tier‑1 support.",
     outcomes: [
       "Less ad-hoc screen sharing for the same Wi‑Fi / printer issues",
       "Older adults get plain language, not jargon",
@@ -102,7 +102,7 @@ const CONTENT = {
     cards: [
       {
         title: "Remote worker + family",
-        text: "Work machine issues vs. home network confusion—separate flows so nobody mixes profiles.",
+        text: "Work machine issues vs. home network confusion, separate flows so nobody mixes profiles.",
       },
       {
         title: "Students & parents",
@@ -110,7 +110,7 @@ const CONTENT = {
       },
       {
         title: "Multi-generational homes",
-        text: "Bigger text, slower steps, and fewer assumptions—still the same underlying automation.",
+        text: "Bigger text, slower steps, and fewer assumptions, still the same underlying automation.",
       },
       {
         title: "Renters & shared housing",
@@ -118,7 +118,7 @@ const CONTENT = {
       },
       {
         title: "Home office upgrade cycles",
-        text: "New monitor, dock, or headset—guided setup instead of trial-and-error drivers.",
+        text: "New monitor, dock, or headset, guided setup instead of trial-and-error drivers.",
       },
       {
         title: "Side projects under one roof",
@@ -129,7 +129,7 @@ const CONTENT = {
   individual: {
     headline: "Solo operator, freelancer, or power user",
     lede:
-      "You don’t have a helpdesk—you are the helpdesk. ResolveMeQ is the checklist-driven assistant for recurring device, account, and connectivity problems so you stop searching the same three forums every month.",
+      "You don’t have a helpdesk, you are the helpdesk. ResolveMeQ is the checklist-driven assistant for recurring device, account, and connectivity problems so you stop searching the same three forums every month.",
     outcomes: [
       "Less context switching between vendor status pages",
       "Repeatable fixes you can actually remember",
@@ -138,23 +138,23 @@ const CONTENT = {
     cards: [
       {
         title: "Freelancers & consultants",
-        text: "Client SSO, VPN splits, and invoice tools—keep personal and client identities from colliding.",
+        text: "Client SSO, VPN splits, and invoice tools, keep personal and client identities from colliding.",
       },
       {
         title: "Creators & media",
-        text: "Large files, sync tools, and “why is Premiere angry again”—structured triage beats random reboots.",
+        text: "Large files, sync tools, and “why is Premiere angry again”, structured triage beats random reboots.",
       },
       {
         title: "Students & career switchers",
-        text: "Cheap hardware, strict deadlines—get unblocked on lab software and submission portals.",
+        text: "Cheap hardware, strict deadlines, get unblocked on lab software and submission portals.",
       },
       {
         title: "Job seekers",
-        text: "Video tools, background noise, and “my mic works in Zoom but not Teams”—narrow it fast.",
+        text: "Video tools, background noise, and “my mic works in Zoom but not Teams”, narrow it fast.",
       },
       {
         title: "Traveling workers",
-        text: "Hotel Wi‑Fi, tethering, and VPN drops—lightweight checks that fit a carry-on lifestyle.",
+        text: "Hotel Wi‑Fi, tethering, and VPN drops, lightweight checks that fit a carry-on lifestyle.",
       },
       {
         title: "Privacy-minded individuals",

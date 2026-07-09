@@ -13,7 +13,7 @@ const Docs = () => {
   return (
     <main className="min-h-screen bg-[#fafafa] dark:bg-[#09090b] pt-24 pb-20">
       <PageSeo
-        title="Documentation — Resolve Me Quickly (ResolveMeQ)"
+        title="Documentation, Resolve Me Quickly (ResolveMeQ)"
         description="Complete product manual: tickets, AI chat, workflows, automation rules, integrations, analytics, MSP mode, security audit log, and Partner API."
         path="/docs"
         socialTitle="Documentation | ResolveMeQ"
@@ -34,7 +34,7 @@ const Docs = () => {
           </h1>
           <p className="type-lede">
             Everything you need to run tickets, AI-assisted resolution, workflows,
-            automation, and enterprise controls—written for admins, agents, and integration
+            automation, and enterprise controls, written for admins, agents, and integration
             partners. No external wiki required.
           </p>
           <a

@@ -19,7 +19,7 @@ const FAQ_ITEMS = [
   {
     question: "What happens when the AI can’t solve a ticket?",
     answer:
-      "It escalates to a real person—your own team, or ResolveMeQ’s support staff—with the full conversation and attempted steps attached. The reply shows up in the same chat your employee already started, not a separate inbox.",
+      "It escalates to a real person, your own team, or ResolveMeQ’s support staff, with the full conversation and attempted steps attached. The reply shows up in the same chat your employee already started, not a separate inbox.",
   },
   {
     question: "Is Resolve Me Quickly (ResolveMeQ) suitable for enterprise?",
@@ -34,17 +34,17 @@ const FAQ_ITEMS = [
   {
     question: "Do you support multi-step workflows like onboarding?",
     answer:
-      "Yes. Curated workflow templates cover onboarding, offboarding, and provisioning—with step SLAs, Slack/Teams notifications, connector auto-checks, and a per-step AI assistant. The employee onboarding playbook ships as a bundle you can install in your workspace.",
+      "Yes. Curated workflow templates cover onboarding, offboarding, and provisioning, with step SLAs, Slack/Teams notifications, connector auto-checks, and a per-step AI assistant. The employee onboarding playbook ships as a bundle you can install in your workspace.",
   },
   {
     question: "Can partners integrate without a custom fork?",
     answer:
-      "Yes. The Partner API (scoped keys for tickets, workflows, and rules) plus signed outbound webhooks let external systems create intake and track playbook progress. Full reference is in our Partner API documentation—no GitHub link required.",
+      "Yes. The Partner API (scoped keys for tickets, workflows, and rules) plus signed outbound webhooks let external systems create intake and track playbook progress. Full reference is in our Partner API documentation, no GitHub link required.",
   },
   {
     question: "Do we have to replace our help desk or ticketing tool?",
     answer:
-      "No. ResolveMeQ is designed to sit alongside the systems you already use—ticketing, chat, identity, and knowledge—and to hand work back to them with structured context. Most teams connect first, then expand automation over time.",
+      "No. ResolveMeQ is designed to sit alongside the systems you already use, ticketing, chat, identity, and knowledge, and to hand work back to them with structured context. Most teams connect first, then expand automation over time.",
   },
   {
     question: "What happens when the 14-day trial ends?",
@@ -100,7 +100,7 @@ const FAQ = () => {
             transition={{ delay: 0.1 }}
             className="type-lede max-w-xl mx-auto"
           >
-            Straight answers—same ones we surface to search engines so there’s no fine print between
+            Straight answers, same ones we surface to search engines so there’s no fine print between
             the marketing site and reality.
           </motion.p>
         </header>

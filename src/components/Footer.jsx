@@ -139,7 +139,7 @@ const Footer = () => {
                 transition={{ delay: 0.1 }}
                 className="type-lede max-w-md"
               >
-                Product notes, IT automation ideas, and changelog-style updates—low frequency, no fluff.
+                Product notes, IT automation ideas, and changelog-style updates, low frequency, no fluff.
               </motion.p>
             </div>
 
@@ -188,7 +188,7 @@ const Footer = () => {
                     <p className="text-sm text-red-600 dark:text-red-400 px-1">{subscribeError}</p>
                   )}
                   <p className="text-xs text-zinc-500 dark:text-zinc-500 px-0.5">
-                    No spam. Unsubscribe anytime—we don’t sell addresses.
+                    No spam. Unsubscribe anytime, we don’t sell addresses.
                   </p>
                 </form>
               ) : (
@@ -238,7 +238,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="type-body mb-6 max-w-md">
-              Resolve Me Quickly (ResolveMeQ) — AI-powered IT support automation. Reduce ticket resolution time by 40%, improve team efficiency by 60%. Trusted by 500+ companies.
+              Resolve Me Quickly (ResolveMeQ), AI-powered IT support automation. Reduce ticket resolution time by 40%, improve team efficiency by 60%. Trusted by 500+ companies.
             </p>
             <div className="space-y-2.5">
               {contactInfo.map((info, index) => (

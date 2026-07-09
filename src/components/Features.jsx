@@ -18,16 +18,16 @@ const features = [
   {
     title: "Instant resolution",
     description:
-      "Deflect repetitive tickets with guided flows and answers pulled from your knowledge base—before they hit a human queue.",
+      "Deflect repetitive tickets with guided flows and answers pulled from your knowledge base, before they hit a human queue.",
     longDescription:
-      "Natural-language intake maps common issues to runbooks and KB articles. The AI returns step-by-step guidance with confidence scores and citations—not generic chatbot text. Dashboard metrics show deflection rate for your workspace.",
+      "Natural-language intake maps common issues to runbooks and KB articles. The AI returns step-by-step guidance with confidence scores and citations, not generic chatbot text. Dashboard metrics show deflection rate for your workspace.",
     icon: FiZap,
     stats: "KB-grounded AI",
   },
   {
     title: "Real escalation, not a black hole",
     description:
-      "When AI isn’t enough, a real person picks it up—with the full history, attempted steps, and predictive routing suggestions on the escalation queue.",
+      "When AI isn’t enough, a real person picks it up, with the full history, attempted steps, and predictive routing suggestions on the escalation queue.",
     longDescription:
       "No re-explaining the problem. Agents claim tickets atomically, see routing hints based on category history and workload, and reply in the same conversation the employee started.",
     icon: FiUserCheck,
@@ -36,16 +36,16 @@ const features = [
   {
     title: "Multi-step workflows",
     description:
-      "Onboarding, offboarding, provisioning—curated playbooks with SLAs, step claims, connector auto-checks, and per-step AI assistant.",
+      "Onboarding, offboarding, provisioning, curated playbooks with SLAs, step claims, connector auto-checks, and per-step AI assistant.",
     longDescription:
-      "Human-authored templates—not LLM-invented processes. Each step has owners and due dates; Slack/Teams notify assignees. Okta, Google, and M365 can verify account state. Employee onboarding playbook ships out of the box.",
+      "Human-authored templates, not LLM-invented processes. Each step has owners and due dates; Slack/Teams notify assignees. Okta, Google, and M365 can verify account state. Employee onboarding playbook ships out of the box.",
     icon: FiCheckSquare,
     stats: "Playbooks + SLAs",
   },
   {
     title: "Automation rules",
     description:
-      "Trigger workflows, escalations, notifications, and outbound webhooks when tickets match your conditions—no custom fork.",
+      "Trigger workflows, escalations, notifications, and outbound webhooks when tickets match your conditions, no custom fork.",
     longDescription:
       "Rules fire on ticket created, status changed, low confidence, and more. Every execution is logged. Pair with outbound webhooks for SIEM, ITSM, or partner systems.",
     icon: FiTrendingUp,
@@ -56,7 +56,7 @@ const features = [
     description:
       "Slack, Teams, Okta, Google Workspace, Microsoft 365, Jira Cloud, Partner REST API, and signed outbound webhooks.",
     longDescription:
-      "Partner API keys (scoped tickets, workflows, rules) let external systems create intake and track playbooks. Full setup in our documentation—no GitHub required.",
+      "Partner API keys (scoped tickets, workflows, rules) let external systems create intake and track playbooks. Full setup in our documentation, no GitHub required.",
     icon: FiCode,
     stats: "8+ live connectors",
   },
@@ -65,7 +65,7 @@ const features = [
     description:
       "Immutable compliance audit log with CSV export, role-based access, agent circuit breaker, and MSP multi-client mode.",
     longDescription:
-      "Append-only audit events for tickets, workflows, rules, and MSP actions. Settings → Security for browse and export. Agent outages fail gracefully within 30 seconds—not hung tickets.",
+      "Append-only audit events for tickets, workflows, rules, and MSP actions. Settings → Security for browse and export. Agent outages fail gracefully within 30 seconds, not hung tickets.",
     icon: FiShield,
     stats: "Audit-ready",
   },
@@ -74,7 +74,7 @@ const features = [
     description:
       "Deflection by category, AI confidence calibration vs outcomes, workflow bottleneck detection, and CSV export.",
     longDescription:
-      "See which categories automate well, whether high-confidence buckets actually resolve without escalation, and which playbook steps stall. Built for quarterly business reviews—not vanity charts.",
+      "See which categories automate well, whether high-confidence buckets actually resolve without escalation, and which playbook steps stall. Built for quarterly business reviews, not vanity charts.",
     icon: FiActivity,
     stats: "Calibration built-in",
   },
@@ -206,7 +206,7 @@ const Features = () => {
             transition={{ delay: 0.1 }}
             className="type-lede mb-10"
           >
-            One surface for deflection, escalation, integrations, and reporting—so your team spends
+            One surface for deflection, escalation, integrations, and reporting, so your team spends
             time on incidents that need judgment, not on re-explaining Wi‑Fi for the ninth time.
           </motion.p>
 

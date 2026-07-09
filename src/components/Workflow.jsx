@@ -13,7 +13,7 @@ const steps = [
     title: "Intake that doesn’t waste a cycle",
     subtitle: "Structured + conversational",
     description:
-      "Employees describe the issue in plain language—chat, form, or whatever you already use. ResolveMeQ normalizes it into a ticket the system can reason about, without forcing a novel every time.",
+      "Employees describe the issue in plain language, chat, form, or whatever you already use. ResolveMeQ normalizes it into a ticket the system can reason about, without forcing a novel every time.",
     icon: FiMessageSquare,
   },
   {
@@ -21,15 +21,15 @@ const steps = [
     title: "Match against how your org actually fixes things",
     subtitle: "Knowledge, history, policy",
     description:
-      "We pull from approved articles, similar closed tickets, and the guardrails you set. The goal isn’t a generic answer—it’s the next step that fits your environment.",
+      "We pull from approved articles, similar closed tickets, and the guardrails you set. The goal isn’t a generic answer, it’s the next step that fits your environment.",
     icon: FiCpu,
   },
   {
     id: 3,
-    title: "Close it—or hand off with receipts",
+    title: "Close it, or hand off with receipts",
     subtitle: "Resolve vs. escalate",
     description:
-      "Common paths finish automatically. Everything else lands with a human alongside context: what was tried, what failed, and what we’d try next—so tier-2 isn’t doing discovery from zero.",
+      "Common paths finish automatically. Everything else lands with a human alongside context: what was tried, what failed, and what we’d try next, so tier-2 isn’t doing discovery from zero.",
     icon: FiGitBranch,
   },
 ];
@@ -241,7 +241,7 @@ function WorkflowDiagram({ className }) {
         className="fill-zinc-400 dark:fill-zinc-500"
         style={{ fontSize: "11px" }}
       >
-        One continuous path — no dead ends in the UI
+        One continuous path, no dead ends in the UI
       </text>
     </svg>
   );
@@ -340,7 +340,7 @@ const Workflow = () => {
               <p className="type-eyebrow mb-4">Flow</p>
               <WorkflowDiagram className="w-full h-auto text-zinc-400 dark:text-zinc-500" />
 
-              {/* Horizontal stepper — desktop-friendly summary */}
+              {/* Horizontal stepper, desktop-friendly summary */}
               <div className="mt-8 pt-8 border-t border-zinc-200/80 dark:border-zinc-800/80">
                 <div className="hidden sm:flex items-center justify-between gap-2 text-center">
                   {["Capture", "Decide", "Finish"].map((label, i) => (
@@ -372,25 +372,20 @@ const Workflow = () => {
               </div>
             </div>
 
-            {/* Trust strip — qualitative, no unverifiable percentages */}
-            <ul className="mt-6 space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
-              <li className="flex gap-2">
-                <span className="text-primary-500 dark:text-primary-400 flex-shrink-0">—</span>
-                <span>Built for teams that already have a ticket system—we complement it, not replace it overnight.</span>
+            {/* Trust strip, qualitative, no unverifiable percentages */}
+            <ul className="mt-6 space-y-3 text-sm text-zinc-600 dark:text-zinc-400 list-disc pl-5">
+              <li>
+                Built for teams that already have a ticket system. We complement it, not replace it overnight.
               </li>
-              <li className="flex gap-2">
-                <span className="text-primary-500 dark:text-primary-400 flex-shrink-0">—</span>
-                <span>Immutable compliance audit log plus per-ticket history—what was suggested, executed, and exported.</span>
+              <li>
+                Immutable compliance audit log plus per-ticket history: what was suggested, executed, and exported.
               </li>
-              <li className="flex gap-2">
-                <span className="text-primary-500 dark:text-primary-400 flex-shrink-0">—</span>
-                <span>
-                  Full product manual at{" "}
-                  <Link to="/docs" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
-                    resolvemeq.net/docs
-                  </Link>
-                  —workflows, rules, integrations, and Partner API.
-                </span>
+              <li>
+                Full product manual at{" "}
+                <Link to="/docs" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
+                  resolvemeq.net/docs
+                </Link>
+                {" "}(workflows, rules, integrations, and Partner API).
               </li>
             </ul>
           </motion.aside>

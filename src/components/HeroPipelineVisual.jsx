@@ -4,7 +4,7 @@ import { useTheme } from "../context/ThemeContext";
 
 const VB = { w: 520, h: 260 };
 
-/** Ticket → triage → knowledge pulses → resolved / escalated — matches design.txt */
+/** Ticket → triage → knowledge pulses → resolved / escalated, matches design.txt */
 export function HeroPipelineVisual({ reducedMotion }) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -286,7 +286,7 @@ function EscalateChip({ escalate, nodeFill, chipTextColor }) {
 const DOT = 10;
 const HALF = DOT / 2;
 
-/** Tickets as DOM layers — pixel `x`/`y` from measured box (Framer skips SVG cx/cy; % strings are flaky). */
+/** Tickets as DOM layers, pixel `x`/`y` from measured box (Framer skips SVG cx/cy; % strings are flaky). */
 function TicketDot({ variant, delay, ticketCore, ticketGlow, overlayW, overlayH }) {
   const duration = 12;
   const kf = TICKET_KF[variant];

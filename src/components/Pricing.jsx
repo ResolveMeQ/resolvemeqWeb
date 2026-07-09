@@ -349,7 +349,7 @@ const Pricing = () => {
           </div>
         </motion.div>
 
-        {/* Enterprise footnote — avoids duplicating full CTA row */}
+        {/* Enterprise footnote, avoids duplicating full CTA row */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -360,7 +360,7 @@ const Pricing = () => {
             <FiShield className="w-4 h-4 text-zinc-500 flex-shrink-0" aria-hidden />
             <p className="text-sm text-zinc-600 dark:text-zinc-400 text-left sm:text-center">
               <span className="text-zinc-900 dark:text-zinc-200 font-medium">Volume, SSO, or custom terms?</span>{" "}
-              Enterprise includes deeper security reviews and tailored rollout—
+              Enterprise includes deeper security reviews and tailored rollout, 
               <a
                 href="https://app.resolvemeq.net/billing"
                 target="_blank"

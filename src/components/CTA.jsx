@@ -16,7 +16,7 @@ const highlights = [
   {
     icon: FiCalendar,
     title: "Live in days, not quarters",
-    text: "Connect ticketing and knowledge first—expand automation as you gain confidence.",
+    text: "Connect ticketing and knowledge first, expand automation as you gain confidence.",
   },
   {
     icon: FiPhone,
@@ -69,7 +69,7 @@ const CTA = () => {
       id="contact"
       className="relative py-24 md:py-32 overflow-hidden scroll-mt-20"
     >
-      {/* Canvas — deep neutral + restrained brand light (Vercel / Linear-style closer) */}
+      {/* Canvas, deep neutral + restrained brand light (Vercel / Linear-style closer) */}
       <div
         className="absolute inset-0 bg-zinc-950 pointer-events-none"
         aria-hidden
@@ -118,7 +118,7 @@ const CTA = () => {
               transition={{ delay: 0.1 }}
               className="type-lede-on-dark mb-8 max-w-lg"
             >
-              Start a trial on your own timeline—or drop your work email and we’ll route you to the
+              Start a trial on your own timeline, or drop your work email and we’ll route you to the
               right next step. No spam, no twenty-field forms.
             </motion.p>
 
@@ -194,7 +194,7 @@ const CTA = () => {
                   Request a walkthrough
                 </h3>
                 <p className="type-body mt-2 text-zinc-600 dark:text-zinc-700">
-                  We’ll use this to personalize your demo—not to add you to a generic nurture stream.
+                  We’ll use this to personalize your demo, not to add you to a generic nurture stream.
                 </p>
               </div>
 
@@ -321,7 +321,7 @@ const CTA = () => {
                 >
                   Browse the knowledge base
                 </a>{" "}
-                — no signup.
+               , no signup.
               </p>
               <p>
                 Sales:{" "}

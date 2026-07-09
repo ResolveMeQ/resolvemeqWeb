@@ -25,7 +25,7 @@ function nextHeadingId(title, usedIds) {
 }
 
 function renderInline(text) {
-  const parts = text.split(/(`[^`]+`)/g);
+  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*)/g).filter((p) => p.length > 0);
   return parts.map((part, i) => {
     if (part.startsWith("`") && part.endsWith("`")) {
       return (
@@ -37,7 +37,17 @@ function renderInline(text) {
         </code>
       );
     }
-    return part;
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong
+          key={i}
+          className="font-semibold text-zinc-800 dark:text-zinc-100"
+        >
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return <React.Fragment key={i}>{part}</React.Fragment>;
   });
 }
 
@@ -141,7 +151,7 @@ export function buildManualArticleParts(text) {
           key={bi}
           className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 tracking-tight scroll-mt-28"
         >
-          {block.slice(4)}
+          {renderInline(block.slice(4))}
         </h3>
       );
       bi += 1;

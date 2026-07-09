@@ -86,7 +86,7 @@ const IntegrationsStrip = () => {
           >
             Slack and Teams for notifications and intake. Okta, Google, and Microsoft 365 for
             workflow verification. Jira for escalate sync. Partner API and webhooks for custom
-            systems—see our{" "}
+            systems, see our{" "}
             <Link to="/docs/integrations" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
               integrations guide
             </Link>

@@ -10,7 +10,7 @@ import {
   FiActivity,
 } from "react-icons/fi";
 
-/** Same headline outcomes as FAQ, Hero, and SEO—shown on every card for consistency */
+/** Same headline outcomes as FAQ, Hero, and SEO, shown on every card for consistency */
 const OUTCOME_METRICS = [
   { label: "Resolution time", value: "40% faster" },
   { label: "Team efficiency", value: "60% higher" },
@@ -24,7 +24,7 @@ const testimonials = [
     role: "IT Director",
     company: "TechCorp Inc.",
     content:
-      "ResolveMeQ has transformed our IT support operations. Smart routing and escalation mean our tier-1 queue finally scales with the business—without losing the audit trail.",
+      "ResolveMeQ has transformed our IT support operations. Smart routing and escalation mean our tier-1 queue finally scales with the business, without losing the audit trail.",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     metrics: OUTCOME_METRICS,
     rating: 5,
@@ -46,7 +46,7 @@ const testimonials = [
     role: "IT Manager",
     company: "Global Solutions",
     content:
-      "The AI's ability to understand and route common issues is impressive. It feels like an additional team member who's available 24/7—with context that reaches the right person.",
+      "The AI's ability to understand and route common issues is impressive. It feels like an additional team member who's available 24/7, with context that reaches the right person.",
     avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     metrics: OUTCOME_METRICS,
     rating: 5,

@@ -1,5 +1,5 @@
 /**
- * ResolveMeQ product manual — hosted on resolvemeq.net/docs (not GitHub).
+ * ResolveMeQ product manual, hosted on resolvemeq.net/docs (not GitHub).
  * Body uses ## / ### headings (parsed by buildBlogArticleParts).
  */
 
@@ -18,7 +18,7 @@ export const PRODUCT_MANUAL = [
     description:
       "What ResolveMeQ is, how tickets, AI, workflows, and integrations fit together, and who each surface is for.",
     readMinutes: 6,
-    body: `ResolveMeQ (Resolve Me Quickly) is an AI-powered IT helpdesk platform. Employees describe problems in plain language; the system analyzes each request against your knowledge base and ticket history, suggests step-by-step fixes with a confidence score, and escalates to a human when needed—with full context attached.
+    body: `ResolveMeQ (Resolve Me Quickly) is an AI-powered IT helpdesk platform. Employees describe problems in plain language; the system analyzes each request against your knowledge base and ticket history, suggests step-by-step fixes with a confidence score, and escalates to a human when needed, with full context attached.
 
 ## The three layers
 
@@ -26,7 +26,7 @@ export const PRODUCT_MANUAL = [
 
 **Workflows** are curated multi-step playbooks (onboarding, offboarding, provisioning). Steps have owners, due dates, and SLAs. Workflows can start automatically when a ticket category matches a template.
 
-**Automation rules** react to ticket events—start a workflow, escalate, notify a channel, or call an outbound webhook—without custom code.
+**Automation rules** react to ticket events, start a workflow, escalate, notify a channel, or call an outbound webhook, without custom code.
 
 ## AI's role (narrow by design)
 
@@ -38,14 +38,14 @@ Each **workspace** is an isolated team. Members see only tickets and workflows i
 
 ## Where to work in the app
 
-- **Dashboard** — volume, deflection, and workflow completion at a glance
-- **Tickets** — create, chat with AI, escalate, assign
-- **Workflows** — active playbooks, overdue steps, claims
-- **Escalation queue** — human pickup with routing suggestions
-- **Knowledge base** — articles the AI cites during analysis
-- **Automation** — rules, triggers, and execution history
-- **Analytics** — deflection by category, confidence calibration, bottlenecks
-- **Settings** — integrations, MSP mode, audit log, partner API keys`,
+- **Dashboard**: volume, deflection, and workflow completion at a glance
+- **Tickets**: create, chat with AI, escalate, assign
+- **Workflows**: active playbooks, overdue steps, claims
+- **Escalation queue**: human pickup with routing suggestions
+- **Knowledge base**: articles the AI cites during analysis
+- **Automation**: rules, triggers, and execution history
+- **Analytics**: deflection by category, confidence calibration, bottlenecks
+- **Settings**: integrations, MSP mode, audit log, partner API keys`,
   },
   {
     slug: "getting-started",
@@ -60,7 +60,7 @@ Each **workspace** is an isolated team. Members see only tickets and workflows i
 
 1. Go to **app.resolvemeq.net** and choose **Sign up**.
 2. Confirm your email if prompted.
-3. Complete your profile—your name appears on tickets and workflow steps you claim.
+3. Complete your profile, your name appears on tickets and workflow steps you claim.
 
 ## Your first workspace
 
@@ -70,7 +70,7 @@ On first login you get a workspace (team). The owner can rename it under **Setti
 
 1. Open **Teams** (or **Settings → Members**).
 2. Invite by email or add existing users.
-3. Assign **ops roles** (IT, HR, Facilities, Security) when workflow steps are role-gated—only matching roles can claim those steps.
+3. Assign **ops roles** (IT, HR, Facilities, Security) when workflow steps are role-gated, only matching roles can claim those steps.
 
 ## Set your active workspace
 
@@ -100,7 +100,7 @@ Resolved tickets with good agent responses can enrich the KB over time.
 For HR/IT onboarding pilots:
 
 1. Ask your admin to run the onboarding bundle install (employee onboarding template + resolution patterns)
-2. Create a ticket with category **onboarding**—a workflow should start automatically
+2. Create a ticket with category **onboarding**, a workflow should start automatically
 3. Open the ticket's **Workflow** checklist and claim the first active step
 
 ## First-week checklist
@@ -134,11 +134,11 @@ When a ticket is submitted, the platform sends it to the AI agent service. Withi
 
 - **Category and severity** assessment
 - **Step-by-step guidance** in plain language
-- **Confidence score** (0–1)—how strongly the model backs the suggestion
-- **Recommended action** — auto-resolve path, request clarification, or escalate
-- **KB citations** — which internal articles informed the answer
+- **Confidence score** (0–1), how strongly the model backs the suggestion
+- **Recommended action**: auto-resolve path, request clarification, or escalate
+- **KB citations**: which internal articles informed the answer
 
-The chat UI shows analysis before an empty thread—no blank screen while waiting.
+The chat UI shows analysis before an empty thread, no blank screen while waiting.
 
 ## Confidence and when to trust AI
 
@@ -146,7 +146,7 @@ The chat UI shows analysis before an empty thread—no blank screen while waitin
 |------------|-----------------|
 | 0.8–1.0 | Strong match to KB/history; often safe for self-service |
 | 0.6–0.8 | Reasonable suggestion; user or L1 should verify |
-| 0.3–0.6 | Uncertain—clarify or route to a human |
+| 0.3–0.6 | Uncertain, clarify or route to a human |
 | Below 0.3 | Escalate or gather more information |
 
 Security, outage, and data-loss categories **never** auto-resolve regardless of score.
@@ -170,7 +170,7 @@ Agents can assign tickets to teammates, change status (open, in progress, resolv
 
 ## Rollback
 
-Some autonomous actions can be rolled back from ticket history when your policy allows—useful when automation misfires.
+Some autonomous actions can be rolled back from ticket history when your policy allows, useful when automation misfires.
 
 ## Agent reliability
 
@@ -183,7 +183,7 @@ If the AI service is unavailable, a **circuit breaker** stops tickets from hangi
     description:
       "Author articles, organize by category, and keep content the AI can cite during ticket analysis.",
     readMinutes: 6,
-    body: `The knowledge base (KB) is what makes AI answers specific to your organization—not generic chatbot text.
+    body: `The knowledge base (KB) is what makes AI answers specific to your organization, not generic chatbot text.
 
 ## Articles
 
@@ -195,7 +195,7 @@ During ticket analysis the agent retrieves relevant articles (RAG), reranks matc
 
 ## Authoring tips
 
-- Write for the employee reading on a phone—short steps, numbered lists
+- Write for the employee reading on a phone, short steps, numbered lists
 - One article per intent (VPN connect, not "network stuff")
 - Include prerequisites ("must be on corporate Wi‑Fi first")
 - Date or version sensitive steps (OS-specific paths)
@@ -220,9 +220,9 @@ When tickets resolve with strong agent responses, the platform can sync content 
 
 ## Concepts
 
-- **Template** — admin-authored definition (steps, due days, assignee roles, skip rules)
-- **Workflow** — a running instance, optionally linked to a ticket
-- **Step** — pending, active, done, or skipped; only one active step at a time in the default sequential flow
+- **Template**: admin-authored definition (steps, due days, assignee roles, skip rules)
+- **Workflow**: a running instance, optionally linked to a ticket
+- **Step**: pending, active, done, or skipped; only one active step at a time in the default sequential flow
 
 ## Starting a workflow
 
@@ -236,7 +236,7 @@ When tickets resolve with strong agent responses, the platform can sync content 
 
 1. Open the workflow from **Workflows** or the ticket detail page
 2. The **active** step is highlighted; overdue steps show a badge
-3. Click **Claim** to take ownership (race-safe—only one agent claims)
+3. Click **Claim** to take ownership (race-safe, only one agent claims)
 4. Complete the step or skip when policy allows
 5. The next step becomes active; Slack/Teams notifies the next assignee
 
@@ -246,15 +246,15 @@ Templates define **due_days** per step. When a step activates, its due date is s
 
 ## Step assistant
 
-On active steps, **Step assistant** offers LLM + KB hints specific to that step—without inventing new steps. Use it for provisioning scripts, policy reminders, or links to internal runbooks.
+On active steps, **Step assistant** offers LLM + KB hints specific to that step, without inventing new steps. Use it for provisioning scripts, policy reminders, or links to internal runbooks.
 
 ## Connector auto-check and auto-complete
 
-Steps can require an **auto_check** against Okta, Google Workspace, or Microsoft 365 (e.g. "account exists"). Verified steps may **auto_complete** when the connector confirms success—reducing manual checkbox work.
+Steps can require an **auto_check** against Okta, Google Workspace, or Microsoft 365 (e.g. "account exists"). Verified steps may **auto_complete** when the connector confirms success, reducing manual checkbox work.
 
 ## Branching (skip rules)
 
-Steps support **skip_when** conditions on ticket fields (e.g. skip office desk setup for remote onboarding). This is simple branching—not a visual DAG builder.
+Steps support **skip_when** conditions on ticket fields (e.g. skip office desk setup for remote onboarding). This is simple branching, not a visual DAG builder.
 
 ## Employee onboarding playbook
 
@@ -266,7 +266,7 @@ Some playbooks spawn **child tickets** for parallel work (e.g. separate hardware
 
 ## Template admin
 
-Workspace admins create and edit templates in **Workflow templates**—step titles, assignee roles, due days, auto_complete flags, and connector configuration.`,
+Workspace admins create and edit templates in **Workflow templates**, step titles, assignee roles, due days, auto_complete flags, and connector configuration.`,
   },
   {
     slug: "automation-rules",
@@ -281,9 +281,9 @@ Workspace admins create and edit templates in **Workflow templates**—step titl
 
 Each rule has:
 
-- **Trigger** — e.g. ticket created, status changed, confidence below threshold, category matched
-- **Conditions** — optional filters on category, urgency, team
-- **Actions** — one or more effects when the rule fires
+- **Trigger**: e.g. ticket created, status changed, confidence below threshold, category matched
+- **Conditions**: optional filters on category, urgency, team
+- **Actions**: one or more effects when the rule fires
 
 ## Common actions
 
@@ -312,7 +312,7 @@ Partners often combine webhooks with the Partner API for bidirectional sync.
 
 - Start with one trigger and one action; expand after reviewing logs
 - Never auto-resolve security category tickets via rules
-- Use descriptive rule names—your future self will thank you
+- Use descriptive rule names, your future self will thank you
 - Test in a sandbox workspace before enabling in production`,
   },
   {
@@ -326,7 +326,7 @@ Partners often combine webhooks with the Partner API for bidirectional sync.
 
 ## Notification bus
 
-All channels (Slack, Teams, email, in-app) route through a single notification layer—consistent payloads and retry behavior.
+All channels (Slack, Teams, email, in-app) route through a single notification layer, consistent payloads and retry behavior.
 
 ## Slack
 
@@ -336,12 +336,12 @@ All channels (Slack, Teams, email, in-app) route through a single notification l
 
 ## Microsoft Teams
 
-- Same pattern as Slack—connect bot, test notify path
+- Same pattern as Slack, connect bot, test notify path
 - Escalation and workflow DMs to assignees
 
 ## Okta (read)
 
-Used for workflow **auto_check** steps—verify account existence, group membership, or app assignment before marking a step complete.
+Used for workflow **auto_check** steps, verify account existence, group membership, or app assignment before marking a step complete.
 
 ## Google Workspace (read)
 
@@ -361,7 +361,7 @@ See the Automation rules guide for event delivery and HMAC verification.
 
 ## Connector reliability
 
-All connector calls use timeouts and isolation—vendor SDKs do not run inside request handlers. Failures degrade gracefully (step stays active for human follow-up).`,
+All connector calls use timeouts and isolation, vendor SDKs do not run inside request handlers. Failures degrade gracefully (step stays active for human follow-up).`,
   },
   {
     slug: "analytics",
@@ -370,7 +370,7 @@ All connector calls use timeouts and isolation—vendor SDKs do not run inside r
     description:
       "Dashboard deflection, outcome metrics, advanced analytics, confidence calibration, and workflow bottlenecks.",
     readMinutes: 7,
-    body: `ResolveMeQ ships built-in ROI metrics—no spreadsheet export required for headline numbers.
+    body: `ResolveMeQ ships built-in ROI metrics, no spreadsheet export required for headline numbers.
 
 ## Dashboard
 
@@ -380,7 +380,7 @@ The home **Dashboard** shows open vs closed tickets, deflection-style rates, wor
 
 Key fields include:
 
-- **Deflection rate** — agent-processed tickets resolved without escalation
+- **Deflection rate**: agent-processed tickets resolved without escalation
 - **Escalated count**
 - **Workflows completed / in progress**
 - **Onboarding playbook** stats when that template is in use
@@ -389,15 +389,15 @@ Key fields include:
 
 The **Analytics** page adds:
 
-- **Deflection by category** — which request types automate well
-- **Confidence calibration** — buckets (0.8–1.0, 0.6–0.8, etc.) vs resolved, escalated, and reopened rates
-- **Workflow bottlenecks** — steps with overdue counts and median time from workflow start
+- **Deflection by category**: which request types automate well
+- **Confidence calibration**: buckets (0.8–1.0, 0.6–0.8, etc.) vs resolved, escalated, and reopened rates
+- **Workflow bottlenecks**: steps with overdue counts and median time from workflow start
 
 Use calibration monthly to tune thresholds and KB gaps.
 
 ## Predictive routing metrics
 
-Track how often routing suggestions are applied vs reassigned—helps validate assignee heuristics.
+Track how often routing suggestions are applied vs reassigned, helps validate assignee heuristics.
 
 ## Export
 
@@ -407,7 +407,7 @@ Analytics supports CSV export for leadership reviews. Pair with the compliance a
 
 | Samples per bucket | Guidance |
 |--------------------|----------|
-| Under 10 | Directional only—don't change production thresholds |
+| Under 10 | Directional only, don't change production thresholds |
 | 10–50 | Pilot decisions OK |
 | 50+ | Suitable for customer-facing ROI conversations |`,
   },
@@ -436,11 +436,11 @@ Create **child client** teams linked to the parent. Each client has isolated tic
 
 ## Billing and limits
 
-Usage quotas may apply per client depending on your plan—check **Settings → Billing** or contact sales for MSP packaging.
+Usage quotas may apply per client depending on your plan, check **Settings → Billing** or contact sales for MSP packaging.
 
 ## Security
 
-MSP enablement and client creation are audited events. Do not share owner credentials across clients—use per-client workspace membership.`,
+MSP enablement and client creation are audited events. Do not share owner credentials across clients, use per-client workspace membership.`,
   },
   {
     slug: "security-and-audit",
@@ -449,7 +449,7 @@ MSP enablement and client creation are audited events. Do not share owner creden
     description:
       "Compliance audit events, CSV export, roles, data isolation, and agent reliability controls.",
     readMinutes: 7,
-    body: `Enterprise buyers need evidence—not marketing claims. ResolveMeQ includes controls you can demonstrate in a security review.
+    body: `Enterprise buyers need evidence, not marketing claims. ResolveMeQ includes controls you can demonstrate in a security review.
 
 ## Data isolation
 
@@ -475,7 +475,7 @@ Records cannot be edited or deleted after insert.
 
 1. **Settings → Security**
 2. Browse recent events or filter by type
-3. **Export CSV** for auditors—export itself is logged as audit.exported
+3. **Export CSV** for auditors, export itself is logged as audit.exported
 
 ## Per-ticket history
 
@@ -487,7 +487,7 @@ Outbound AI calls use a 30-second timeout and circuit breaker. Repeated agent fa
 
 ## Encryption and compliance posture
 
-Data in transit uses HTTPS. Encryption at rest depends on your hosting environment. Formal SOC 2 Type II certification is a commercial/ops decision—the audit log supports **preparation** for SOC 2 evidence collection. Discuss GDPR, retention, and regions during enterprise onboarding.`,
+Data in transit uses HTTPS. Encryption at rest depends on your hosting environment. Formal SOC 2 Type II certification is a commercial/ops decision, the audit log supports **preparation** for SOC 2 evidence collection. Discuss GDPR, retention, and regions during enterprise onboarding.`,
   },
   {
     slug: "partner-api",
@@ -505,7 +505,7 @@ Data in transit uses HTTPS. Encryption at rest depends on your hosting environme
 ## Authentication
 
 1. Workspace owner opens **Settings → Integrations → Partner API**
-2. Create a key—shown **once**; store it securely
+2. Create a key, shown **once**; store it securely
 3. Send on every request:
 
 \`Authorization: Bearer rmq_pk_<secret>\`
@@ -546,19 +546,19 @@ Example body:
 
 ## Read and update tickets
 
-- \`GET /api/public/v1/tickets/\` — list with status, limit, offset
-- \`GET /api/public/v1/tickets/{id}/\` — detail
-- \`PATCH /api/public/v1/tickets/{id}/update/\` — status changes
+- \`GET /api/public/v1/tickets/\` ,  list with status, limit, offset
+- \`GET /api/public/v1/tickets/{id}/\` ,  detail
+- \`PATCH /api/public/v1/tickets/{id}/update/\` ,  status changes
 
 ## Workflows
 
-- \`GET /api/public/v1/workflows/?ticket_id=\` — workflows for a ticket
-- \`GET /api/public/v1/workflows/{uuid}/\` — steps and status
-- \`POST /api/public/v1/workflows/start/\` — start from template (requires tickets:write)
+- \`GET /api/public/v1/workflows/?ticket_id=\` ,  workflows for a ticket
+- \`GET /api/public/v1/workflows/{uuid}/\` ,  steps and status
+- \`POST /api/public/v1/workflows/start/\` ,  start from template (requires tickets:write)
 
 ## Rules
 
-\`GET /api/public/v1/rules/\` — team and global automation rules (read-only via API).
+\`GET /api/public/v1/rules/\` ,  team and global automation rules (read-only via API).
 
 ## API discovery
 
@@ -574,11 +574,11 @@ Configure in **Settings → Integrations → Webhooks**. Events are HMAC-signed 
 
 ## Key management (JWT session, not partner key)
 
-Owners manage keys at \`/api/public/keys/\` from the authenticated app—list prefixes, create, revoke. Never embed owner JWT in partner services; use partner keys only.
+Owners manage keys at \`/api/public/keys/\` from the authenticated app, list prefixes, create, revoke. Never embed owner JWT in partner services; use partner keys only.
 
 ## Rate limits and errors
 
-Use exponential backoff on HTTP 429 and 5xx. Keys share infrastructure with the main API—design idempotent intake on your side.
+Use exponential backoff on HTTP 429 and 5xx. Keys share infrastructure with the main API, design idempotent intake on your side.
 
 ## Security checklist for partners
 
