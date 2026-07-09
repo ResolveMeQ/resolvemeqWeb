@@ -1,5 +1,31 @@
 import React from "react";
 
+function renderInline(text) {
+  const parts = text
+    .split(/(`[^`]+`|\*\*[^*]+\*\*)/g)
+    .filter((p) => p.length > 0);
+  return parts.map((part, i) => {
+    if (part.startsWith("`") && part.endsWith("`")) {
+      return (
+        <code
+          key={i}
+          className="text-sm font-mono bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-800 dark:text-zinc-200"
+        >
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={i} className="font-semibold text-zinc-800 dark:text-zinc-100">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return <React.Fragment key={i}>{part}</React.Fragment>;
+  });
+}
+
 function slugifyHeading(text) {
   const s = text
     .toLowerCase()
@@ -45,7 +71,7 @@ export function buildBlogArticleParts(text) {
           key={i}
           className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 tracking-tight scroll-mt-28"
         >
-          {t.slice(4)}
+          {renderInline(t.slice(4))}
         </h3>
       );
     }
@@ -63,7 +89,7 @@ export function buildBlogArticleParts(text) {
             isFirstHeading ? "mt-2" : "mt-14 pt-2 border-t border-zinc-200/80 dark:border-zinc-800/80"
           }`}
         >
-          {titleText}
+          {renderInline(titleText)}
         </h2>
       );
     }
@@ -73,7 +99,7 @@ export function buildBlogArticleParts(text) {
         key={i}
         className="text-[17px] sm:text-lg leading-[1.75] text-zinc-600 dark:text-zinc-300 mb-5"
       >
-        {t}
+        {renderInline(t)}
       </p>
     );
   });
