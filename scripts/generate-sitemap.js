@@ -31,6 +31,7 @@ const docSlugs = [
   "integrations",
   "analytics",
   "msp-mode",
+  "workspace-permissions",
   "security-and-audit",
   "partner-api",
 ];

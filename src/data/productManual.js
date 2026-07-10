@@ -34,7 +34,7 @@ The AI matches tickets to the right template, suggests resolutions grounded in y
 
 ## Workspaces and access
 
-Each **workspace** is an isolated team. Members see only tickets and workflows in workspaces they belong to. Workspace owners manage billing, integrations, partner API keys, and security settings.
+Each **workspace** is an isolated team. Members see only tickets and workflows in workspaces they belong to. The **workspace owner** controls billing and can grant **delegated admin** access with scoped permissions (playbooks, members, integrations, and more). See [Workspace permissions](/docs/workspace-permissions).
 
 ## Where to work in the app
 
@@ -68,9 +68,11 @@ On first login you get a workspace (team). The owner can rename it under **Setti
 
 ## Invite teammates
 
-1. Open **Teams** (or **Settings → Members**).
+1. Open **Teams** (workspace owner or a delegated admin with **Members & ops roles** permission).
 2. Invite by email or add existing users.
 3. Assign **ops roles** (IT, HR, Facilities, Security) when workflow steps are role-gated, only matching roles can claim those steps.
+
+Owners can grant other members scoped admin access under **Teams → Permissions** without sharing the owner account.
 
 ## Set your active workspace
 
@@ -266,7 +268,7 @@ Some playbooks spawn **child tickets** for parallel work (e.g. separate hardware
 
 ## Template admin
 
-Workspace admins create and edit templates in **Workflow templates**, step titles, assignee roles, due days, auto_complete flags, and connector configuration.`,
+Users with **Playbooks & automation rules** permission (workspace owner or delegated admin) create and edit templates in **Workflow templates**, step titles, assignee roles, due days, auto_complete flags, and connector configuration. Select an **active workspace** in the header before creating templates or rules.`,
   },
   {
     slug: "automation-rules",
@@ -275,7 +277,7 @@ Workspace admins create and edit templates in **Workflow templates**, step title
     description:
       "Triggers, conditions, actions, execution logs, and outbound webhooks when tickets change.",
     readMinutes: 9,
-    body: `Automation rules let you respond to ticket events without writing code.
+    body: `Automation rules let you respond to ticket events without writing code. Only the workspace owner or a delegated admin with **Playbooks & automation rules** permission can create and edit rules.
 
 ## Rule structure
 
@@ -322,7 +324,7 @@ Partners often combine webhooks with the Partner API for bidirectional sync.
     description:
       "Slack, Microsoft Teams, Okta, Google Workspace, Microsoft 365, Jira Cloud, and webhooks.",
     readMinutes: 8,
-    body: `ResolveMeQ connects to the tools your employees and IT team already use.
+    body: `ResolveMeQ connects to the tools your employees and IT team already use. Connecting OAuth integrations requires **Integrations** permission (owner or delegated admin).
 
 ## Notification bus
 
@@ -440,7 +442,76 @@ Usage quotas may apply per client depending on your plan, check **Settings → B
 
 ## Security
 
-MSP enablement and client creation are audited events. Do not share owner credentials across clients, use per-client workspace membership.`,
+MSP enablement and client creation are audited events. Do not share owner credentials across clients, use per-client workspace membership and scoped delegation where appropriate.`,
+  },
+  {
+    slug: "workspace-permissions",
+    category: "enterprise",
+    title: "Workspace permissions",
+    description:
+      "Workspace owner vs delegated admin, scoped grants, ops roles, and what stays owner-only.",
+    readMinutes: 6,
+    body: `ResolveMeQ separates **who runs tickets** from **who configures the workspace**. Most teams need more than one person to manage playbooks without handing over billing or the owner account.
+
+## Three access layers
+
+| Layer | Who | What they can do |
+|-------|-----|------------------|
+| **Workspace owner** | Account that created the workspace | Everything, including billing, granting permissions, and revoking delegation |
+| **Delegated workspace admin** | Member granted scoped permissions by the owner | Only the areas checked in **Teams → Permissions** |
+| **Member + ops role** | Any teammate | Work tickets, claim workflow steps matching their IT/HR/etc. ops role |
+
+**Ops roles** (IT, HR, Facilities, Security) control **workflow step claiming**, not workspace configuration. A user can be HR for step claims without being able to invite members or edit automation rules.
+
+## Scoped permissions (delegated admin)
+
+The owner opens **Teams**, selects a member, and clicks **Permissions**. Each scope is independent:
+
+| Permission | Allows |
+|------------|--------|
+| **Playbooks & automation rules** | Create/edit workflow templates and automation rules |
+| **Members & ops roles** | Invite and remove members; set ops roles |
+| **Integrations** | Connect Slack, Teams, Okta, Google, Microsoft 365, Jira |
+| **Outbound webhooks** | Create and manage webhook endpoints |
+| **Partner API keys** | Create and revoke partner API keys |
+| **Compliance audit log** | View and export the audit log in Settings → Security |
+
+Unchecking every scope removes delegation entirely. Delegated admins **cannot** grant permissions to others, only the owner can.
+
+## Owner-only actions
+
+These always require the workspace owner (not delegable today):
+
+- Billing and subscription changes
+- Granting or revoking delegated admin access
+- Deleting the workspace (if enabled on your plan)
+
+## Active workspace requirement
+
+Workflow templates and automation rules are scoped to the **active workspace** in the header. If no workspace is selected, the UI shows a banner instead of allowing create/edit. Switch workspace before configuring playbooks.
+
+## Audit trail
+
+Permission changes are recorded in the compliance audit log:
+
+- \`workspace.admin.granted\`
+- \`workspace.admin.revoked\`
+- \`workspace.permissions.updated\`
+
+Export from **Settings → Security** for security reviews.
+
+## Common patterns
+
+| Persona | Typical grants |
+|---------|----------------|
+| IT lead | Playbooks + integrations |
+| HR lead | Members only (invite/onboarding coordinators) |
+| Security lead | Audit log + webhooks (SIEM intake) |
+| Integration engineer | Integrations + partner API + webhooks |
+
+## Member limits
+
+Invites respect the workspace owner's plan **member limit** (current members + pending invitations). If invite fails with a limit error, upgrade billing or remove pending invites before retrying.`,
   },
   {
     slug: "security-and-audit",
@@ -457,7 +528,9 @@ Each workspace (team) is a tenant boundary. Tickets, workflows, rules, audit eve
 
 ## Role-based access
 
-Workspace owners manage members and integrations. Workflow steps can require **ops roles** (IT, HR, etc.) for claim permissions. Escalation queue access follows ticket visibility rules.
+**Workspace owner** has full control. **Delegated admins** receive scoped grants (playbooks, members, integrations, webhooks, partner API, audit log). See [Workspace permissions](/docs/workspace-permissions).
+
+**Ops roles** on member profiles (IT, HR, etc.) gate **workflow step claiming** only. Escalation queue access follows ticket visibility rules.
 
 ## Compliance audit log
 
@@ -466,6 +539,7 @@ An **append-only, immutable** event stream records:
 - Ticket created, escalated, resolved
 - Workflow step completed
 - Automation rule created, updated, deleted, executed
+- Workspace admin granted, revoked, or permissions updated
 - MSP mode enabled, client created
 - Audit log exported
 
@@ -473,7 +547,7 @@ Records cannot be edited or deleted after insert.
 
 ## Viewing and exporting
 
-1. **Settings → Security**
+1. **Settings → Security** (workspace owner or delegated admin with **Compliance audit log** permission)
 2. Browse recent events or filter by type
 3. **Export CSV** for auditors, export itself is logged as audit.exported
 
@@ -504,7 +578,7 @@ Data in transit uses HTTPS. Encryption at rest depends on your hosting environme
 
 ## Authentication
 
-1. Workspace owner opens **Settings → Integrations → Partner API**
+1. Workspace owner or delegated admin with **Partner API** permission opens **Settings → Integrations → Partner API**
 2. Create a key, shown **once**; store it securely
 3. Send on every request:
 
@@ -574,7 +648,7 @@ Configure in **Settings → Integrations → Webhooks**. Events are HMAC-signed 
 
 ## Key management (JWT session, not partner key)
 
-Owners manage keys at \`/api/public/keys/\` from the authenticated app, list prefixes, create, revoke. Never embed owner JWT in partner services; use partner keys only.
+Owners manage keys at \`/api/public/keys/\` from the authenticated app, list prefixes, create, revoke. Delegated admins with Partner API permission can also manage keys. Never embed owner JWT in partner services; use partner keys only.
 
 ## Rate limits and errors
 

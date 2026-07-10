@@ -142,6 +142,7 @@
     integrations: "Integrations",
     analytics: "Analytics and metrics",
     "msp-mode": "MSP mode",
+    "workspace-permissions": "Workspace permissions",
     "security-and-audit": "Security and audit log",
     "partner-api": "Partner API",
   };
