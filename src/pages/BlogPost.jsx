@@ -251,7 +251,7 @@ const BlogPost = () => {
             <div className="min-w-0">
               <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{authorName}</p>
               <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">
-                Editorial · IT operations & support
+                Founder · IT operations & support
               </p>
             </div>
           </div>
