@@ -2,9 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { FadeInDiv } from "../animations/fadeIn";
 import { useTheme } from "../context/ThemeContext";
 import { useEffect, useRef, useState, useCallback } from "react";
-import Particles from "react-tsparticles";
 import { HeroPipelineVisual } from "./HeroPipelineVisual";
-import { loadFull } from "tsparticles";
 import { useInView } from "react-intersection-observer";
 import { trackEvent } from "../utils/analytics";
 import {
@@ -131,9 +129,42 @@ const Hero = () => {
     return () => mq.removeEventListener("change", update);
   }, []);
 
+  const [ParticlesComp, setParticlesComp] = useState(null);
+  const [particlesReady, setParticlesReady] = useState(false);
+  const showParticles = !reducedMotion && !narrowViewport;
+
   const particlesInit = useCallback(async (engine) => {
+    const { loadFull } = await import("tsparticles");
     await loadFull(engine);
   }, []);
+
+  useEffect(() => {
+    if (!showParticles) return undefined;
+
+    let cancelled = false;
+    const load = () => {
+      import("react-tsparticles").then((mod) => {
+        if (!cancelled) {
+          setParticlesComp(() => mod.default);
+          setParticlesReady(true);
+        }
+      });
+    };
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(load, { timeout: 2500 });
+      return () => {
+        cancelled = true;
+        window.cancelIdleCallback?.(id);
+      };
+    }
+
+    const timer = setTimeout(load, 900);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [showParticles]);
 
   const y = useTransform(scrollYProgress, [0, 1], [0, -300]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
@@ -172,8 +203,7 @@ const Hero = () => {
     };
   }, [reducedMotion]);
 
-  const showParticles = !reducedMotion && !narrowViewport;
-  const particleCount = theme === "dark" ? 50 : 35;
+  const particleCount = theme === "dark" ? 40 : 28;
 
   const particlesOptions = {
     particles: {
@@ -252,9 +282,9 @@ const Hero = () => {
           }}
         />
       )}
-      {showParticles && (
+      {showParticles && particlesReady && ParticlesComp && (
         <div className="absolute inset-0 pointer-events-none">
-          <Particles id="tsparticles-hero" init={particlesInit} options={particlesOptions} />
+          <ParticlesComp id="tsparticles-hero" init={particlesInit} options={particlesOptions} />
         </div>
       )}
 

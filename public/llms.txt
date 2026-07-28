@@ -1,0 +1,25 @@
+# ResolveMeQ
+
+> AI-powered IT support automation — deflect tickets, resolve faster, escalate with full context.
+
+## Product
+
+- [Marketing site](https://resolvemeq.net/): features, pricing, FAQ, contact
+- [Web app](https://app.resolvemeq.net/knowledge-base): knowledge base and community Q&A
+- [Documentation](https://resolvemeq.net/docs): product manual and setup guides
+- [Journal / blog](https://resolvemeq.net/blog): product updates and IT operations content
+
+## Public content for indexing
+
+- Knowledge base articles: `https://app.resolvemeq.net/knowledge-base`
+- Community Q&A: `https://app.resolvemeq.net/knowledge-base?view=community`
+- Docs chapters: `https://resolvemeq.net/docs/*`
+- Sitemap: `https://resolvemeq.net/sitemap.xml`
+- RSS: `https://resolvemeq.net/rss.xml`
+- Locale: English (`en`); see `/docs/SEO.md` for Search Console and prerender notes.
+
+## Contact
+
+- Website: https://resolvemeq.net/contact
+- Twitter: https://twitter.com/resolvemeq
+- LinkedIn: https://www.linkedin.com/company/resolvemeq

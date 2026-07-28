@@ -224,17 +224,18 @@ const Footer = () => {
             viewport={{ once: true }}
             className="lg:col-span-2 min-w-0"
           >
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2.5 mb-4">
               <img
-                src="/assets/logo.png"
-                alt="Resolve Me Quickly - ResolveMeQ"
-                className="h-8 w-auto object-contain"
+                src="/assets/logo-mark.svg"
+                alt=""
+                aria-hidden="true"
+                className="h-9 w-9 object-contain"
               />
               <div>
-                <h3 className="type-card-title">
-                  Resolve Me Quickly
+                <h3 className="type-card-title tracking-tight">
+                  ResolveMeQ
                 </h3>
-                <p className="text-xs text-zinc-500 dark:text-zinc-500">ResolveMeQ</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-500">Resolve Me Quickly</p>
               </div>
             </div>
             <p className="type-body mb-6 max-w-md">

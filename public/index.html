@@ -3,10 +3,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/assets/logo.png" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/logo.png" />
+  <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#4F46E5" />
+  <meta name="theme-color" content="#2563EB" />
   <title>ResolveMeQ</title>
   <!-- Per-URL canonical + meta + body intro: seo-intros.js then seo-boot.js; keep in sync with PageSeo / marketingSectionSeo. -->
   <link rel="canonical" id="rmq-canonical" href="https://resolvemeq.net/" />
@@ -14,6 +14,8 @@
   <script src="%PUBLIC_URL%/seo-boot.js"></script>
   <link rel="alternate" type="application/rss+xml" title="ResolveMeQ Journal" href="https://resolvemeq.net/rss.xml" />
   <meta name="msvalidate.01" content="5BAD73DDDA2DE538A91E3B3E6E45FC39" />
+  <!-- Google Search Console: set REACT_APP_GOOGLE_SITE_VERIFICATION in Netlify / .env -->
+  <meta name="google-site-verification" content="%REACT_APP_GOOGLE_SITE_VERIFICATION%" />
 
   <!-- Google Consent Mode defaults (deny) before gtag loads; GA4 loads but limits cookies until update. -->
   <script>
@@ -83,11 +85,23 @@
   <!-- Preconnect to important domains for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.resolvemeq.net" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://api.resolvemeq.net" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  <link rel="preload" href="%PUBLIC_URL%/assets/logo-mark.svg" as="image" type="image/svg+xml" />
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap"
     rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
   />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap"
+      rel="stylesheet"
+    />
+  </noscript>
   
   <!-- Structured Data - Organization -->
   <script type="application/ld+json">
@@ -98,7 +112,7 @@
       "name": "Resolve Me Quickly",
       "alternateName": "ResolveMeQ",
       "url": "https://resolvemeq.net",
-      "logo": "https://resolvemeq.net/assets/logo.png",
+      "logo": "https://resolvemeq.net/assets/logo-mark.svg",
       "description": "Resolve Me Quickly (ResolveMeQ) - AI-powered IT support automation platform. Reduce ticket resolution time by 40%, improve team efficiency by 60%.",
       "foundingDate": "2024",
       "sameAs": [
@@ -292,13 +306,13 @@
           "@type": "ListItem",
           "position": 2,
           "name": "Features",
-          "item": "https://resolvemeq.net/#features"
+          "item": "https://resolvemeq.net/features"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Pricing",
-          "item": "https://resolvemeq.net/#pricing"
+          "item": "https://resolvemeq.net/pricing"
         }
       ]
     }
@@ -347,6 +361,7 @@
     <a href="https://resolvemeq.net/contact">Contact</a>
     <a href="https://resolvemeq.net/newsletter">Newsletter</a>
     <a href="https://resolvemeq.net/blog">Blog</a>
+    <a href="https://resolvemeq.net/docs">Documentation</a>
     <a href="https://resolvemeq.net/privacy">Privacy</a>
     <a href="https://resolvemeq.net/terms">Terms</a>
     <a href="https://resolvemeq.net/cookies">Cookies</a>

@@ -83,13 +83,18 @@ const Header = () => {
             className="flex items-center gap-2"
           >
             <motion.img
-              src="/assets/logo.png"
-              alt="Resolve Me Quickly - ResolveMeQ"
-              className="h-8 w-auto object-contain"
+              src="/assets/logo-mark.svg"
+              alt=""
+              aria-hidden="true"
+              width={32}
+              height={32}
+              fetchPriority="high"
+              decoding="async"
+              className="h-8 w-8 object-contain"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             />
-            <span className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
+            <span className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
               ResolveMeQ
             </span>
           </Link>

@@ -3,37 +3,23 @@
   "name": "ResolveMeQ - AI-Powered IT Support Automation",
   "icons": [
     {
-      "src": "assets/logo.png",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/png"
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
-      "src": "assets/logo.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/logo.png",
-      "type": "image/png",
-      "sizes": "512x512",
+      "src": "assets/logo-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#4F46E5",
-  "background_color": "#ffffff",
+  "theme_color": "#2563EB",
+  "background_color": "#0B1220",
   "description": "Transform your IT support with ResolveMeQ's AI-powered automation. Reduce ticket resolution time by 40%, improve team efficiency, and enhance user satisfaction.",
   "orientation": "portrait",
-  "categories": ["business", "productivity", "utilities"],
-  "screenshots": [
-    {
-      "src": "assets/logo.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "platform": "wide",
-      "label": "ResolveMeQ Dashboard"
-    }
-  ]
+  "categories": ["business", "productivity", "utilities"]
 }

@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --brand: #2563eb;
+    --brand-fg: #60a5fa;
+    --brand-muted: #1d4ed8;
+    --brand-ink: #0b1220;
+  }
+
   html {
     @apply antialiased;
   }

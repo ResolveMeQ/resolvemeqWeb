@@ -19,12 +19,14 @@
     "react-tsparticles": "^2.12.2",
     "three": "^0.160.0",
     "tsparticles": "^2.12.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^4.2.4"
   },
   "scripts": {
     "prebuild": "node scripts/generate-sitemap.js && node scripts/generate-rss.js",
+    "postbuild": "node scripts/prerender.js",
     "sitemap": "node scripts/generate-sitemap.js",
     "rss": "node scripts/generate-rss.js",
+    "prerender": "node scripts/prerender.js",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",

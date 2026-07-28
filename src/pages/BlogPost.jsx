@@ -156,7 +156,7 @@ const BlogPost = () => {
       name: "Resolve Me Quickly",
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/assets/logo.png`,
+        url: `${SITE_URL}/assets/logo-mark.svg`,
       },
     },
     mainEntityOfPage: {
@@ -241,7 +241,7 @@ const BlogPost = () => {
           <div className="flex items-center gap-3 mb-8 pb-8 border-b border-zinc-200/80 dark:border-zinc-800/80">
             <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 overflow-hidden">
               <img
-                src="/assets/logo.png"
+                src="/assets/logo-mark.svg"
                 alt=""
                 className="h-7 w-7 object-contain"
                 width="28"

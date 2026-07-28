@@ -36,7 +36,13 @@ module.exports = {
           900: "#1e3a8a",
         },
         secondary: {
-          500: "#8b5cf6",
+          500: "#64748b",
+        },
+        brand: {
+          DEFAULT: "#2563eb",
+          fg: "#60a5fa",
+          muted: "#1d4ed8",
+          ink: "#0b1220",
         },
         accent: {
           500: "#10b981",

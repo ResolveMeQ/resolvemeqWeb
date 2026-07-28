@@ -42,6 +42,9 @@ export function PageSeo({
     <Helmet prioritizeSeoTags>
       <title>{title}</title>
       <meta name="description" content={description} />
+      <link rel="canonical" href={url} />
+      <link rel="alternate" hrefLang="en" href={url} />
+      <link rel="alternate" hrefLang="x-default" href={url} />
       {noindex ? (
         <meta name="robots" content="noindex, follow" />
       ) : null}
